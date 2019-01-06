@@ -123,6 +123,9 @@ app.post('/customerOrArtist', (req, res) => {
   };
 })
 
+//should this be in the API routes/controller files (or does it have to be here)
+//also shouldn't all of the auth routes, be in the authRoutes file/controller
+//or because it uses Express Sessions it has to be in server file?
 //pictures
 app.post('/artistPictures', (req, res) => {
 
