@@ -1,16 +1,10 @@
 const path = require('path');
 const router = require('express').Router();
-const apiImagesRoutes = require('./api/images');
-// const apiUserRoutes = require('./api/user');
-// const authRoutes = require("./auth/xxxx");
+const apiRoutes = require('./api');
 
 // API Routes
-//for images
-router.use('/api/images', apiImagesRoutes);
+router.use('/api', apiRoutes);
 
-//for user
-
-//for auth?
 
 // If no API routes are hit, send the React app
 //not sure how this will work with authentiecation routes?

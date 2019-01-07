@@ -1,9 +1,9 @@
 var express = require("express");
 var mongoose = require("mongoose");
 var session = require("express-session");
+var routes = require("./routes")
 
-//is this correct, Jon didn't have it this way so want to check
-var PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT || 3001;
 
 var db = require("./models");
 
@@ -158,10 +158,14 @@ app.post('/artistPictures', (req, res) => {
 
 app.get('/session', (req, res) => {
   res.json(req.session.customer)
-})
+});
+
+//using router routes
+app.use(routes)
+
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
-})
+});
 
 
 

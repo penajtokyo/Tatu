@@ -12,13 +12,14 @@ class User extends Component {
     }
 
     componentDidMount() {
+        //when page loads without search queries display a default view/gallery
 
     };
 
     //May only need one hanlder for the query, but need to query db by both terms (what if placement is blank?)
     //query DB for all images with a certain body placement
     getImages = () => {
-        API.getImages(this.state.placement, this.state.style)
+        API.getImagesByQuery(this.state.placement, this.state.style)
             .then((response) => {
                 console.log('response from db', response);
                 this.setState({imageResults: response.data})
@@ -45,7 +46,7 @@ class User extends Component {
         event.preventDefault();
         //send the value selection as the query to the db (call the methods above for the API)
         this.getImages();
-        //open modal with results displayed in a gallery (mayb of cards?)
+        // display results in cards
     };
 
     render() {

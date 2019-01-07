@@ -9,7 +9,7 @@ module.exports = {
         console.log(req.body);
         console.log('finding all pictures');
         db.Pictures
-        .findAll({})
+        .find({})
         .then(doc => res.json(doc))
         .catch(err => res.status(422).json(err));
     },
@@ -23,16 +23,33 @@ module.exports = {
     //     .catch(err => res.status(422).json(err));
     // },
     //used from user page when querying by style and placement of tattoo
-    findAllStyle: function(req, res) {
-        console.log(req.body);
-        console.log('finding pictures by style and placement');
-        db.Pictures
-        .find({
-            style: req.body.style,
-            placement: req.body.placement
-        })
-        .then(doc => res.json(doc))
-        .catch(err => res.status(422).json(err));
+    findAllQuery: function(req, res) {
+        console.log('this is the query values', req.query);
+        if (req.query.style != "" && req.query.placement != "") {
+            db.Pictures
+            .find({
+                style: req.query.style,
+                placement: req.query.placement
+            })
+            .then(doc => res.json(doc))
+            .catch(err => res.status(422).json(err));   
+        }
+        else if (req.query.style === "" && req.query.placement != "") {
+            db.Pictures
+            .find({
+                placement: req.query.placement
+            })
+            .then(doc => res.json(doc))
+            .catch(err => res.status(422).json(err));  
+        }
+        else if (req.query.placement === "" && req.query.style != "") {
+            db.Pictures
+                .find({
+                    style: req.query.style
+                })
+                .then(doc => res.json(doc))
+                .catch(err => res.status(422).json(err));
+        }
     },
     //adds picture and its tags to db from artist page
     //this maybe done in the server.js file...need to verify and possible move?

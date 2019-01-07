@@ -2,14 +2,19 @@
 const router = require('express').Router();
 const imageController = require('../../controllers/imageController');
 
-//this will post the image to the db tied to that artist when they add one from their page?
-//should this be in a separate file for images (based on user query and artist profile?), 
-//how to tie to artist if they are separate?
+// url is now: api/images/ (CRUD)
+//can only have one get per route
 router
-  .route('/images')
+  .route('/')
   .post(imageController.create)
-  .get(imageController.findAll)
-  // .get(imageController.findAllPlacement)
-  .get(imageController.findAllStyle);
+  .get(imageController.findAll);
+
+// api/images/:id (CRUD) this will find inages by artist id if needed
+// router.route('/:id')
+
+router.route('/style')
+.get(imageController.findAllQuery);
+
+// router.route('/placement')
 
 module.exports = router;

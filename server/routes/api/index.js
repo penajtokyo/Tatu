@@ -1,10 +1,11 @@
 const router = require('express').Router();
-const imagesRoutes = require('./artist');
+const imagesRoutes = require('./images');
 // const userRoutes = require('./user');
 
 // images routes
+// url is /api/images
 router.use('/images', imagesRoutes);
 
-//user routes
+//auth routes?
 
 module.exports = router;
