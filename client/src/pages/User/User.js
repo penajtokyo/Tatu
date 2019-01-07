@@ -8,7 +8,7 @@ class User extends Component {
     state = {
         placement: '',
         style: '',
-        imageResults: []
+        searchResults: []
     }
 
     componentDidMount() {
@@ -33,7 +33,7 @@ class User extends Component {
     //handles the form input (dropdown) for the onChange in the form
     handleSelection = (event) => {
         const { name, value } = event.target;
-        console.log(event.target);
+        // console.log(event.target);
         this.setState({
             [name]: value
         });
@@ -64,7 +64,7 @@ class User extends Component {
                 <Row>
                     <Col s={12} className='results center'>
                         <Results 
-                            images={this.state.imageResults}
+                            imagesData={this.state.searchResults}
                         />
                     </Col>
                 </Row>

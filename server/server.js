@@ -2,7 +2,8 @@ var express = require("express");
 var mongoose = require("mongoose");
 var session = require("express-session");
 
-var PORT = 3000;
+//is this correct, Jon didn't have it this way so want to check
+var PORT = process.env.PORT || 3000;
 
 var db = require("./models");
 
