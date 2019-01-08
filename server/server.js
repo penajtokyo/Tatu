@@ -1,8 +1,9 @@
 var express = require("express");
 var mongoose = require("mongoose");
 var session = require("express-session");
+var routes = require("./routes")
 
-var PORT = 3000;
+var PORT = process.env.PORT || 3001;
 
 var db = require("./models");
 
@@ -123,6 +124,9 @@ app.post('/customerOrArtist', (req, res) => {
   };
 })
 
+//should this be in the API routes/controller files (or does it have to be here)
+//also shouldn't all of the auth routes, be in the authRoutes file/controller
+//or because it uses Express Sessions it has to be in server file?
 //pictures
 app.post('/artistPictures', (req, res) => {
 
@@ -154,10 +158,14 @@ app.post('/artistPictures', (req, res) => {
 
 app.get('/session', (req, res) => {
   res.json(req.session.customer)
-})
+});
+
+//using router routes
+app.use(routes)
+
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
-})
+});
 
 
 
