@@ -50,43 +50,43 @@ mongoose.connect("mongodb://localhost/mongotestrepository", { useNewUrlParser: t
 app.get('/customerOrArtist', (req, res) => {
 
 })
-app.get('/cutomerWithArtistsPictures', (req, res) => {
+// app.get('/cutomerWithArtistsPictures', (req, res) => {
 
-  db.Customer.findOne({_id: req.session.customer._id})
-  .populate("artistId")
-  .then((customerArtist) => {
-    console.log(customerArtist);
-  })
-})
+//   db.Customer.findOne({_id: req.session.customer._id})
+//   .populate("artistId")
+//   .then((customerArtist) => {
+//     console.log(customerArtist);
+//   })
+// })
 //should this be in the API routes/controller files (or does it have to be here)
 //also shouldn't all of the auth routes, be in the authRoutes file/controller
 //or because it uses Express Sessions it has to be in server file?
 //pictures
-app.post('/artistPictures', (req, res) => {
+// app.post('/artistPictures', (req, res) => {
 
-  //get the customer
-  //verify that hey are an artist
-  //post a picure.
+//   //get the customer
+//   //verify that hey are an artist
+//   //post a picure.
   
-  db.Artist.findOne({
-    _id: req.session.customer.artistId
-  })
-  .then((artist) => {
-    console.log(artist);
-    db.Pictures.create(req.body).then((picture) => {
+//   db.Artist.findOne({
+//     _id: req.session.customer.artistId
+//   })
+//   .then((artist) => {
+//     console.log(artist);
+//     db.Pictures.create(req.body).then((picture) => {
 
-      db.Artist.findOneAndUpdate({_id: req.session.customer.artistData.artistId}, { $push: { pictures: picture._id } }, { new: true })
-      .then((updatedArtists) => {
-        res.json(updatedArtists)
-      })
+//       db.Artist.findOneAndUpdate({_id: req.session.customer.artistData.artistId}, { $push: { pictures: picture._id } }, { new: true })
+//       .then((updatedArtists) => {
+//         res.json(updatedArtists)
+//       })
 
-    })
-  })
-  .catch((err) => {
-    console.log(error);
-    res.send('looks like your not an artists')
-  })
-})
+//     })
+//   })
+//   .catch((err) => {
+//     console.log(error);
+//     res.send('looks like your not an artists')
+//   })
+// })
 
 
 

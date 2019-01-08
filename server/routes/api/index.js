@@ -8,4 +8,5 @@ router.use('/images', imagesRoutes);
 
 //auth routes?
 router.use('/auth', authRoutes);
+
 module.exports = router;
