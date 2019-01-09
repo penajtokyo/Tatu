@@ -5,7 +5,7 @@ var routes = require("./routes")
 
 var PORT = process.env.PORT || 3001;
 
-var db = require("./models");
+// var db = require("./models");
 
 // Initialize Express
 var app = express();
@@ -44,12 +44,11 @@ app.use(express.static("public"));
 // Connect to the Mongo DB
 mongoose.connect("mongodb://localhost/mongotestrepository", { useNewUrlParser: true });
 
-//test routes
 
 //artist or customer creation
-app.get('/customerOrArtist', (req, res) => {
+// app.get('/customerOrArtist', (req, res) => {
 
-})
+// })
 // app.get('/cutomerWithArtistsPictures', (req, res) => {
 
 //   db.Customer.findOne({_id: req.session.customer._id})
@@ -60,9 +59,9 @@ app.get('/customerOrArtist', (req, res) => {
 // })
 
 
-app.get('/session', (req, res) => {
-  res.json(req.session.customer)
-});
+// app.get('/session', (req, res) => {
+//   res.json(req.session.customer)
+// });
 
 //using router routes
 app.use(routes)
@@ -90,13 +89,13 @@ app.listen(PORT, () => {
 
 // {
 //   "type": "artist",
-//   "firstName": "asdf",
-//   "lastName": "asdf",
-//   "phone": "asdf",
-//   "email": "asdf@asdf.com",
-//   "password": "asdf",
+//   "firstName": "test",
+//   "lastName": "artist",
+//   "phone": "8015551212",
+//   "email": "testTest@test.com",
+//   "password": "1234",
 //   "artistData": {
-//     "specialization": "chicano",
+//     "specialization": "Anatomy",
 //     "pricing": "byPiece",
 //     "location": "asdf",
 //     "street": "asdf",

@@ -13,16 +13,19 @@ const Results = (props) => {
                 {/* loop throught images array (of objects if has the description, style, placement
                 and may each one into the card format*/}
                 {props.imagesData.map((imageData, index) => (
-                    <Col m={6} s={12} key={index}>
+                    <Col l={4} m={6} s={12} key={index}>
                         <Card
                             header={<CardTitle reveal image={imageData.file} waves='light' />} 
-                            title='Card Title'
+                            title={imageData.style}
                             reveal={<div><p>{imageData.style} on {imageData.placement}</p>
-                            <p>{imageData.description}</p></div>}>
+                            <p>{imageData.description}</p></div>}
+                            // tattoo artist info also needed here
+                            >
                         </Card>
                     </Col>)
                 )}
             </Row>
+            
         </div>
     );
 };
