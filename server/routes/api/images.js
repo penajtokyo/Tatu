@@ -13,6 +13,6 @@ router
 router
   .route('/:id')
   .post(imageController.saveImage)
-  .get(imageController.findAll);
+  .get(imageController.findAllByArtist);
 
 module.exports = router;

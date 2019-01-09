@@ -74,7 +74,7 @@ module.exports = {
     });
   },
   login: (req, res) => {
-    //email 
+    //email
     //password
     db.Customer.find({email: req.body.email}).then((userData) => {
       console.log(userData);
@@ -82,33 +82,40 @@ module.exports = {
         // res == true
         if(res === true){
           console.log("loggedin");
-          //check to see if they are an artists or not
-            //if artrists
-              //  res.session.customer = userObj = {
-              //     _id: customerData._id,
-              //     firstName: customerData.firstName,
-              //     lastName: customerData.lastName,
-              //     email: customerData.email,
-              //     phone: customerData.phone,
-              //     type: customerData.type,
-              //     artistData: {
-              //       artistId: artistData._id,
-              //       specialization: artistData.specialization,
-              //       pricing: artistData.pricing,
-              //       location: artistData.location,
-              //       street: artistData.street,
-              //       city: artistData.city,
-              //       state: artistData.state,
-              //       zip: artistData.zip
-              //     }
-            //else costomer
-               //  res.session.customer = userObj = {
-               //     _id: customerData._id,
-               //     firstName: customerData.firstName,
-               //     lastName: customerData.lastName,
-               //     email: customerData.email,
-               //     phone: customerData.phone,
-               //     type: customerData.type,
+          console.log(res);
+          // check to see if they are an artists or not
+          //   if artrists
+            if(req.body._id === db.Artist){
+              res.session.customer = userObj = {
+                //  _id: customerData._id,
+                //  firstName: customerData.firstName,
+                //  lastName: customerData.lastName,
+                //  email: customerData.email,
+                //  phone: customerData.phone,
+                //  type: customerData.type,
+                   artistId: _id,
+                   specialization: specialization,
+                   pricing: pricing,
+                   location: location,
+                   street: street,
+                   city: city,
+                   state: state,
+                   zip: zip
+                
+                }
+                console.log("I am logged in as an artist!")
+            }else{
+ 
+            //   res.session.customer = userObj = {
+            //      _id: customerData._id,
+            //      firstName: customerData.firstName,
+            //      lastName: customerData.lastName,
+            //      email: customerData.email,
+            //      phone: customerData.phone,
+            //      type: customerData.type,
+            //  }
+           }
+           console.log("I am a Customer and I am logged in")
         }
         else {
           console.log("invalid email or password")
