@@ -83,8 +83,8 @@ app.listen(PORT, () => {
 //   "firstName": "asdf",
 //   "lastName": "asdf",
 //   "phone": "asdf",
-//   "email": "asdf@asd.com",
-//   "password": "asdf"
+//   "email": "customerTest@test.com",
+//   "password": "1234"
 // }
 
 // {

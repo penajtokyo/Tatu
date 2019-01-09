@@ -82,40 +82,46 @@ module.exports = {
         // res == true
         if(res === true){
           console.log("loggedin");
-          console.log(res);
           // check to see if they are an artists or not
-          //   if artrists
-            if(req.body._id === db.Artist){
-              res.session.customer = userObj = {
-                //  _id: customerData._id,
-                //  firstName: customerData.firstName,
-                //  lastName: customerData.lastName,
-                //  email: customerData.email,
-                //  phone: customerData.phone,
-                //  type: customerData.type,
-                   artistId: _id,
-                   specialization: specialization,
-                   pricing: pricing,
-                   location: location,
-                   street: street,
-                   city: city,
-                   state: state,
-                   zip: zip
-                
+          // if customer (I switched it to check if customer first)
+          console.log('req.body', req.body); //email and password object since that is the info being passed in from the "front end"
+          console.log(db.Customer.type);
+          //need to determine how to check the type from teh db for the email???
+            if(db.Customer.type === "customer"){
+              //changed res to req below
+              req.session.customer = userObj = {
+                //changed from "customerData.XXXXX" to "db.Customer.XXXXX" on all values
+                _id: db.Customer._id,
+                firstName: db.Customer.firstName,
+                lastName: db.Customer.lastName,
+                email: db.Customer.email,
+                phone: db.Customer.phone,
+                type: db.Customer.type
+              }
+              console.log("I am logged in as a customer!")
+            }
+            else {
+              //changed res to req below and then customerData.XXXX to db.Customer.XXXX on all values
+              req.session.customer = userObj = {
+                _id: db.Customer._id,
+                firstName: db.Customer.firstName,
+                lastName: db.Customer.lastName,
+                email: db.Customer.email,
+                phone: db.Customer.phone,
+                type: db.Customer.type,
+                artistData: {
+                  artistId: db.Artist._id,
+                  specialization: db.Artist.specialization,
+                  pricing: db.Artist.pricing,
+                  location: db.Artist.location,
+                  street: db.Artist.street,
+                  city: db.Artist.city,
+                  state: db.Artist.state,
+                  zip: db.Artist.zip
                 }
-                console.log("I am logged in as an artist!")
-            }else{
- 
-            //   res.session.customer = userObj = {
-            //      _id: customerData._id,
-            //      firstName: customerData.firstName,
-            //      lastName: customerData.lastName,
-            //      email: customerData.email,
-            //      phone: customerData.phone,
-            //      type: customerData.type,
-            //  }
+              }
+            console.log("I am an Artist and I am logged in")
            }
-           console.log("I am a Customer and I am logged in")
         }
         else {
           console.log("invalid email or password")
