@@ -31,7 +31,7 @@ var CustomerSchema = new Schema({
     type: String,
     require: true
   },
-  artistId: {
+  artistData: {
     type: Schema.Types.ObjectId,
     ref: "Artist"
   }

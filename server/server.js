@@ -50,13 +50,6 @@ mongoose.connect("mongodb://localhost/mongotestrepository", { useNewUrlParser: t
 
 // })
 
-
-
-
-// app.get('/session', (req, res) => {
-//   res.json(req.session.customer)
-// });
-
 //using router routes
 app.use(routes)
 
@@ -83,18 +76,18 @@ app.listen(PORT, () => {
 
 // {
 //   "type": "artist",
-//   "firstName": "test",
-//   "lastName": "artist",
-//   "phone": "8015551212",
-//   "email": "testTest@test.com",
-//   "password": "1234",
+//   "firstName": "test2",
+//   "lastName": "artist2",
+//   "phone": "8015551214",
+//   "email": "test2Test@test.com",
+//   "password": "12345",
 //   "artistData": {
-//     "specialization": "Anatomy",
+//     "specialization": "American Traditional",
 //     "pricing": "byPiece",
-//     "location": "asdf",
-//     "street": "asdf",
-//     "city": "asdf",
-//     "state": "asdf",
+//     "location": "home",
+//     "street": "123 main st",
+//     "city": "salt lake city",
+//     "state": "UT",
 //     "zip": "84121"
 //   }
 // }
