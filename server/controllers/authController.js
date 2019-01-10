@@ -102,7 +102,7 @@ module.exports = {
             }
             else {
               //changed res to req below and then customerData.XXXX to db.Customer.XXXX on all values
-              req.session.customer = userObj = {
+              req.session.customer = artistData = {
                 _id: db.Customer._id,
                 firstName: db.Customer.firstName,
                 lastName: db.Customer.lastName,
@@ -121,6 +121,7 @@ module.exports = {
                 }
               }
             console.log("I am an Artist and I am logged in")
+            console.log(artistData)
            }
         }
         else {
@@ -128,5 +129,8 @@ module.exports = {
         }
       });
     })
+  },
+  session: (req, res) =>{
+    res.json(req.session.customer)
   }
 }
