@@ -5,7 +5,7 @@ var routes = require("./routes")
 
 var PORT = process.env.PORT || 3001;
 
-var db = require("./models");
+// var db = require("./models");
 
 // Initialize Express
 var app = express();
@@ -44,49 +44,12 @@ app.use(express.static("public"));
 // Connect to the Mongo DB
 mongoose.connect("mongodb://localhost/mongotestrepository", { useNewUrlParser: true });
 
-//test routes
 
 //artist or customer creation
-app.get('/customerOrArtist', (req, res) => {
+// app.get('/customerOrArtist', (req, res) => {
 
-})
-app.get('/cutomerWithArtistsPictures', (req, res) => {
+// })
 
-  db.Customer.findOne({_id: req.session.customer._id})
-  .populate("artistId")
-  .then((customerArtist) => {
-    console.log(customerArtist);
-  })
-})
-//should this be in the API routes/controller files (or does it have to be here)
-//also shouldn't all of the auth routes, be in the authRoutes file/controller
-//or because it uses Express Sessions it has to be in server file?
-//pictures
-app.post('/artistPictures', (req, res) => {
-
-  //get the customer
-  //verify that hey are an artist
-  //post a picure.
-  
-  db.Artist.findOne({
-    _id: req.session.customer.artistId
-  })
-  .then((artist) => {
-    console.log(artist);
-    db.Pictures.create(req.body).then((picture) => {
-
-      db.Artist.findOneAndUpdate({_id: req.session.customer.artistData.artistId}, { $push: { pictures: picture._id } }, { new: true })
-      .then((updatedArtists) => {
-        res.json(updatedArtists)
-      })
-
-    })
-  })
-  .catch((err) => {
-    console.log(error);
-    res.send('looks like your not an artists')
-  })
-})
 
 
 
@@ -113,20 +76,20 @@ app.listen(PORT, () => {
 //   "type": "customer",
 //   "firstName": "asdf",
 //   "lastName": "asdf",
-  // "phone": "asdf",
-  // "email": "asdf@asd.com",
-  // "password": "asdf"
+//   "phone": "asdf",
+//   "email": "customerTest@test.com",
+//   "password": "1234"
 // }
 
 // {
 //   "type": "artist",
-//   "firstName": "aasdf",
-//   "lastName": "aasdf",
-//   "phone": "aasdf",
-//   "email": "aasdf@asdf.com",
-//   "password": "aasdf",
+//   "firstName": "test",
+//   "lastName": "artist",
+//   "phone": "8015551212",
+//   "email": "testTest@test.com",
+//   "password": "1234",
 //   "artistData": {
-//     "specialization": "chicano",
+//     "specialization": "Anatomy",
 //     "pricing": "byPiece",
 //     "location": "asdf",
 //     "street": "asdf",

@@ -2,19 +2,17 @@
 const router = require('express').Router();
 const imageController = require('../../controllers/imageController');
 
-// url is now: api/images/ (CRUD)
-//can only have one get per route
+//this is used from the user page to return searched images.
 router
-  .route('/')
-  .post(imageController.create)
-  .get(imageController.findAll);
+  .route('/query')
+  .get(imageController.findAllQuery);
 
-// api/images/:id (CRUD) this will find inages by artist id if needed
-// router.route('/:id')
-
-router.route('/style')
-.get(imageController.findAllQuery);
-
-// router.route('/placement')
+//I had to move this to last so that query would work, is that normal?
+//this is the route from the artist ID (their profile) to save and view all their images
+//url is api/images/:id
+router
+  .route('/:id')
+  .post(imageController.saveImage)
+  .get(imageController.findAllByArtist);
 
 module.exports = router;

@@ -11,16 +11,16 @@ const SearchForm = (props) => {
             </Row>
             <Row>
                 <Input s={12} m={6} type='select' name='style' label="Tattoo Style" onChange={props.handleSelection} defaultValue='blank'>
-                    <option value='blank'>Choose One...</option>
-                    <option value='abstract'>Abstract</option>
-                    <option value='american'>American Traditional</option>
-                    <option value='anatomy'>Anatomy</option>
+                    <option value=''>Choose One...</option>
+                    <option value='Abstract'>Abstract</option>
+                    <option value='American Traditional'>American Traditional</option>
+                    <option value='Anatomy'>Anatomy</option>
                 </Input>
                 <Input s={12} m={6} type='select' name='placement' label="Body Placement" onChange={props.handleSelection} defaultValue='blank'>
-                    <option value='blank'>Choose One...</option>
-                    <option value='ankle'>Ankle</option>
-                    <option value='bicep'>Bicep</option>
-                    <option value='chest'>Chest</option>
+                    <option value=''>Choose One...</option>
+                    <option value='Ankle'>Ankle</option>
+                    <option value='Bicep'>Bicep</option>
+                    <option value='Chest'>Chest</option>
                 </Input>
             </Row>
             <Row>

@@ -2,19 +2,20 @@
 import axios from 'axios';
 
 export default {
-    //get all images by style and possibly by placement//not sure the formatting
-    //sending the style and placement as the req.body
-    getImages: (query) => {
-        return axios.get('/api/images/')
-    },
-    //get all images by style and placement
+    //this is get from artist page to show all their images
+    // getImages: (id) => {
+    //     return axios.get('/api/images/:id')
+    // },
+    //get all images by style and placement query on user page
+    // WORKING
     getImagesByQuery: (placement, style) => {
-        return axios.get('/api/images/style', {
+        return axios.get('/api/images/query', {
            params: {
                 style: style,
                 placement: placement
            }
         })
     }
+    //post api route to save pictures (Andi is creating)
 };
 
