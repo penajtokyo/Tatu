@@ -16,20 +16,15 @@ class User extends Component {
 
     };
 
-    //May only need one hanlder for the query, but need to query db by both terms (what if placement is blank?)
-    //query DB for all images with a certain body placement
+    //query DB for all images with a certain body placement and/or style
     getImages = () => {
         API.getImagesByQuery(this.state.placement, this.state.style)
-            .then((response) => {
-                console.log('response from db', response);
-                this.setState({imageResults: response.data})
-            })
-            .catch(err => console.log(err))
+        .then((response) => {
+            console.log('response data from db', response.data);
+            this.setState({searchResults: response.data})
+        })
+        .catch(err => console.log(err))
     };
-
-    //query DB for all images with a certain body placement
-    // handleImagesByStyle = () => {
-    // };
 
     //handles the form input (dropdown) for the onChange in the form
     handleSelection = (event) => {
@@ -46,7 +41,7 @@ class User extends Component {
         event.preventDefault();
         //send the value selection as the query to the db (call the methods above for the API)
         this.getImages();
-        // display results in cards
+        // display results in cards in results area
     };
 
     render() {
