@@ -49,14 +49,6 @@ mongoose.connect("mongodb://localhost/mongotestrepository", { useNewUrlParser: t
 // app.get('/customerOrArtist', (req, res) => {
 
 // })
-// app.get('/cutomerWithArtistsPictures', (req, res) => {
-
-//   db.Customer.findOne({_id: req.session.customer._id})
-//   .populate("artistId")
-//   .then((customerArtist) => {
-//     console.log(customerArtist);
-//   })
-// })
 
 
 // app.get('/session', (req, res) => {
