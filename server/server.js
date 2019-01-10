@@ -90,9 +90,9 @@ app.post('/artistPictures', (req, res) => {
 
 
 
-app.get('/session', (req, res) => {
-  res.json(req.session.customer)
-});
+// app.get('/session', (req, res) => {
+//   res.json(req.session.customer)
+// });
 
 //using router routes
 app.use(routes)
@@ -113,18 +113,18 @@ app.listen(PORT, () => {
 //   "type": "customer",
 //   "firstName": "asdf",
 //   "lastName": "asdf",
-//   "phone": "asdf",
-//   "email": "asdf@asd.com",
-//   "password": "asdf"
+  // "phone": "asdf",
+  // "email": "asdf@asd.com",
+  // "password": "asdf"
 // }
 
 // {
 //   "type": "artist",
-//   "firstName": "asdf",
-//   "lastName": "asdf",
-//   "phone": "asdf",
-//   "email": "asdf@asdf.com",
-//   "password": "asdf",
+//   "firstName": "aasdf",
+//   "lastName": "aasdf",
+//   "phone": "aasdf",
+//   "email": "aasdf@asdf.com",
+//   "password": "aasdf",
 //   "artistData": {
 //     "specialization": "chicano",
 //     "pricing": "byPiece",

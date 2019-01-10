@@ -7,5 +7,8 @@ router.route('/signup')
 router.route('/login')
   .post(authController.login)
 
+ router.route('/session')
+  .get(authController.session)
+
 
 module.exports = router;
