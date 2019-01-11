@@ -1,10 +1,12 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const session = require("express-session");
 
-const PORT = process.env.PORT || 3001;
+var express = require("express");
+var mongoose = require("mongoose");
+var session = require("express-session");
+var routes = require("./routes")
 
-var db = require("./models");
+var PORT = process.env.PORT || 3001;
+
+// var db = require("./models");
 
 // Initialize Express
 var app = express();
@@ -41,126 +43,17 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/mongotestrepository", { useNewUrlParser: true });
+mongoose.connect("mongodb://localhost/tatuDB", { useNewUrlParser: true });
 
-//test routes
+//using router routes
+app.use(routes)
 
-//artist or customer creation
-app.get('/customerOrArtist', (req, res) => {
-
-})
-app.get('/cutomerWithArtistsPictures', (req, res) => {
-
-  db.Customer.findOne({_id: req.session.customer._id})
-  .populate("artistId")
-  .then((customerArtist) => {
-    console.log(customerArtist);
-  })
-})
-app.post('/customerOrArtist', (req, res) => {
-
-  if (req.body.type === "customer") {
-    db.Customer.create(req.body).then(function (dbData) {
-      var userObj = {
-        _id: dbData._id,
-        firstName: dbData.firstName,
-        lastName: dbData.lastName,
-        email: dbData.email,
-        phone: dbData.phone,
-        type: dbData.type
-      }
-      req.session.customer = userObj;
-      req.session.customer.loggedIn = true;
-      res.json(dbData);
-    })
-  } else {
-
-    var customerObj = {
-      type: req.body.type,
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      phone: req.body.phone,
-      email: req.body.email,
-      password: req.body.password
-    };
-    console.log(customerObj);
-    db.Customer.create(customerObj).then(function (customerData) {
-      var artistData = {
-        specialization: req.body.artistData.specialization,
-        pricing: req.body.artistData.pricing,
-        location: req.body.artistData.location,
-        address: req.body.artistData.street,
-        city: req.body.artistData.city,
-        state: req.body.artistData.state,
-        zip: req.body.artistData.zip,
-        Customer_Id: customerData._id
-      }
-      db.Artist.create(artistData).then(function (artistData) {
-        console.log(artistData);
-        var userObj = {
-          _id: customerData._id,
-          firstName: customerData.firstName,
-          lastName: customerData.lastName,
-          email: customerData.email,
-          phone: customerData.phone,
-          type: customerData.type,
-          artistData: {
-            artistId: artistData._id,
-            specialization: artistData.specialization,
-            pricing: artistData.pricing,
-            location: artistData.location,
-            street: artistData.street,
-            city: artistData.city,
-            state: artistData.state,
-            zip: artistData.zip
-          }
-        };
-        req.session.customer = userObj;
-        req.session.customer.loggedIn = true;
-        res.json(userObj);
-      })
-    })
-  };
-})
-
-//pictures
-app.post('/artistPictures', (req, res) => {
-
-  //get the customer
-  //verify that hey are an artist
-  //post a picure.
-  
-  db.Artist.findOne({
-    _id: req.session.customer.artistId
-  })
-  .then((artist) => {
-    console.log(artist);
-    db.Pictures.create(req.body).then((picture) => {
-
-      db.Artist.findOneAndUpdate({_id: req.session.customer.artistData.artistId}, { $push: { pictures: picture._id } }, { new: true })
-      .then((updatedArtists) => {
-        res.json(updatedArtists)
-      })
-
-    })
-  })
-  .catch((err) => {
-    console.log(error);
-    res.send('looks like your not an artists')
-  })
-})
-
-
-
-app.get('/session', (req, res) => {
-  res.json(req.session.customer)
-})
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
-})
+});
 
 
-
+//Test Data
 // {
 //   "file": 'asdfasdf.jpg',
 //   "description": 'dope tattoo',
@@ -172,24 +65,24 @@ app.listen(PORT, () => {
 //   "firstName": "asdf",
 //   "lastName": "asdf",
 //   "phone": "asdf",
-//   "email": "asdf@asd.com",
-//   "password": "asdf"
+//   "email": "customerTest@test.com",
+//   "password": "1234"
 // }
 
 // {
 //   "type": "artist",
-//   "firstName": "asdf",
-//   "lastName": "asdf",
-//   "phone": "asdf",
-//   "email": "asdf@asdf.com",
-//   "password": "asdf",
+//   "firstName": "test2",
+//   "lastName": "artist2",
+//   "phone": "8015551214",
+//   "email": "test2Test@test.com",
+//   "password": "12345",
 //   "artistData": {
-//     "specialization": "chicano",
+//     "specialization": "American Traditional",
 //     "pricing": "byPiece",
-//     "location": "asdf",
-//     "street": "asdf",
-//     "city": "asdf",
-//     "state": "asdf",
+//     "location": "home",
+//     "street": "123 main st",
+//     "city": "salt lake city",
+//     "state": "UT",
 //     "zip": "84121"
 //   }
 // }
