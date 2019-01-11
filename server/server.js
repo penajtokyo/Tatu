@@ -42,13 +42,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/mongotestrepository", { useNewUrlParser: true });
-
-
-//artist or customer creation
-// app.get('/customerOrArtist', (req, res) => {
-
-// })
+mongoose.connect("mongodb://localhost/tatuDB", { useNewUrlParser: true });
 
 //using router routes
 app.use(routes)
@@ -58,7 +52,7 @@ app.listen(PORT, () => {
 });
 
 
-
+//Test Data
 // {
 //   "file": 'asdfasdf.jpg',
 //   "description": 'dope tattoo',

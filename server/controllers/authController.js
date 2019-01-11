@@ -78,26 +78,17 @@ module.exports = {
     });
   },
   login: (req, res) => {
-    //email
-    //password
     db.Customer.findOne({
       email: req.body.email
     })
     .populate("artistData")
     .then((userData) => {
-      console.log('userData ahhhhhhhhhhhhhhhhh', userData);
+      console.log('userData', userData);
       bcrypt.compare(req.body.password, userData.password, function (err, pMatch) {
-        if( pMatch === true) {
-
-          // if(userData.type === "artist"){
-          //   db.Artist.find
-          // }
+        if(pMatch === true) {
           // check to see if they are an artists or not
-          // if customer
           if(userData.type === "customer") {
-            //changed res to req below
             req.session.customer = {
-              //changed from "customerData.XXXXX" to "db.Customer.XXXXX" on all values
               _id: userData._id,
               firstName: userData.firstName,
               lastName: userData.lastName,
@@ -105,10 +96,10 @@ module.exports = {
               phone: userData.phone,
               type: userData.type,
             }
-            console.log("I am logged in as a customer!");
+            req.session.customer.loggedIn = true;
+            res.json(req.session.customer);
           }
           else {
-            //changed res to req below and then customerData.XXXX to db.Customer.XXXX on all values
             req.session.customer = {
               _id: userData._id,
               firstName: userData.firstName,
@@ -129,7 +120,6 @@ module.exports = {
             }
             req.session.customer.loggedIn = true;
             res.json(req.session.customer);
- 
           }
         }
         else {
