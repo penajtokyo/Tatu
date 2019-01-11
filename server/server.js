@@ -42,20 +42,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/mongotestrepository", { useNewUrlParser: true });
-
-
-//artist or customer creation
-// app.get('/customerOrArtist', (req, res) => {
-
-// })
-
-
-
-
-// app.get('/session', (req, res) => {
-//   res.json(req.session.customer)
-// });
+mongoose.connect("mongodb://localhost/tatuDB", { useNewUrlParser: true });
 
 //using router routes
 app.use(routes)
@@ -65,7 +52,7 @@ app.listen(PORT, () => {
 });
 
 
-
+//Test Data
 // {
 //   "file": 'asdfasdf.jpg',
 //   "description": 'dope tattoo',
@@ -83,18 +70,18 @@ app.listen(PORT, () => {
 
 // {
 //   "type": "artist",
-//   "firstName": "test",
-//   "lastName": "artist",
-//   "phone": "8015551212",
-//   "email": "testTest@test.com",
-//   "password": "1234",
+//   "firstName": "test2",
+//   "lastName": "artist2",
+//   "phone": "8015551214",
+//   "email": "test2Test@test.com",
+//   "password": "12345",
 //   "artistData": {
-//     "specialization": "Anatomy",
+//     "specialization": "American Traditional",
 //     "pricing": "byPiece",
-//     "location": "asdf",
-//     "street": "asdf",
-//     "city": "asdf",
-//     "state": "asdf",
+//     "location": "home",
+//     "street": "123 main st",
+//     "city": "salt lake city",
+//     "state": "UT",
 //     "zip": "84121"
 //   }
 // }
