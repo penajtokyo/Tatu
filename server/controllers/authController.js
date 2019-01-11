@@ -45,8 +45,11 @@ module.exports = {
               Customer_Id: customerData._id
             }
             db.Artist.create(artistData).then(function (artistData) {
-              db.Customer.findByIdAndUpdate({_id: customerData._id},{artistData: artistData._id})
-              .then( updateData =>{
+              db.Customer.findByIdAndUpdate(
+                {_id: customerData._id},
+                {artistData: artistData._id},
+                {new: true})
+              .then(updateData =>{
                 console.log(artistData);
                 var userObj = {
                   _id: customerData._id,
