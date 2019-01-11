@@ -124,9 +124,11 @@ module.exports = {
                 zip: db.Artist.zip
               }
             }
-          console.log("I am an Artist and I am logged in")
-          console.log('artist user obj', artistObj)
+          console.log("I am an Artist and I am logged in");
+          console.log('artist user obj', artistObj);
+          
           }
+          console.log('logged in or not', req.session.customer.loggedIn = true);
         }
         else {
           console.log("invalid email or password")
