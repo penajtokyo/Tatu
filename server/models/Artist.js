@@ -3,11 +3,11 @@ var Schema = mongoose.Schema;
 
 var ArtistSchema = new Schema({
   location: String,
-  address: String,
+  street: String,
   city: String,
   state: String,
   zip: String,
-  price: String,
+  pricing: String,
   specialization: String,
   pictures: [{
     type: Schema.Types.ObjectId,

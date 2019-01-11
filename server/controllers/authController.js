@@ -45,28 +45,32 @@ module.exports = {
               Customer_Id: customerData._id
             }
             db.Artist.create(artistData).then(function (artistData) {
-              console.log(artistData);
-              var userObj = {
-                _id: customerData._id,
-                firstName: customerData.firstName,
-                lastName: customerData.lastName,
-                email: customerData.email,
-                phone: customerData.phone,
-                type: customerData.type,
-                artistData: {
-                  artistId: artistData._id,
-                  specialization: artistData.specialization,
-                  pricing: artistData.pricing,
-                  location: artistData.location,
-                  street: artistData.street,
-                  city: artistData.city,
-                  state: artistData.state,
-                  zip: artistData.zip
-                }
-              };
-              req.session.customer = userObj;
-              req.session.customer.loggedIn = true;
-              res.json(userObj);
+              db.Customer.findByIdAndUpdate({_id: customerData._id},{artistData: artistData._id})
+              .then( updateData =>{
+                console.log(artistData);
+                var userObj = {
+                  _id: customerData._id,
+                  firstName: customerData.firstName,
+                  lastName: customerData.lastName,
+                  email: customerData.email,
+                  phone: customerData.phone,
+                  type: customerData.type,
+                  artistData: {
+                    artistId: artistData._id,
+                    specialization: artistData.specialization,
+                    pricing: artistData.pricing,
+                    location: artistData.location,
+                    street: artistData.street,
+                    city: artistData.city,
+                    state: artistData.state,
+                    zip: artistData.zip
+                  }
+                };
+                req.session.customer = userObj;
+                req.session.customer.loggedIn = true;
+                res.json(userObj);
+              })
+
             })
           })
         };
@@ -76,53 +80,57 @@ module.exports = {
   login: (req, res) => {
     //email
     //password
-    db.Customer.find({email: req.body.email}).then((userData) => {
-      console.log(userData);
-      bcrypt.compare(req.body.password, userData[0].password, function (err, res) {
-        // res == true
-        if(res === true){
-          console.log("loggedin");
+    db.Customer.findOne({
+      email: req.body.email
+    })
+    .populate("artistData")
+    .then((userData) => {
+      console.log('userData ahhhhhhhhhhhhhhhhh', userData);
+      bcrypt.compare(req.body.password, userData.password, function (err, pMatch) {
+        if( pMatch === true) {
+
+          // if(userData.type === "artist"){
+          //   db.Artist.find
+          // }
           // check to see if they are an artists or not
-          // if customer (I switched it to check if customer first)
-          console.log('req.body', req.body); //email and password object since that is the info being passed in from the "front end"
-          console.log(db.Customer.type);
-          //need to determine how to check the type from teh db for the email???
-            if(db.Customer.type === "customer"){
-              //changed res to req below
-              req.session.customer = userObj = {
-                //changed from "customerData.XXXXX" to "db.Customer.XXXXX" on all values
-                _id: db.Customer._id,
-                firstName: db.Customer.firstName,
-                lastName: db.Customer.lastName,
-                email: db.Customer.email,
-                phone: db.Customer.phone,
-                type: db.Customer.type
-              }
-              console.log("I am logged in as a customer!")
+          // if customer
+          if(userData.type === "customer") {
+            //changed res to req below
+            req.session.customer = {
+              //changed from "customerData.XXXXX" to "db.Customer.XXXXX" on all values
+              _id: userData._id,
+              firstName: userData.firstName,
+              lastName: userData.lastName,
+              email: userData.email,
+              phone: userData.phone,
+              type: userData.type,
             }
-            else {
-              //changed res to req below and then customerData.XXXX to db.Customer.XXXX on all values
-              req.session.customer = artistData = {
-                _id: db.Customer._id,
-                firstName: db.Customer.firstName,
-                lastName: db.Customer.lastName,
-                email: db.Customer.email,
-                phone: db.Customer.phone,
-                type: db.Customer.type,
-                artistData: {
-                  artistId: db.Artist._id,
-                  specialization: db.Artist.specialization,
-                  pricing: db.Artist.pricing,
-                  location: db.Artist.location,
-                  street: db.Artist.street,
-                  city: db.Artist.city,
-                  state: db.Artist.state,
-                  zip: db.Artist.zip
-                }
+            console.log("I am logged in as a customer!");
+          }
+          else {
+            //changed res to req below and then customerData.XXXX to db.Customer.XXXX on all values
+            req.session.customer = {
+              _id: userData._id,
+              firstName: userData.firstName,
+              lastName: userData.lastName,
+              email: userData.email,
+              phone: userData.phone,
+              type: userData.type,
+              artistData: {
+                _id: userData.artistData._id,
+                specialization: userData.artistData.specialization,
+                pricing: userData.artistData.pricing,
+                location: userData.artistData.location,
+                street: userData.artistData.street,
+                city: userData.artistData.city,
+                state: userData.artistData.state,
+                zip: userData.artistData.zip
               }
-            console.log("I am an Artist and I am logged in")
-            console.log(artistData)
-           }
+            }
+            req.session.customer.loggedIn = true;
+            res.json(req.session.customer);
+ 
+          }
         }
         else {
           console.log("invalid email or password")
