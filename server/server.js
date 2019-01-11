@@ -1,8 +1,8 @@
-var express = require("express");
-var mongoose = require("mongoose");
-var session = require("express-session");
+const express = require("express");
+const mongoose = require("mongoose");
+const session = require("express-session");
 
-var PORT = 3000;
+const PORT = process.env.PORT || 3001;
 
 var db = require("./models");
 
