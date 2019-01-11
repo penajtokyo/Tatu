@@ -8,7 +8,7 @@ module.exports = {
     findAllByArtist: function(req, res) {
         console.log('finding all pictures for this artist ID:', req.params.id);
         db.Artist.findOne({
-            // _id: req.session.customer.artistData.artistId
+            // _id: req.session.customer.artistData._Id
             _id: req.params.id
         })
         .populate('pictures')

@@ -45,30 +45,32 @@ module.exports = {
               Customer_Id: customerData._id
             }
             db.Artist.create(artistData).then(function (artistData) {
-              console.log('artistData in artist db', artistData);
-              //changed this to artistObj from userObj for clarity and to align with login verbiage
-              var artistObj = {
-                _id: customerData._id,
-                firstName: customerData.firstName,
-                lastName: customerData.lastName,
-                email: customerData.email,
-                phone: customerData.phone,
-                type: customerData.type,
-                artistData: {
-                  _id: artistData._id,
-                  specialization: artistData.specialization,
-                  pricing: artistData.pricing,
-                  location: artistData.location,
-                  street: artistData.street,
-                  city: artistData.city,
-                  state: artistData.state,
-                  zip: artistData.zip
-                }
-              };
-              req.session.customer = artistObj;
-              req.session.customer.loggedIn = true;
-              console.log('req.session.customer in artist signup', req.session.customer);
-              res.json(artistObj);
+              db.Customer.findByIdAndUpdate({_id: customerData._id},{artistData: artistData._id})
+              .then( updateData =>{
+                console.log(artistData);
+                var userObj = {
+                  _id: customerData._id,
+                  firstName: customerData.firstName,
+                  lastName: customerData.lastName,
+                  email: customerData.email,
+                  phone: customerData.phone,
+                  type: customerData.type,
+                  artistData: {
+                    artistId: artistData._id,
+                    specialization: artistData.specialization,
+                    pricing: artistData.pricing,
+                    location: artistData.location,
+                    street: artistData.street,
+                    city: artistData.city,
+                    state: artistData.state,
+                    zip: artistData.zip
+                  }
+                };
+                req.session.customer = userObj;
+                req.session.customer.loggedIn = true;
+                res.json(userObj);
+              })
+
             })
           })
         };
@@ -81,18 +83,20 @@ module.exports = {
     db.Customer.findOne({
       email: req.body.email
     })
-    .populate('artist')
+    .populate("artistData")
     .then((userData) => {
-      console.log('userData', userData);
-      res.json(userData);
-      bcrypt.compare(req.body.password, userData.password, function (err, res) {
-        if(res === true) {
-          console.log("loggedin");
+      console.log('userData ahhhhhhhhhhhhhhhhh', userData);
+      bcrypt.compare(req.body.password, userData.password, function (err, pMatch) {
+        if( pMatch === true) {
+
+          // if(userData.type === "artist"){
+          //   db.Artist.find
+          // }
           // check to see if they are an artists or not
           // if customer
           if(userData.type === "customer") {
             //changed res to req below
-            req.session.customer = userObj = {
+            req.session.customer = {
               //changed from "customerData.XXXXX" to "db.Customer.XXXXX" on all values
               _id: userData._id,
               firstName: userData.firstName,
@@ -102,11 +106,10 @@ module.exports = {
               type: userData.type,
             }
             console.log("I am logged in as a customer!");
-            console.log("userObj", userObj);
           }
           else {
             //changed res to req below and then customerData.XXXX to db.Customer.XXXX on all values
-            req.session.customer = artistObj = {
+            req.session.customer = {
               _id: userData._id,
               firstName: userData.firstName,
               lastName: userData.lastName,
@@ -114,21 +117,20 @@ module.exports = {
               phone: userData.phone,
               type: userData.type,
               artistData: {
-                _id: db.Artist._id,
-                specialization: db.Artist.specialization,
-                pricing: db.Artist.pricing,
-                location: db.Artist.location,
-                street: db.Artist.street,
-                city: db.Artist.city,
-                state: db.Artist.state,
-                zip: db.Artist.zip
+                _id: userData.artistData._id,
+                specialization: userData.artistData.specialization,
+                pricing: userData.artistData.pricing,
+                location: userData.artistData.location,
+                street: userData.artistData.street,
+                city: userData.artistData.city,
+                state: userData.artistData.state,
+                zip: userData.artistData.zip
               }
             }
-          console.log("I am an Artist and I am logged in");
-          console.log('artist user obj', artistObj);
-          
+            req.session.customer.loggedIn = true;
+            res.json(req.session.customer);
+ 
           }
-          console.log('logged in or not', req.session.customer.loggedIn = true);
         }
         else {
           console.log("invalid email or password")

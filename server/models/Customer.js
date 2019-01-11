@@ -31,10 +31,17 @@ var CustomerSchema = new Schema({
     type: String,
     require: true
   },
+<<<<<<< HEAD
   artistData: {
     type: Schema.Types.ObjectId,
     ref: "Artist"
   }
+=======
+    artistData: {
+      type: Schema.Types.ObjectId,
+      ref: "Artist"
+    }
+>>>>>>> master
 });
 
 // This creates our model from the above schema, using mongoose's model method
