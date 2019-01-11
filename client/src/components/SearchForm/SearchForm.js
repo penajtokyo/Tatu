@@ -1,11 +1,12 @@
 import React from 'react';
 import {Button, Col, Input, Row } from 'react-materialize';
+import './SearchForm.css';
 
 const SearchForm = (props) => {
     return (
         <div>
             <Row>
-                <Col>
+                <Col s={12}>
                     <h4>Search Tattoos</h4>
                 </Col>
             </Row>
