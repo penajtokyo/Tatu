@@ -12,7 +12,7 @@ module.exports = {
       req.session.customer.artistData._id
     );
     db.Artist.findOne({
-      _id: req.session.customer.artistData.artistId
+      _id: req.session.customer.artistData._id
     })
       .populate("pictures")
       .then(doc => {
