@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import { Link } from "react-router-dom";
+// import { Route, Link } from "react-router-dom";
 // import { Container } from "../../components/Container";
 import { ErrModal, UserModalForm, ArtistModalForm } from "../../components/Modals";
 import { LoginForm } from "../../components/LoginForm";
@@ -108,10 +108,10 @@ class Home extends Component {
         //need to redirect to the User or artist page here, but how...may need to do it in the render section, but not sure how
         if (response.data.type === 'customer') {
           //open user page
-          // <Link to='/user' />
+          this.props.history.push('/user');
         } else {
           //open artist page
-          // <Link to='artist' />
+          this.props.history.push('/artist');
         }
       })
       .catch(err => console.log(err))
@@ -198,15 +198,16 @@ class Home extends Component {
     API.signup(signupData)
       .then((response) => {
         console.log('acount has been created');
+        console.log('response', response);
         // console.log('response', response.data);
         //need to redirect to the User or artist page here, but how...may need to do it in the render section, but not sure how
-        // if (response.data.type === 'customer') {
-        //   //open user page
-        //   // <Link to='/user' />
-        // } else {
-        //   //open artist page
-        //   // <Link to='artist' />
-        // }
+        if (response.data.type === 'customer') {
+          //open user page
+          this.props.history.push('/user');
+        } else {
+          //open artist page
+          this.props.history.push('/artist');
+        }
       })
       .catch(err => console.log(err))
   };
