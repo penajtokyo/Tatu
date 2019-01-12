@@ -15,7 +15,16 @@ export default {
                 placement: placement
            }
         })
-    }
+    },
     //post api route to save pictures (Andi is creating)
+
+    //post route to send data to backend on account creation along with email and password
+    signup: (signupData) => {
+        return axios.post('/api/auth/signup', signupData)
+    },
+    //used to send login data to db
+    login: (loginData) => {
+        return axios.post('/api/auth/login', loginData)
+    }
 };
 

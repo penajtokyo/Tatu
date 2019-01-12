@@ -4,6 +4,7 @@ module.exports = {
   //10 is saltrounds you can change that later if you with
   //hash is the encrypted password
   customerOrArtist: (req, res) => {
+    console.log('req.body', req.body);
     bcrypt.genSalt(10, function (err, salt) {
       bcrypt.hash(req.body.password, salt, function (err, hash) {
         // Store hash in your password DB.
@@ -35,13 +36,13 @@ module.exports = {
           console.log(customerObj);
           db.Customer.create(customerObj).then(function (customerData) {
             var artistData = {
-              specialization: req.body.artistData.specialization,
-              pricing: req.body.artistData.pricing,
-              location: req.body.artistData.location,
-              street: req.body.artistData.street,
-              city: req.body.artistData.city,
-              state: req.body.artistData.state,
-              zip: req.body.artistData.zip,
+              specialization: req.body.specialization,
+              pricing: req.body.pricing,
+              location: req.body.location,
+              street: req.body.street,
+              city: req.body.city,
+              state: req.body.state,
+              zip: req.body.zip,
               Customer_Id: customerData._id
             }
             db.Artist.create(artistData).then(function (artistData) {
@@ -81,13 +82,14 @@ module.exports = {
     });
   },
   login: (req, res) => {
+    // console.log(req.body);
     db.Customer.findOne({
-      email: req.body.email
+      email: req.body.loginEmail
     })
     .populate("artistData")
     .then((userData) => {
       console.log('userData', userData);
-      bcrypt.compare(req.body.password, userData.password, function (err, pMatch) {
+      bcrypt.compare(req.body.loginPassword, userData.password, function (err, pMatch) {
         if(pMatch === true) {
           // check to see if they are an artists or not
           if(userData.type === "customer") {
