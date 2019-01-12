@@ -16,8 +16,14 @@ export default {
            }
         })
     },
+    //to get all images assoicated with the artist id (req.session.customer.artistData.artistId)
+    getImagesbyArtist: (id) => {
+        return axios.get('/api/images/artistImages', id)
+    },
     //post api route to save pictures (Andi is creating)
-
+    saveImage: (pictureData) => {
+        return axios.post('/api/images/artistImages', pictureData)
+    },
     //post route to send data to backend on account creation along with email and password
     signup: (signupData) => {
         return axios.post('/api/auth/signup', signupData)
