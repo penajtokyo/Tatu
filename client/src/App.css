@@ -1,32 +1,75 @@
-.App {
-  text-align: center;
-}
+@import url('https://fonts.googleapis.com/css?family=Nunito|Pacifico');
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+body {
+  background-image: url('./images/tattooarms_bgi.jpg');
+  font-family: 'Nunito', sans-serif;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+/* buttons */
+.btn {
+  background-color: #344743;
+  font-family: 'Nunito', sans-serif;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.btn:hover {
+  background-color: grey;
+}
+
+.btn:focus {
+  background-color: #344743;
+}
+
+/* form elements */
+.select-wrapper input.select-dropdown {
+  border-bottom: 1px solid white;
+  color: white;
+}
+
+.dropdown-content li>span {
+  color: #BF691E;
+}
+
+/* makes the input lines white as well as the text once input */
+input[type=text]:not(.browser-default),
+input[type=email]:not(.browser-default),
+input[type=password]:not(.browser-default),
+input[type=number]:not(.browser-default) {
+  border-bottom:1px solid white;
+  color: white;
+}
+
+/* this changes the line color to match the text color (below) and makes the completed font color white */
+input[type=text]:not(.browser-default):focus:not([readonly]),
+input[type=password]:not(.browser-default):focus:not([readonly]),
+input[type=email]:not(.browser-default):focus:not([readonly]),
+input[type=number]:not(.browser-default):focus:not([readonly]),
+.select-wrapper input.select-dropdown:focus  {
+  border-bottom: 1px solid #BF691E;
+  box-shadow: 0 1px 0 0 #BF691E;
+}
+
+/* this changes the color of the label's text on the form */
+input[type=text]:not(.browser-default):focus:not([readonly])+label,
+input[type=password]:not(.browser-default):focus:not([readonly])+label,
+input[type=email]:not(.browser-default):focus:not([readonly])+label,
+input[type=number]:not(.browser-default):focus:not([readonly])+label {
+  color: #BF691E;
+}
+
+/* adjustments for mobile first */
+@media only screen and (max-width: 768px) {
+  body {
+    background-image: url('./images/tattooarms_sm_bgi.jpg');
   }
-  to {
-    transform: rotate(360deg);
+  /* img.tattooImage {
+    height: 440px;
+    width: 410px;
+  } */
+}
+
+@media only screen and (max-width: 411px) {
+  body {
+    background-image: url('./images/tattooarms_xsm_bgi.jpg');
   }
 }

@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito|Pacifico');
+
+.nav-wrapper {
+    background-color: #2a303e;
+}
+
+.brand-logo {
+    font-family: "Pacifico", cursive;
+  }
