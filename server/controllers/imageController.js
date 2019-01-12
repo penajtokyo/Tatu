@@ -5,9 +5,9 @@ module.exports = {
   //gets all artist's doc from the DB, based on artist who is signed, in and the array of their images
   // used to load to their profile page gallery
   findAllByArtist: function(req, res) {
-    console.log('req.customer.session artist id', req.session.customer.artistData._id)
+    console.log('req.customer.session artist id', req.session.customer.artistData.artistId)
     db.Artist.findOne({
-      _id: req.session.customer.artistData._id
+      _id: req.session.customer.artistData._artistId
     })
     .populate('pictures')
     .then(doc => {
@@ -56,9 +56,10 @@ module.exports = {
   //adds picture and its tags to db from artist page with the associated artist ID
   saveImage: function (req, res) {
     // console.log('object to save', req.body);
-    console.log ('saving to artist id',req.session.customer.artistData._id);
+    console.log ('session data',req.session.customer);
+    console.log ('saving to artist id',req.session.customer.artistData.artistId);
     db.Artist.findOne({
-        _id: req.session.customer.artistData._id
+        _id: req.session.customer.artistData.artistId
     })
     .then((artist) => {
       // console.log('the artist data:', artist);
@@ -67,7 +68,7 @@ module.exports = {
       .create(req.body)
       .then((picture) => {
         db.Artist.findOneAndUpdate(
-          {_id: req.session.customer.artistData._id},
+          {_id: req.session.customer.artistData.artistId},
           { $push: { pictures: picture._id } }, 
           { new: true })
           .then((doc) => {res.json(doc)})
