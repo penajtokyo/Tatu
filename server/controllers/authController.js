@@ -59,7 +59,7 @@ module.exports = {
                   phone: customerData.phone,
                   type: customerData.type,
                   artistData: {
-                    artistId: artistData._id,
+                    _id: artistData._id,
                     specialization: artistData.specialization,
                     pricing: artistData.pricing,
                     location: artistData.location,
