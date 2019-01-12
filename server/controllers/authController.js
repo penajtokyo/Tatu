@@ -134,5 +134,13 @@ module.exports = {
   },
   session: (req, res) => {
     res.json(req.session.customer);
+  },
+  //Logout route
+  //changed session from an object with items into it to an empty object
+  logout: (req, res) => {
+  if(req.session){
+   req.session.customer = {}
+   res.json("user logged out")
+  }
   }
 };
