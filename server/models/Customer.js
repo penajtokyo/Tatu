@@ -4,13 +4,11 @@ var Schema = mongoose.Schema;
 var CustomerSchema = new Schema({
   lastName: {
     type: String,
-    require: true,
-    unique: true
+    require: true
   },
   firstName: {
     type: String,
-    require: true,
-    unique: true
+    require: true
   },
   email: {
     type: String,
@@ -19,13 +17,11 @@ var CustomerSchema = new Schema({
   },
   password: {
     type: String,
-    require: true,
-    unique: true
+    require: true
   },
   phone: {
     type: String,
-    require: true,
-    unique: true
+    require: true
   },
   type: {
     type: String,

@@ -6,6 +6,10 @@ var PicturesSchema = new Schema({
   description: String,
   style: String,
   placement:String,
+  artist:{
+    type: Schema.Types.ObjectId,
+    ref: "Artist"
+  }
 });
 
 var Pictures = mongoose.model("Pictures", PicturesSchema);
