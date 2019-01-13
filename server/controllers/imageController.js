@@ -33,24 +33,32 @@ module.exports = {
         style: req.query.style,
         placement: req.query.placement
       })
-        // .populate('artist')
-        .then(doc => {
-          console.log("the picture doc", doc);
-          res.json(doc);
-        })
+      .populate('artist')
+      .then(doc => {
+        console.log("the picture doc", doc);
+        res.json(doc);
+      })
         .catch(err => res.status(422).json(err));
     } else if (req.query.style === "" && req.query.placement != "") {
       db.Pictures.find({
         placement: req.query.placement
       })
-        .then(doc => res.json(doc))
-        .catch(err => res.status(422).json(err));
+      .populate('artist')
+      .then(doc => {
+        console.log("the picture doc", doc);
+        res.json(doc);
+      })
+      .catch(err => res.status(422).json(err));
     } else if (req.query.placement === "" && req.query.style != "") {
       db.Pictures.find({
         style: req.query.style
       })
-        .then(doc => res.json(doc))
-        .catch(err => res.status(422).json(err));
+      .populate('artist')
+      .then(doc => {
+        console.log("the picture doc", doc);
+        res.json(doc);
+      })
+      .catch(err => res.status(422).json(err));
     }
   },
   //adds picture and its tags to db from artist page with the associated artist ID
