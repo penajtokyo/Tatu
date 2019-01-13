@@ -10,4 +10,7 @@ router.route('/login')
 router.route('/session')
   .get(authController.session)
 
+router.route('/logout')
+  .get(authController.logout)
+
 module.exports = router;
