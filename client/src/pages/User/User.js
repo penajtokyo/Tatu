@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Container, Row, Col} from 'react-materialize';
 import API from '../../utils/API';
+import Gallery from '../../components/Gallery';
 import SearchForm from '../../components/SearchForm';
 import Results from '../../components/Results';
 
@@ -58,14 +59,17 @@ class User extends Component {
                     </Col>
                 </Row>
                 <Row>
-                    <Col s={12} className='results center'>
+                    <Col s={12} className='results'>
+                    {this.state.searchResults.length ? (
                         <Results 
                             imagesData={this.state.searchResults}
+                        /> ) : ( 
+                        <Gallery 
+                            // send all images from the db to render in gallery
                         />
+                    )}
                     </Col>
                 </Row>
-                {/* inside results, will display Card Componenet with image of category and then link to a modal at at the bottom
-                to open a gallery of all images in that category or placement, after search is done */}
                 {/* in gallery modal, when image is clicked, expands to show the image details and tatto artist info */}
             </Container>
         );
