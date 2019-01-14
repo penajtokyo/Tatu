@@ -86,13 +86,12 @@ module.exports = {
     })
       .populate("artistData")
       .then(userData => {
-        console.log("userData", userData);
+        console.log("User's info:", userData);
         bcrypt.compare(req.body.loginPassword, userData.password, function(
           err,
           pMatch
         ) {
           if (pMatch === true) {
-            // check to see if they are an artists or not
             if (userData.type === "customer") {
               req.session.customer = {
                 _id: userData._id,
