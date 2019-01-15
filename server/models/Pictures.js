@@ -9,10 +9,14 @@ var PicturesSchema = new Schema({
   artist:{
     type: Schema.Types.ObjectId,
     ref: "Artist"
-  }
+  },
+  customer: {
+    type: Schema.Types.ObjectId,
+    ref: "Customer"
+  },
 });
 
 var Pictures = mongoose.model("Pictures", PicturesSchema);
 
-// Export the Library model
+// Export the Pictures model
 module.exports = Pictures;

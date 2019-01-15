@@ -1,4 +1,3 @@
-
 var express = require("express");
 var mongoose = require("mongoose");
 var session = require("express-session");
@@ -41,6 +40,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // Make public a static folder
 app.use(express.static("public"));
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
 
 // Connect to the Mongo DB
 mongoose.connect("mongodb://localhost/tatuDB", { useNewUrlParser: true });
