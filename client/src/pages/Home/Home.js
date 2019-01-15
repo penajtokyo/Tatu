@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import { Route, Link } from "react-router-dom";
 // import { Container } from "../../components/Container";
 import {
   ErrModal,
@@ -7,8 +6,6 @@ import {
   ArtistModalForm
 } from "../../components/Modals";
 import { LoginForm } from "../../components/LoginForm";
-// import Home from "../Home/index";
-// import ArtistProfile from "../ArtistProfile/ArtistProfilePage";
 import { Modal, Button, Input, Row } from "react-materialize";
 import "./Home.css";
 import API from "../../utils/API";
@@ -106,12 +103,12 @@ class Home extends Component {
         .then(response => {
           console.log("user is logged in");
           console.log("response", response);
-          // console.log("email: " + loginData.loginEmail + " and password: " + loginData.loginPassword);
+          
           this.setState({
             loginEmail: "",
             loginPassword: ""
           });
-          //need to redirect to the User or artist page here, but how...may need to do it in the render section, but not sure how
+          //redirect to the User or artist page
           if (response.data.type === "customer") {
             //open user page
             this.props.history.push({
