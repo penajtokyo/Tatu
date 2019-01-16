@@ -98,25 +98,25 @@ export const ArtistModalForm = props => {
             <Input s={6} type="select" name="specialization" value={props.specialization} onChange={props.handleInputChange}>
               <option value="">What is your specialization?</option>
               <option value="3D">3D</option>
-              <option value="abstract">Abstract</option>
-              <option value="amTraditional">American Traditional</option>
-              <option value="biomechanical">Biomechanical</option>
-              <option value="celtic">Celtic</option>
-              <option value="chicano">Chicano</option>
-              <option value="geometric">Geometric</option>
-              <option value="hawaiian">Hawaiian/Maori/Polynesian</option>
-              <option value="hyperRealistic">Hyper Realistic</option>
-              <option value="japanese">Japanese</option>
-              <option value="paintBrushStroke">Paint Brush Stroke</option>
-              <option value="popArt">Pop Art</option>
-              <option value="surrealism">Surrealism</option>
-              <option value="tribal">Tribal</option>
-              <option value="watercolor">Watercolor</option>
+              <option value="Abstract">Abstract</option>
+              <option value="American Traditional">American Traditional</option>
+              <option value="Biomechanical">Biomechanical</option>
+              <option value="Celtic">Celtic</option>
+              <option value="Chicano">Chicano</option>
+              <option value="Geometric">Geometric</option>
+              <option value="Hawaiian">Hawaiian/Maori/Polynesian</option>
+              <option value="HyperRealistic">Hyper Realistic</option>
+              <option value="Japanese">Japanese</option>
+              <option value="aintBrushStroke">Paint Brush Stroke</option>
+              <option value="Pop Art">Pop Art</option>
+              <option value="Surrealism">Surrealism</option>
+              <option value="Tribal">Tribal</option>
+              <option value="Watercolor">Watercolor</option>
             </Input>
           <Input s={6} type="select" name="pricing" value={props.pricing} onChange={props.handleInputChange}>
             <option value="">What is your pricing structure?</option>
-            <option value="hour">Per hour</option>
-            <option value="piece">Per piece</option>
+            <option value="By the Hour">Per hour</option>
+            <option value="By the piece">Per piece</option>
           </Input>
         <Button onClick={props.artistSignUp}>Create Account</Button>
       </Row>

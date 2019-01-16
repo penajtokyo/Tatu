@@ -14,4 +14,10 @@ router
   .post(imageController.saveImage)
   .get(imageController.findAllByArtist);
 
+  //gets all images from DB
+  // url: api/images/allImages
+  router
+    .route('/allImages')
+    .get(imageController.findAllImages);
+
 module.exports = router;

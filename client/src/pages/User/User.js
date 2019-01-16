@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {Container, Row, Col} from 'react-materialize';
 import API from '../../utils/API';
+import Gallery from '../../components/Gallery';
+import Navbar from '../../components/Navbar';
 import SearchForm from '../../components/SearchForm';
 import Results from '../../components/Results';
 
@@ -8,16 +10,29 @@ class User extends Component {
     state = {
         placement: '',
         style: '',
-        searchResults: []
+        searchResults: [],
+        allImages: [],
+        userName: this.props.location.state.detail.firstName
     }
 
     componentDidMount() {
         //when page loads without search queries display a default view/gallery
+        this.getAllImages();
+        // this.setUserName();
+    };
 
+    //get all images to pass to gallery/set up new api to query all images in db
+    getAllImages = () => {
+        API.getAllImages()
+        .then((response) => {
+            console.log('all images from DB', response);
+            this.setState({allImages: response.data})
+        })
+        .catch(err => console.log(err))
     };
 
     //query DB for all images with a certain body placement and/or style
-    getImages = () => {
+    getImagesQuery = () => {
         API.getImagesByQuery(this.state.placement, this.state.style)
         .then((response) => {
             console.log('response data from db', response.data);
@@ -29,7 +44,6 @@ class User extends Component {
     //handles the form input (dropdown) for the onChange in the form
     handleSelection = (event) => {
         const { name, value } = event.target;
-        // console.log(event.target);
         this.setState({
             [name]: value
         });
@@ -39,13 +53,24 @@ class User extends Component {
     //what to do when the submit button is clicked in the form
     handleSubmit = (event) => {
         event.preventDefault();
-        //send the value selection as the query to the db (call the methods above for the API)
-        this.getImages();
-        // display results in cards in results area
+        this.getImagesQuery();
     };
 
+    // setUserName = () => {
+    //     const userData = this.props.location.state.detail;
+    //     console.log('userData var', userData);
+    //     this.setState({userName: userData.firstName})
+    //     console.log('users name', this.state.userName);
+    // };
+
     render() {
+        
+
         return (
+            <div>
+            <Navbar 
+                name={this.state.userName}
+            />
             <Container>
                 <Row>
                     <Col s={12} className='search'>
@@ -58,16 +83,20 @@ class User extends Component {
                     </Col>
                 </Row>
                 <Row>
-                    <Col s={12} className='results center'>
+                    <Col s={12} className='results'>
+                    {this.state.searchResults.length ? (
                         <Results 
                             imagesData={this.state.searchResults}
+                        /> ) : ( 
+                        <Gallery 
+                            images={this.state.allImages}
                         />
+                    )}
                     </Col>
                 </Row>
-                {/* inside results, will display Card Componenet with image of category and then link to a modal at at the bottom
-                to open a gallery of all images in that category or placement, after search is done */}
                 {/* in gallery modal, when image is clicked, expands to show the image details and tatto artist info */}
             </Container>
+            </div>
         );
     }
 }
