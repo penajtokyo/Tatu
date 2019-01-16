@@ -32,8 +32,13 @@ export default {
     return axios.post("/api/auth/signup", signupData);
   },
 
-  //used to send login data to db
+  // used to send login data to db
   login: loginData => {
     return axios.post("/api/auth/login", loginData);
+  },
+
+  // used to update artist information in db
+  updateArtistInfo: updateData => {
+    return axios.get("/api/admin/artistUpdate");
   }
 };
