@@ -11,19 +11,25 @@ class User extends Component {
         placement: '',
         style: '',
         searchResults: [],
+        allImages: [],
         userName: this.props.location.state.detail.firstName
     }
 
     componentDidMount() {
         //when page loads without search queries display a default view/gallery
-        //this.getAllImages();
+        this.getAllImages();
         // this.setUserName();
     };
 
     //get all images to pass to gallery/set up new api to query all images in db
-    // getAllImages = () => {
-
-    // }
+    getAllImages = () => {
+        API.getAllImages()
+        .then((response) => {
+            console.log('all images from DB', response);
+            this.setState({allImages: response.data})
+        })
+        .catch(err => console.log(err))
+    };
 
     //query DB for all images with a certain body placement and/or style
     getImagesQuery = () => {
@@ -83,7 +89,7 @@ class User extends Component {
                             imagesData={this.state.searchResults}
                         /> ) : ( 
                         <Gallery 
-                            // send all images from the db to render in gallery
+                            images={this.state.allImages}
                         />
                     )}
                     </Col>

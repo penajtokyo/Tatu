@@ -12,6 +12,11 @@ export default {
     });
   },
 
+  //return all images with no query from the db to show on defualt user page
+  getAllImages: () => {
+    return axios.get('api/images/allImages');
+  },
+
   // get api route to retreive images in the artists pictures column
   getImages: () => {
     return axios.get("/api/images/artistImages");
