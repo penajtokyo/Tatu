@@ -24,6 +24,7 @@ class Images extends Component {
   };
 
   render() {
+    console.log(this.state.tattooArtistImages);
     if (this.state.tattooArtistImages) {
       // Image variable that maps over the tattooArtistImages array and renders
       const images = this.state.tattooArtistImages.map(image => {
@@ -39,12 +40,13 @@ class Images extends Component {
                     waves="light"
                   />
                 }
-                title="Card Title"
+                title={image.description}
                 reveal={
-                  <p>
-                    Here is some more information about this product that is
-                    only revealed once clicked on.
-                  </p>
+                  <div>
+                    <p>{image.style}</p>
+                    <p>{image.placement}</p>
+                    <p>{image.description}</p>
+                  </div>
                 }
               />
             </Col>
