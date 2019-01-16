@@ -7,6 +7,7 @@ import {
 } from "../../components/Modals";
 import { LoginForm } from "../../components/LoginForm";
 import { Modal, Button, Input, Row } from "react-materialize";
+import Nav from '../../components/Nav';
 import "./Home.css";
 import API from "../../utils/API";
 
@@ -31,7 +32,8 @@ class Home extends Component {
     hideRow: false,
     hideUserRow: false,
     hideArtistRow: false,
-    hideErr: false
+    hideErr: false,
+    userName: ''
   };
 
   // Method to handle user pressing enter in login form.
@@ -268,71 +270,74 @@ class Home extends Component {
     // const userStyle = !this.state.hideUserRow ? {display: "none"} : {};
     // const artistStyle = !this.state.hideArtistRow ? {display: "none"} : {};
     return (
-      <div className="container center-align">
-        <ErrModal hideErr={this.state.hideErr} closeModal={this.closeModal} />
-        {/* <Container fluid> */}
-        <h5>New Users</h5>
-        <Modal
-          header="Create New Account"
-          trigger={<Button>Create Account</Button>}
-        >
-          <Row style={style}>
-            <Input
-              s={12}
-              type="select"
-              value={this.state.selected}
-              onChange={this.handleSelection}
-            >
-              <option value="">What Best Describes You?</option>
-              <option value="customer">Customer</option>
-              <option value="artist">Tattoo Artist</option>
-            </Input>
-          </Row>
-          <UserModalForm
-            hideUserRow={this.state.hideUserRow}
-            firstName={this.state.firstName}
-            lastName={this.state.lastName}
-            password={this.state.password}
-            phoneNumber={this.state.phoneNumber}
-            email={this.state.email}
+      <div>
+        <Nav name={this.state.userName} />
+        <div className="container center-align">
+          <ErrModal hideErr={this.state.hideErr} closeModal={this.closeModal} />
+          {/* <Container fluid> */}
+          <h5>New Users</h5>
+          <Modal
+            header="Create New Account"
+            trigger={<Button>Create Account</Button>}
+          >
+            <Row style={style}>
+              <Input
+                s={12}
+                type="select"
+                value={this.state.selected}
+                onChange={this.handleSelection}
+              >
+                <option value="">What Best Describes You?</option>
+                <option value="customer">Customer</option>
+                <option value="artist">Tattoo Artist</option>
+              </Input>
+            </Row>
+            <UserModalForm
+              hideUserRow={this.state.hideUserRow}
+              firstName={this.state.firstName}
+              lastName={this.state.lastName}
+              password={this.state.password}
+              phoneNumber={this.state.phoneNumber}
+              email={this.state.email}
+              handleInputChange={this.handleInputChange}
+              handleKeyClick={this.handleKeyClick}
+              userSignUp={this.userSignUp}
+            />
+            <ArtistModalForm
+              hideArtistRow={this.state.hideArtistRow}
+              firstName={this.state.firstName}
+              lastName={this.state.lastName}
+              password={this.state.password}
+              phoneNumber={this.state.phoneNumber}
+              email={this.state.email}
+              location={this.state.location}
+              street={this.state.street}
+              state={this.state.state}
+              city={this.state.city}
+              st={this.state.st}
+              zip={this.state.zip}
+              specialization={this.state.specialization}
+              pricing={this.state.pricing}
+              handleInputChange={this.handleInputChange}
+              handleKeyClick={this.handleKeyClick}
+              artistSignUp={this.artistSignUp}
+            />
+          </Modal>
+          {/* </Container> */}
+          <hr />
+          {/* <Container fluid> */}
+          <h5>Existing Users</h5>
+          <LoginForm
+            loginEmail={this.state.loginEmail}
+            loginPassword={this.state.loginPassword}
+            type={this.state.input}
             handleInputChange={this.handleInputChange}
-            handleKeyClick={this.handleKeyClick}
-            userSignUp={this.userSignUp}
+            onLoginSubmit={this.onLoginSubmit}
+            handleKeyPress={this.handleKeyPress}
+            showHide={this.showHide}
           />
-          <ArtistModalForm
-            hideArtistRow={this.state.hideArtistRow}
-            firstName={this.state.firstName}
-            lastName={this.state.lastName}
-            password={this.state.password}
-            phoneNumber={this.state.phoneNumber}
-            email={this.state.email}
-            location={this.state.location}
-            street={this.state.street}
-            state={this.state.state}
-            city={this.state.city}
-            st={this.state.st}
-            zip={this.state.zip}
-            specialization={this.state.specialization}
-            pricing={this.state.pricing}
-            handleInputChange={this.handleInputChange}
-            handleKeyClick={this.handleKeyClick}
-            artistSignUp={this.artistSignUp}
-          />
-        </Modal>
-        {/* </Container> */}
-        <hr />
-        {/* <Container fluid> */}
-        <h5>Existing Users</h5>
-        <LoginForm
-          loginEmail={this.state.loginEmail}
-          loginPassword={this.state.loginPassword}
-          type={this.state.input}
-          handleInputChange={this.handleInputChange}
-          onLoginSubmit={this.onLoginSubmit}
-          handleKeyPress={this.handleKeyPress}
-          showHide={this.showHide}
-        />
-        {/* </Container>     */}
+          {/* </Container>     */}
+        </div>
       </div>
     );
   }

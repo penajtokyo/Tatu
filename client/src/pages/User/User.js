@@ -12,13 +12,14 @@ class User extends Component {
         style: '',
         searchResults: [],
         allImages: [],
-        userName: this.props.location.state.detail.firstName
+        userName: ''
+        // userName: this.props.location.state.detail.firstName
     }
 
     componentDidMount() {
         //when page loads without search queries display a default view/gallery
+        this.setUserName();
         this.getAllImages();
-        // this.setUserName();
     };
 
     //get all images to pass to gallery/set up new api to query all images in db
@@ -56,12 +57,12 @@ class User extends Component {
         this.getImagesQuery();
     };
 
-    // setUserName = () => {
-    //     const userData = this.props.location.state.detail;
-    //     console.log('userData var', userData);
-    //     this.setState({userName: userData.firstName})
-    //     console.log('users name', this.state.userName);
-    // };
+    setUserName = () => {
+        const userData = this.props.location.state.detail;
+        console.log('userData var', userData);
+        this.setState({userName: userData.firstName})
+        console.log('users name', this.state.userName);
+    };
 
     handleLogout = () => {
         API.logout()
@@ -71,15 +72,11 @@ class User extends Component {
             this.setState({userName: ""});
             this.props.history.push({
                 pathname: "/"
-              });
-            //redirect to home page
+            });
         })
         .catch(err => console.log(err))
     };
-
     render() {
-        
-
         return (
             <div>
             <Nav 
