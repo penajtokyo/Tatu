@@ -1,6 +1,12 @@
 //define methods to get and post info to/from the db
 const db = require("../models");
 module.exports = {
+  //gets all images in the db with no parameters to return to the user default view
+  findAllImages: function(req, res) {
+    db.Pictures.find({})
+    .then(pictures => res.json(pictures))
+    .catch(err => res.status(422).json(err))
+  },
   //gets all artist's doc from the DB,used to load to their profile page gallery
   findAllByArtist: function (req, res) {
     console.log(req.session.customer.artistData._id);
