@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Container, Row, Col} from 'react-materialize';
 import API from '../../utils/API';
 import Gallery from '../../components/Gallery';
-import Navbar from '../../components/Navbar';
+import Nav from '../../components/Nav';
 import SearchForm from '../../components/SearchForm';
 import Results from '../../components/Results';
 
@@ -63,13 +63,28 @@ class User extends Component {
     //     console.log('users name', this.state.userName);
     // };
 
+    handleLogout = () => {
+        API.logout()
+        .then((response) => {
+            console.log('response:', response);
+            //remove name (mainly for testing right now, redirecting should atumatically make this reset remove session data)
+            this.setState({userName: ""});
+            this.props.history.push({
+                pathname: "/"
+              });
+            //redirect to home page
+        })
+        .catch(err => console.log(err))
+    };
+
     render() {
         
 
         return (
             <div>
-            <Navbar 
+            <Nav 
                 name={this.state.userName}
+                handleLogout={this.handleLogout}
             />
             <Container>
                 <Row>
@@ -94,7 +109,6 @@ class User extends Component {
                     )}
                     </Col>
                 </Row>
-                {/* in gallery modal, when image is clicked, expands to show the image details and tatto artist info */}
             </Container>
             </div>
         );

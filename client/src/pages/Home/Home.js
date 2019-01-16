@@ -101,26 +101,30 @@ class Home extends Component {
       //call the login method to call the backend, send the login data (email and password)//working!
       API.login(loginData)
         .then(response => {
-          console.log("user is logged in");
           console.log("response", response);
-          
-          this.setState({
-            loginEmail: "",
-            loginPassword: ""
-          });
-          //redirect to the User or artist page
-          if (response.data.type === "customer") {
-            //open user page
-            this.props.history.push({
-              pathname: "/user",
-              state: { detail: response.data }
+          //add if to check response of invalid from backend
+          if (response.data === "invalid") {
+            console.log("Invalid Email or Password")
+          } 
+          else {
+            this.setState({
+              loginEmail: "",
+              loginPassword: ""
             });
-          } else {
-            //open artist page
-            this.props.history.push({
-              pathname: "/artist",
-              state: { detail: response.data }
-            });
+            //redirect to the User or artist page
+            if (response.data.type === "customer") {
+              //open user page
+              this.props.history.push({
+                pathname: "/user",
+                state: { detail: response.data }
+              });
+            } else {
+              //open artist page
+              this.props.history.push({
+                pathname: "/artist",
+                state: { detail: response.data }
+              });
+            }
           }
         })
         .catch(err => console.log(err));

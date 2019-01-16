@@ -37,6 +37,10 @@ export default {
     return axios.post("/api/auth/login", loginData);
   },
 
+  logout: () => {
+    return axios.get("api/auth/logout");
+  },
+
   // used to update artist information in db
   updateArtistInfo: updateData => {
     return axios.get("/api/admin/artistUpdate");
