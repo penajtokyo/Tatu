@@ -36,6 +36,7 @@ class AddPhotoForm extends Component {
       this.state.description
     ) {
       this.handleAddPhoto();
+      window.location.reload();
     } else {
       alert("Oops! It looks like something's missing.");
     }

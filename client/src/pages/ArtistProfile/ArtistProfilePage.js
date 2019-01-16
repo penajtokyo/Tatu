@@ -1,7 +1,10 @@
 import React, { Component } from "react";
+// import { Link } from "react-router-dom";
 import { Container, Col, Row } from "react-materialize";
+// import { Container, Col, Row, Icon, Button } from "react-materialize";
 import Images from "../../components/Images/Images";
 import AddPhotoForm from "../../components/AddPhotoForm/AddPhotoForm";
+import ArtistAdminModal from "../../components/ArtistAdminModal/ArtistAdminModal";
 
 class ArtistProfilePage extends Component {
   render() {
@@ -12,6 +15,7 @@ class ArtistProfilePage extends Component {
       <div>
         <Container>
           <AddPhotoForm id={artistData._id} />
+          <ArtistAdminModal userData={userData} />
           <Row>
             <Col s={12} m={12} l={12} className="center">
               <h6>{`${userData.firstName}  ${userData.lastName}`}</h6>
