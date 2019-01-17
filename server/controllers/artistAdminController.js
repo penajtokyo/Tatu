@@ -1,8 +1,11 @@
-// const db = require("../models");
-// // const bcrypt = require("bcrypt");
+const db = require("../models");
+// const bcrypt = require("bcrypt");
 
-// module.exports = {
-//   getArtistData: (req, res) => {
-//     console.log(req.data);
-//   }
-// };
+module.exports = {
+  getArtistData: (req, res) => {
+      db.Customer.findOneandUpdate{
+          
+      }
+    console.log(req.data);
+  }
+};
