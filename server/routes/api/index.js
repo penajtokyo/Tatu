@@ -10,7 +10,7 @@ router.use("/images", imagesRoutes);
 // artist admin routes
 // router.use("/admin", artistAdmin);
 
-//auth routes?
+//auth routes
 router.use("/auth", authRoutes);
 
 module.exports = router;
