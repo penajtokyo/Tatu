@@ -1,4 +1,6 @@
-// const router = require("express").Router();
-// const artistAdminController = require("../../controllers/artistAdminController");
+const router = require("express").Router();
+const artistAdminController = require("../../controllers/artistAdminController");
 
-// router.route("/artistUpdate").get(artistAdminController.getArtistData);
+router.route("/artistUpdate").put(artistAdminController.getArtistData);
+
+module.exports = router;
