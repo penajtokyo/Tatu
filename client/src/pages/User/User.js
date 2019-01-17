@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Container, Row, Col} from 'react-materialize';
 import API from '../../utils/API';
 import Gallery from '../../components/Gallery';
-import Navbar from '../../components/Navbar';
+import Nav from '../../components/Nav';
 import SearchForm from '../../components/SearchForm';
 import Results from '../../components/Results';
 
@@ -12,13 +12,14 @@ class User extends Component {
         style: '',
         searchResults: [],
         allImages: [],
-        userName: this.props.location.state.detail.firstName
+        userName: ''
+        // userName: this.props.location.state.detail.firstName
     }
 
     componentDidMount() {
         //when page loads without search queries display a default view/gallery
+        this.setUserName();
         this.getAllImages();
-        // this.setUserName();
     };
 
     //get all images to pass to gallery/set up new api to query all images in db
@@ -56,20 +57,31 @@ class User extends Component {
         this.getImagesQuery();
     };
 
-    // setUserName = () => {
-    //     const userData = this.props.location.state.detail;
-    //     console.log('userData var', userData);
-    //     this.setState({userName: userData.firstName})
-    //     console.log('users name', this.state.userName);
-    // };
+    setUserName = () => {
+        const userData = this.props.location.state.detail;
+        console.log('userData var', userData);
+        this.setState({userName: userData.firstName})
+        console.log('users name', this.state.userName);
+    };
 
+    handleLogout = () => {
+        API.logout()
+        .then((response) => {
+            console.log('response:', response);
+            //remove name (mainly for testing right now, redirecting should atumatically make this reset remove session data)
+            this.setState({userName: ""});
+            this.props.history.push({
+                pathname: "/"
+            });
+        })
+        .catch(err => console.log(err))
+    };
     render() {
-        
-
         return (
             <div>
-            <Navbar 
+            <Nav 
                 name={this.state.userName}
+                handleLogout={this.handleLogout}
             />
             <Container>
                 <Row>
@@ -94,7 +106,6 @@ class User extends Component {
                     )}
                     </Col>
                 </Row>
-                {/* in gallery modal, when image is clicked, expands to show the image details and tatto artist info */}
             </Container>
             </div>
         );
