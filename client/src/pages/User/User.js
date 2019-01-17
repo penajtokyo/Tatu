@@ -13,7 +13,6 @@ class User extends Component {
         searchResults: [],
         allImages: [],
         userName: ''
-        // userName: this.props.location.state.detail.firstName
     }
 
     componentDidMount() {

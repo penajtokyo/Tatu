@@ -4,6 +4,23 @@
     background-color: #2a303e;
 }
 
-.brand-logo {
+nav .brand-logo {
     font-family: "Pacifico", cursive;
-  }
+    padding-left: 2%;
+}
+
+.navHeader {
+    width: 300px;
+    text-align: right;
+    margin-top: 8%;
+    padding-right: 10%;
+}
+
+.side-nav {
+    background-color: gray;
+}
+
+.side-nav li>a {
+    color: white;
+    text-align: right;
+}

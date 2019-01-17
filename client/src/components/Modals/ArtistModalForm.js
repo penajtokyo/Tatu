@@ -105,9 +105,9 @@ export const ArtistModalForm = props => {
               <option value="Chicano">Chicano</option>
               <option value="Geometric">Geometric</option>
               <option value="Hawaiian">Hawaiian/Maori/Polynesian</option>
-              <option value="HyperRealistic">Hyper Realistic</option>
+              <option value="Hyper Realistic">Hyper Realistic</option>
               <option value="Japanese">Japanese</option>
-              <option value="aintBrushStroke">Paint Brush Stroke</option>
+              <option value="Paint Brush Stroke">Paint Brush Stroke</option>
               <option value="Pop Art">Pop Art</option>
               <option value="Surrealism">Surrealism</option>
               <option value="Tribal">Tribal</option>

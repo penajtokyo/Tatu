@@ -7,11 +7,11 @@ const Nav = (props) =>  {
         <Navbar brand='Tatu' right>
         {props.name !== '' ? (
             <div>
-                <NavItem>Hello {props.name}</NavItem>
+                <li><h6 className='navHeader'>Hello {props.name}!</h6></li>
                 <NavItem onClick={props.handleLogout}>Logout</NavItem>
             </div>
             ) : (
-            <NavItem>Welcome!</NavItem>  
+            <li><h6 className='navHeader'>Welcome!</h6></li>
             )   
         }
         </Navbar> 
