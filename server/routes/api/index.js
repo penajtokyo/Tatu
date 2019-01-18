@@ -8,7 +8,7 @@ const artistAdmin = require("./artistAdmin");
 router.use("/images", imagesRoutes);
 
 // artist admin routes
-// router.use("/admin", artistAdmin);
+router.use("/admin", artistAdmin);
 
 //auth routes
 router.use("/auth", authRoutes);
