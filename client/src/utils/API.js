@@ -12,6 +12,11 @@ export default {
     });
   },
 
+  //return all images with no query from the db to show on defualt user page
+  getAllImages: () => {
+    return axios.get('api/images/allImages');
+  },
+
   // get api route to retreive images in the artists pictures column
   getImages: () => {
     return axios.get("/api/images/artistImages");
@@ -27,8 +32,17 @@ export default {
     return axios.post("/api/auth/signup", signupData);
   },
 
-  //used to send login data to db
+  // used to send login data to db
   login: loginData => {
     return axios.post("/api/auth/login", loginData);
+  },
+
+  logout: () => {
+    return axios.get("api/auth/logout");
+  },
+
+  // used to update artist information in db
+  updateArtistInfo: updateData => {
+    return axios.get("/api/admin/artistUpdate");
   }
 };

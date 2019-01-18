@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+// import { Container } from "../../components/Container";
+
 import {
   ErrModal,
   UserModalForm,
@@ -6,6 +8,7 @@ import {
 } from "../../components/Modals";
 import { LoginForm } from "../../components/LoginForm";
 import { Modal, Button, Input, Row } from "react-materialize";
+import Nav from '../../components/Nav';
 import "./Home.css";
 import API from "../../utils/API";
 
@@ -32,7 +35,9 @@ class Home extends Component {
     hideUserRow: false,
     hideArtistRow: false,
     hideErr: false,
-    invalidCredentials: false
+    invalidCredentials: false,
+    userName: ''
+
   };
 
   // Method to handle user pressing enter in login form.
@@ -114,19 +119,20 @@ onLoginSubmit = event => {
             loginEmail: "",
             loginPassword: ""
           });
-          //redirect to the User or artist page
-          if (response.data.type === "customer") {
-            //open user page
-            this.props.history.push({
-              pathname: "/user",
-              state: { detail: response.data }
-            });
-          } else {
-            //open artist page
-            this.props.history.push({
-              pathname: "/artist",
-              state: { detail: response.data }
-            });
+            //redirect to the User or artist page
+            if (response.data.type === "customer") {
+              //open user page
+              this.props.history.push({
+                pathname: "/user",
+                state: { detail: response.data }
+              });
+            } else {
+              //open artist page
+              this.props.history.push({
+                pathname: "/artist",
+                state: { detail: response.data }
+              });
+            }
           }
         }
       })
@@ -300,6 +306,8 @@ onLoginSubmit = event => {
     const style = this.state.hideRow ? { display: "none" } : {};
     const btnStyle = this.state.hideRow ? {display: "block"} : {display: "none"};
     return (
+      <div>
+      <Nav name={this.state.userName} />
       <div className="container center-align">
         <ErrModal hideErr={this.state.hideErr} closeModal={this.closeModal} />
         <h5><b>New Users</b></h5>
@@ -372,6 +380,7 @@ onLoginSubmit = event => {
           handleKeyPress={this.handleKeyPress}
           showPassword={this.showPassword}
         />
+      </div>
       </div>
     );
   }

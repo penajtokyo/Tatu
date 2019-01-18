@@ -154,6 +154,7 @@ export const ArtistModalForm = props => {
             <option value="">What is your pricing structure?</option>
             <option value="Hour">Per hour</option>
             <option value="Piece">Per piece</option>
+
           </Input>
       </Col>
     </Row>
