@@ -5,6 +5,7 @@ import Gallery from '../../components/Gallery';
 import Nav from '../../components/Nav';
 import SearchForm from '../../components/SearchForm';
 import Results from '../../components/Results';
+import './User.css';
 
 class User extends Component {
     state = {
@@ -25,7 +26,7 @@ class User extends Component {
     getAllImages = () => {
         API.getAllImages()
         .then((response) => {
-            console.log('all images from DB', response);
+            console.log('all images from DB', response.data);
             this.setState({allImages: response.data})
         })
         .catch(err => console.log(err))

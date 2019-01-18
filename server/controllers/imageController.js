@@ -4,7 +4,41 @@ module.exports = {
   //gets all images in the db with no parameters to return to the user default view
   findAllImages: function(req, res) {
     db.Pictures.find({})
-    .then(pictures => res.json(pictures))
+    .populate('artist')
+    .populate('customer')
+    .then(docs => {
+      console.log("the picture docs", docs);
+      //create a new array of objects that doesn't contain un-needed info
+      var newDocs = docs.map((doc, i) => {
+        return ({
+          _id: doc._id,
+          file: doc.file,
+          description: doc.description,
+          style: doc.style,
+          placement: doc.placement,
+          artist: {
+            pictures: doc.artist.pictures,
+            _id: doc.artist._id,
+            specialization: doc.artist.specialization,
+            pricing: doc.artist.pricing,
+            location: doc.artist.location,
+            street: doc.artist.street,
+            city: doc.artist.city,
+            state: doc.artist.state,
+            zip: doc.artist.zip,
+          },
+          customer: {
+            _id: doc.customer._id,
+            firstName: doc.customer.firstName,
+            lastName: doc.customer.lastName,
+            phone: doc.customer.phone,
+            email: doc.customer.email,
+          }
+        })
+      })
+      res.json(newDocs);
+    })
+    // .then(pictures => res.json(pictures))
     .catch(err => res.status(422).json(err))
   },
   //gets all artist's doc from the DB,used to load to their profile page gallery
@@ -30,7 +64,7 @@ module.exports = {
         .then(docs => {
           console.log("the picture docs", docs);
           //create a new array of objects that doesn't contain un-needed info
-          var newDocs = docs.map((doc, i,) => {
+          var newDocs = docs.map((doc, i) => {
             return ({
               _id: doc._id,
               file: doc.file,
@@ -106,7 +140,7 @@ module.exports = {
         .populate('customer')
         .then(docs => {
           console.log("the picture docs", docs);
-          var newDocs = docs.map((doc, i, ) => {
+          var newDocs = docs.map((doc, i) => {
             return ({
               _id: doc._id,
               file: doc.file,
