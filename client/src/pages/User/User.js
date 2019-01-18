@@ -3,8 +3,10 @@ import {Container, Row, Col} from 'react-materialize';
 import API from '../../utils/API';
 import Gallery from '../../components/Gallery';
 import Nav from '../../components/Nav';
+import {SearchErrModal} from '../../components/Modals';
 import SearchForm from '../../components/SearchForm';
 import Results from '../../components/Results';
+import './User.css';
 
 class User extends Component {
     state = {
@@ -12,8 +14,8 @@ class User extends Component {
         style: '',
         searchResults: [],
         allImages: [],
-        userName: ''
-        // userName: this.props.location.state.detail.firstName
+        userName: '',
+        hideErr: false
     }
 
     componentDidMount() {
@@ -22,11 +24,26 @@ class User extends Component {
         this.getAllImages();
     };
 
+    // Method for calling error modal
+    errModal = () => {
+        console.log(this.state.hideErr);
+        this.setState({
+          hideErr: true
+        });
+      };
+
+    //closes the modal
+    closeModal = () => {
+        this.setState({
+          hideErr: false,
+        })
+      }
+
     //get all images to pass to gallery/set up new api to query all images in db
     getAllImages = () => {
         API.getAllImages()
         .then((response) => {
-            console.log('all images from DB', response);
+            console.log('all images from DB', response.data);
             this.setState({allImages: response.data})
         })
         .catch(err => console.log(err))
@@ -38,6 +55,8 @@ class User extends Component {
         .then((response) => {
             console.log('response data from db', response.data);
             this.setState({searchResults: response.data})
+            //need to do something if the docs array is blank (ie no match to search results)
+            //render verbiage in the results area or do a modal
         })
         .catch(err => console.log(err))
     };
@@ -54,7 +73,14 @@ class User extends Component {
     //what to do when the submit button is clicked in the form
     handleSubmit = (event) => {
         event.preventDefault();
-        this.getImagesQuery();
+        //if both fields are blank invoke the err modal
+        if (this.state.style === '' && this.state.placement === '') {
+            this.errModal();
+        }
+        // if not get the images
+        else {
+            this.getImagesQuery();
+        }
     };
 
     setUserName = () => {
@@ -84,6 +110,7 @@ class User extends Component {
                 handleLogout={this.handleLogout}
             />
             <Container>
+                <SearchErrModal hideErr={this.state.hideErr} closeModal={this.closeModal}/>
                 <Row>
                     <Col s={12} className='search'>
                         <SearchForm 

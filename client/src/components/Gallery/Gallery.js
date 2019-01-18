@@ -11,7 +11,7 @@ const Gallery = (props) => {
         <div>
         <Row>
             <Col s={12}>
-                <h4>All Images...</h4>
+                <h4>View All Images...</h4>
             </Col>
         </Row>
         <Row>

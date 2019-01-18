@@ -1,5 +1,7 @@
 import React from 'react';
-import {Button, Col, Input, Row } from 'react-materialize';
+import {Button, Col, Row } from 'react-materialize';
+import SelectPlacement from '../SelectPlacement';
+import SelectStyle from '../SelectStyle';
 import './SearchForm.css';
 
 const SearchForm = (props) => {
@@ -12,20 +14,10 @@ const SearchForm = (props) => {
             </Row>
             <Row>
                 <Col s={12} m={6}>
-                <Input s={12} type='select' name='style' onChange={props.handleSelection} defaultValue='blank'>
-                    <option value=''>Choose a Style...</option>
-                    <option value='Abstract'>Abstract</option>
-                    <option value='American Traditional'>American Traditional</option>
-                    <option value='Anatomy'>Anatomy</option>
-                </Input>
+                    <SelectStyle handleSelection={props.handleSelection}/>
                 </Col>
                 <Col s={12} m={6}>
-                <Input s={12} type='select' name='placement' onChange={props.handleSelection} defaultValue='blank'>
-                    <option value=''>Choose Placement...</option>
-                    <option value='Ankle'>Ankle</option>
-                    <option value='Bicep'>Bicep</option>
-                    <option value='Chest'>Chest</option>
-                </Input>
+                    <SelectPlacement handleSelection={props.handleSelection}/>
                 </Col>
             </Row>
             <Row>
@@ -33,6 +25,7 @@ const SearchForm = (props) => {
             </Row>
         </div>
     );
-};
+}
+
 
 export default SearchForm;

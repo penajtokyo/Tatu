@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, Col, CardTitle } from 'react-materialize';
+import './DisplayCard.css';
 
 const DisplayCard = (props) => {
   return (
