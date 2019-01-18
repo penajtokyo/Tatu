@@ -1,14 +1,10 @@
 import React, { Component } from "react";
-// import { Route, Link } from "react-router-dom";
-// import { Container } from "../../components/Container";
 import {
   ErrModal,
   UserModalForm,
   ArtistModalForm
 } from "../../components/Modals";
 import { LoginForm } from "../../components/LoginForm";
-// import Home from "../Home/index";
-// import ArtistProfile from "../ArtistProfile/ArtistProfilePage";
 import { Modal, Button, Input, Row } from "react-materialize";
 import "./Home.css";
 import API from "../../utils/API";
@@ -20,7 +16,8 @@ class Home extends Component {
     email: "",
     password: "",
     selected: "",
-    type: "input",
+    type: "",
+    isPasswordVisible: false,
     firstName: "",
     lastName: "",
     phoneNumber: "",
@@ -34,23 +31,24 @@ class Home extends Component {
     hideRow: false,
     hideUserRow: false,
     hideArtistRow: false,
-    hideErr: false
+    hideErr: false,
+    invalidCredentials: false
   };
 
   // Method to handle user pressing enter in login form.
-  handleKeyPress = e => {
-    if (e.key === "Enter") {
-      this.onLoginSubmit(e);
+  handleKeyPress = event => {
+    if (event.key === "Enter") {
+      this.onLoginSubmit(event);
     }
   };
 
   // Method to handle user pressing enter in sign up form.
-  handleKeyClick = e => {
-    if (e.key === "Enter") {
+  handleKeyClick = event => {
+    if (event.key === "Enter") {
       if (this.state.selected === "customer") {
-        this.userSignUp(e);
+        this.userSignUp(event);
       } else {
-        this.artistSignUp(e);
+        this.artistSignUp(event);
       }
     }
   };
@@ -80,38 +78,43 @@ class Home extends Component {
     }
   };
 
-  // Method for showing and hiding password on login. Still not fully functional.
-  showHide = e => {
-    e.preventDefault();
-    e.stopPropagation();
-    this.setState({
-      type: this.state.type === "input" ? "password" : "input"
+  // Method for showing and hiding password on login.
+  showPassword = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    this.setState({isPasswordVisible: !this.state.isPasswordVisible
     });
   };
 
-  // Method for user/artist login and input verification.
-  onLoginSubmit = event => {
-    const loginData = {
-      loginEmail: this.state.loginEmail,
-      loginPassword: this.state.loginPassword
-    };
-    event.preventDefault();
-    if (loginData.loginEmail === "" || loginData.loginPassword === "") {
-      this.setState({
-        hideErr: true
-      });
-    } else {
-      //call the login method to call the backend, send the login data (email and password)//working!
-      API.login(loginData)
-        .then(response => {
-          console.log("user is logged in");
-          console.log("response", response);
-          // console.log("email: " + loginData.loginEmail + " and password: " + loginData.loginPassword);
+// Method for user/artist login and input verification.
+onLoginSubmit = event => {
+  const loginData = {
+    loginEmail: this.state.loginEmail,
+    loginPassword: this.state.loginPassword
+  };
+  event.preventDefault();
+  if (loginData.loginEmail === "" || loginData.loginPassword === "") {
+    this.setState({
+      hideErr: true
+    });
+  } else {
+    //call the login method to call the backend, send the login data (email and password)//working!
+    API.login(loginData)
+      .then(response => {
+        console.log("response", response);
+        //add if to check response of invalid from backend
+        if (response.data === "invalid") {
+          console.log("Invalid Email or Password")
+          this.setState({
+            invalidCredentials: true
+          });
+        } 
+        else {
           this.setState({
             loginEmail: "",
             loginPassword: ""
           });
-          //need to redirect to the User or artist page here, but how...may need to do it in the render section, but not sure how
+          //redirect to the User or artist page
           if (response.data.type === "customer") {
             //open user page
             this.props.history.push({
@@ -125,10 +128,11 @@ class Home extends Component {
               state: { detail: response.data }
             });
           }
-        })
-        .catch(err => console.log(err));
-    }
-  };
+        }
+      })
+      .catch(err => console.log(err));
+  }
+};
 
   // Method for artist signup and input verification.
   artistSignUp = event => {
@@ -142,7 +146,7 @@ class Home extends Component {
       location: this.state.location,
       street: this.state.street,
       city: this.state.city,
-      state: this.state.st,
+      st: this.state.st,
       zip: this.state.zip,
       specialization: this.state.specialization,
       pricing: this.state.pricing
@@ -158,7 +162,7 @@ class Home extends Component {
       artistInfo.location === "" ||
       artistInfo.street === "" ||
       artistInfo.city === "" ||
-      artistInfo.state === "" ||
+      artistInfo.st === "" ||
       artistInfo.zip === "" ||
       artistInfo.specialization === "" ||
       artistInfo.pricing === ""
@@ -208,10 +212,9 @@ class Home extends Component {
     ) {
       this.errModal();
     } else {
-      //This is where we will have the post route for user sign up.
+      //Post route for user sign up.
       console.log("customer info", customerInfo);
       this.handleSignup(customerInfo);
-      // console.log("email: " + email + " and " + password + " and " + firstName + " and " + lastName + " and " + phoneNumber);
       this.setState({
         email: "",
         password: "",
@@ -227,8 +230,8 @@ class Home extends Component {
   handleSignup = signupData => {
     API.signup(signupData)
       .then(response => {
-        console.log("acount has been created");
-        //need to redirect to the User or artist page here, but how...may need to do it in the render section, but not sure how
+        console.log("account has been created");
+        
         if (response.data.type === "customer") {
           //open user page
           this.props.history.push({
@@ -244,7 +247,18 @@ class Home extends Component {
         }
       })
       .catch(err => console.log(err));
+
+      this.setState({
+        hideRow: false,
+        hideUserRow: false,
+        hideArtistRow: false
+      });
   };
+
+  // Method for capitalizing the first letter of the first and last name for both User and Artist sign up form
+  capitalize = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
 
   // Method for error modal. Still not fully functional.
   errModal = () => {
@@ -254,26 +268,51 @@ class Home extends Component {
     });
   };
 
-  // Method for closing error modalc
-  closeModal = () => {
-    console.log("Is this working?");
+  // Method for closing error modal
+  resetModals = () => {
     this.setState({
-      hideErr: false
+      email: "",
+      password: "",
+      selected: "",
+      firstName: "",
+      lastName: "",
+      phoneNumber: "",
+      location: "",
+      street: "",
+      city: "",
+      st: "",
+      zip: "",
+      specialization: "",
+      pricing: "",
+      hideRow: false,
+      hideUserRow: false,
+      hideArtistRow: false
     });
   };
 
+  closeModal = () => {
+    this.setState({
+      hideErr: false,
+    })
+  }
+
   render() {
     const style = this.state.hideRow ? { display: "none" } : {};
-    // const userStyle = !this.state.hideUserRow ? {display: "none"} : {};
-    // const artistStyle = !this.state.hideArtistRow ? {display: "none"} : {};
+    const btnStyle = this.state.hideRow ? {display: "block"} : {display: "none"};
     return (
       <div className="container center-align">
         <ErrModal hideErr={this.state.hideErr} closeModal={this.closeModal} />
-        {/* <Container fluid> */}
-        <h5>New Users</h5>
+        <h5><b>New Users</b></h5>
         <Modal
+          s={12}
+          m={12}
           header="Create New Account"
           trigger={<Button>Create Account</Button>}
+          actions={
+            <div>
+              <Button className="cancel-btn" onClick={this.resetModals} flat modal="close" waves="light">Cancel</Button>
+              <Button style={btnStyle} onClick={this.state.hideArtistRow ? this.artistSignUp : this.userSignUp}>Create Account</Button>
+            </div>}
         >
           <Row style={style}>
             <Input
@@ -297,6 +336,7 @@ class Home extends Component {
             handleInputChange={this.handleInputChange}
             handleKeyClick={this.handleKeyClick}
             userSignUp={this.userSignUp}
+            capitalize={this.capitalize}
           />
           <ArtistModalForm
             hideArtistRow={this.state.hideArtistRow}
@@ -316,22 +356,22 @@ class Home extends Component {
             handleInputChange={this.handleInputChange}
             handleKeyClick={this.handleKeyClick}
             artistSignUp={this.artistSignUp}
+            capitalize={this.capitalize}
           />
         </Modal>
-        {/* </Container> */}
         <hr />
-        {/* <Container fluid> */}
-        <h5>Existing Users</h5>
+        <h5><b>Existing Users</b></h5>
         <LoginForm
           loginEmail={this.state.loginEmail}
           loginPassword={this.state.loginPassword}
           type={this.state.input}
+          isPasswordVisible={this.state.isPasswordVisible}
+          invalidCredentials={this.state.invalidCredentials}
           handleInputChange={this.handleInputChange}
           onLoginSubmit={this.onLoginSubmit}
           handleKeyPress={this.handleKeyPress}
-          showHide={this.showHide}
+          showPassword={this.showPassword}
         />
-        {/* </Container>     */}
       </div>
     );
   }
