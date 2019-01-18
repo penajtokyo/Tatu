@@ -1,60 +1,61 @@
 import React from "react";
-import { Row } from "react-materialize";
-// import "../../App.css";
+import "./Modal.css";
+import { Row, Col } from "react-materialize";
+
 
 const modalOpenStyle = {
-        position: "fixed",
-        top: 0,
-        right: 0,
-        bottom: 0,
-        left: 0,
         display: "block",
         zIndex: 1050,
-        overflow: "hidden",
-        outline: 0,
-        boxSizing: "border-box",
-        border: "solid",
+        backgroundColor: "white",
+        width: "50%",
+        color: "#BF691E"
 }
 
 const modalCloseStyle = {
-        position: "fixed",
-        top: 0,
-        right: 0,
-        bottom: 0,
-        left: 0,
         display: "none",
         zIndex: 1050,
-        overflow: "hidden",
-        outline: 0,
-        boxSizing: "border-box",
-        border: "solid"
+        backgroundColor: "white",
+        width: "50%",
+        color: "#BF691E"
 }
 
-
-
 export const ErrModal = (props) => {
-   
-         if (!props.hideErr) {
-           return ( 
-                <div  style={modalCloseStyle}>
-                    <h4>Oops</h4>
+     if (!props.hideErr) {
+       return ( 
+                    <div style={modalCloseStyle} className="modal">
+                        <div className="modal-content">
                         <Row>
-                        Please fill in all available fields in the form.
-                        </Row>
-                        <button onClick={props.closeModal}> Close </button> 
-                </div> 
-           )
-        } else if (props.hideErr) {
-            return (
-                <div  style={modalOpenStyle}>
-                    <h4>Oops</h4>
+                            <Col s={12} m={12}>
+                                <h4>Oops</h4>
+                                    </Col>
+                                        <Col s={12} m={12}>
+                                    <p>All fields are required, please fill in the empty field(s)</p>
+                                </Col>
+                            </Row>
+                        </div>
+                    <div className="modal-foot">
+                <button className="btn" onClick={props.closeModal}>Close</button>
+            </div>
+        </div>
+       )
+    } else if (props.hideErr) {
+        return (
+                    <div style={modalOpenStyle} className="modal">
+                        <div className="modal-content">
                         <Row>
-                        Please fill in all available fields in the form.
-                        </Row>
-                        <button onClick={props.closeModal}> Close </button> 
-                </div>  
-
-            )
-        }
+                            <Col s={12} m={12}>
+                                <h4>Oops</h4>
+                                    </Col>
+                                        <Col s={12} m={12}>
+                                    <p>All fields are required, please fill in the empty field(s)</p>
+                                </Col>
+                            </Row>
+                        </div>
+                    <div className="modal-foot">
+                <button className="btn" onClick={props.closeModal}>Close</button>
+            </div>
+        </div>
+        )
+    }
         
 };

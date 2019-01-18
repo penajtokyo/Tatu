@@ -1,28 +1,37 @@
 import React from 'react';
-import { Button, Input, Row } from "react-materialize";
+import { Input, Row, Col } from "react-materialize";
 
 export const UserModalForm = props => {
       const userStyle = !props.hideUserRow ? {display: "none"} : {};
   return (
-    <Row style={userStyle}>
-    <Input 
-      s={6}
-      label="First Name" 
-      type="text" 
-      name="firstName"
-      value={props.firstName}
-      onChange={props.handleInputChange}
-      onKeyPress={props.handleKeyClick} 
-    />
-      <Input 
-        s={6}
-        label="Last Name" 
-        type="text" 
-        name="lastName"
-        value={props.lastName}
-        onChange={props.handleInputChange}
-        onKeyPress={props.handleKeyClick}
-      />
+    <div style={userStyle}>
+      <Row></Row>
+        <Row>
+          <Col s={12} m={6}>
+            <Input 
+              s={12}
+              label="First Name" 
+              type="text" 
+              name="firstName"
+              value={props.capitalize(props.firstName)}
+              onChange={props.handleInputChange}
+              onKeyPress={props.handleKeyClick} 
+            />
+          </Col>
+        <Col s={12} m={6}>
+          <Input 
+            s={12}
+            label="Last Name" 
+            type="text" 
+            name="lastName"
+            value={props.capitalize(props.lastName)}
+            onChange={props.handleInputChange}
+            onKeyPress={props.handleKeyClick}
+          />
+        </Col>
+      </Row>
+    <Row>
+      <Col s={12} m={6}>
         <Input 
           s={12}
           label="Phone Number" 
@@ -32,26 +41,33 @@ export const UserModalForm = props => {
           onChange={props.handleInputChange}
           onKeyPress={props.handleKeyClick}
         />
+      </Col>
+    </Row>
+  <Row>
+    <Col s={12} m={6}>
       <Input 
-        s={6}
-        label="Password" 
-        type="password" 
-        name="password"
-        value={props.password}
+        s={12}
+        label="Email" 
+        type="email" 
+        name="email"
+        value={props.email}
         onChange={props.handleInputChange}
         onKeyPress={props.handleKeyClick}
       />
-    <Input 
-      s={6}
-      label="Email" 
-      type="email" 
-      name="email"
-      value={props.email}
-      onChange={props.handleInputChange}
-      onKeyPress={props.handleKeyClick}
-    />
-  <Button s={12} onClick={props.userSignUp}>Create Account</Button>
-</Row>
+    </Col>
+      <Col s={12} m={6}>
+        <Input 
+          s={12}
+          label="Password" 
+          type="text" 
+          name="password"
+          value={props.password}
+          onChange={props.handleInputChange}
+          onKeyPress={props.handleKeyClick}
+        />
+      </Col>
+    </Row>
+  </div>
   );
   }
 export default UserModalForm;
