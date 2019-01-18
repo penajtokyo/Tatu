@@ -134,16 +134,16 @@ export const ArtistModalForm = props => {
           <option value="">What is your specialization?</option>
           <option value="3D">3D</option>
           <option value="Abstract">Abstract</option>
-          <option value="AmTraditional">American Traditional</option>
+          <option value="American Traditional">American Traditional</option>
           <option value="Biomechanical">Biomechanical</option>
           <option value="Celtic">Celtic</option>
           <option value="Chicano">Chicano</option>
           <option value="Geometric">Geometric</option>
           <option value="Hawaiian">Hawaiian/Maori/Polynesian</option>
-          <option value="HyperRealistic">Hyper Realistic</option>
+          <option value="Hyper Realistic">Hyper Realistic</option>
           <option value="Japanese">Japanese</option>
-          <option value="PaintBrushStroke">Paint Brush Stroke</option>
-          <option value="PopArt">Pop Art</option>
+          <option value="Paint Brush Stroke">Paint Brush Stroke</option>
+          <option value="Pop Art">Pop Art</option>
           <option value="Surrealism">Surrealism</option>
           <option value="Tribal">Tribal</option>
           <option value="Watercolor">Watercolor</option>
@@ -152,8 +152,8 @@ export const ArtistModalForm = props => {
         <Col s={12} m={6}>
           <Input s={12} type="select" name="pricing" value={props.pricing} onChange={props.handleInputChange}>
             <option value="">What is your pricing structure?</option>
-            <option value="Hour">Per hour</option>
-            <option value="Piece">Per piece</option>
+            <option value="Per Hour">Per Hour</option>
+            <option value="Per Piece">Per Piece</option>
 
           </Input>
       </Col>

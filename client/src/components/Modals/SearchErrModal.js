@@ -1,55 +1,59 @@
 import React from "react";
-import { Row } from "react-materialize";
+import { Row, Col } from "react-materialize";
+import "./Modal.css";
 
 const modalOpenStyle = {
-    position: "fixed",
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
     display: "block",
     zIndex: 1050,
-    overflow: "hidden",
-    outline: 0,
-    boxSizing: "border-box",
-    border: "solid",
-};
+    backgroundColor: "white",
+    width: "50%",
+    color: "#BF691E"
+}
 
 const modalCloseStyle = {
-    position: "fixed",
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
     display: "none",
     zIndex: 1050,
-    overflow: "hidden",
-    outline: 0,
-    boxSizing: "border-box",
-    border: "solid"
-};
+    backgroundColor: "white",
+    width: "50%",
+    color: "#BF691E"
+}
 
 export const SearchErrModal = (props) => {
-    if (!props.hideErr) {
-        return (
-            <div  style={modalCloseStyle}>
-                <h4>Oops!</h4>
-                    <Row>
-                        At least one field is required to search our gallery
+     if (!props.hideErr) {
+       return ( 
+            <div style={modalCloseStyle} className="modal">
+                <div className="modal-content">
+                <Row>
+                    <Col s={12} m={12}>
+                        <h4>Oops!</h4>
+                            </Col>
+                                <Col s={12} m={12}>
+                            <p>At least one search field is required.</p>
+                        </Col>
                     </Row>
-                    <button onClick={props.closeModal}> Close </button> 
-            </div> 
-        )
+                </div>
+                <div className="modal-foot">
+                    <button className="btn" onClick={props.closeModal}>Close</button>
+                </div>
+            </div>
+       )
     } else if (props.hideErr) {
         return (
-            <div  style={modalOpenStyle}>
-                <h4>Oops!</h4>
-                    <Row>
-                        At least one field is required to search our gallery
+            <div style={modalOpenStyle} className="modal">
+                <div className="modal-content">
+                <Row>
+                    <Col s={12} m={12}>
+                        <h4>Oops!</h4>
+                            </Col>
+                                <Col s={12} m={12}>
+                            <p>At least one search field is required.</p>
+                        </Col>
                     </Row>
-                    <button onClick={props.closeModal}> Close </button> 
-            </div>  
-
+                </div>
+                <div className="modal-foot">
+                    <button className="btn" onClick={props.closeModal}>Close</button>
+                </div>
+            </div>
         )
     }
         

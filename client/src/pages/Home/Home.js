@@ -37,7 +37,6 @@ class Home extends Component {
     hideErr: false,
     invalidCredentials: false,
     userName: ''
-
   };
 
   // Method to handle user pressing enter in login form.
@@ -103,11 +102,9 @@ onLoginSubmit = event => {
       hideErr: true
     });
   } else {
-    //call the login method to call the backend, send the login data (email and password)//working!
     API.login(loginData)
       .then(response => {
         console.log("response", response);
-        //add if to check response of invalid from backend
         if (response.data === "invalid") {
           console.log("Invalid Email or Password")
           this.setState({
@@ -119,15 +116,12 @@ onLoginSubmit = event => {
             loginEmail: "",
             loginPassword: ""
           });
-            //redirect to the User or artist page
             if (response.data.type === "customer") {
-              //open user page
               this.props.history.push({
                 pathname: "/user",
                 state: { detail: response.data }
               });
             } else {
-              //open artist page
               this.props.history.push({
                 pathname: "/artist",
                 state: { detail: response.data }
@@ -174,10 +168,8 @@ onLoginSubmit = event => {
     ) {
       this.errModal();
     } else {
-      //This is where we will have the post route for artist sign up.
       console.log("artist info obj", artistInfo);
       this.handleSignup(artistInfo);
-      // console.log("email: " + email + " and password: " + password + " and specialization: " + specialization + " pricing: " + pricing);
       this.setState({
         email: "",
         password: "",
