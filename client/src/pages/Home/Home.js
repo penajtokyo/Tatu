@@ -151,7 +151,7 @@ onLoginSubmit = event => {
       location: this.state.location,
       street: this.state.street,
       city: this.state.city,
-      st: this.state.st,
+      state: this.state.st,
       zip: this.state.zip,
       specialization: this.state.specialization,
       pricing: this.state.pricing
