@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 // import { Container } from "../../components/Container";
-import {
-  ErrModal,
-  UserModalForm,
-  ArtistModalForm
-} from "../../components/Modals";
+import { ArtistModalForm, ErrModal, UserModalForm } from "../../components/Modals";
 import { LoginForm } from "../../components/LoginForm";
 import { Modal, Button, Input, Row } from "react-materialize";
 import Nav from '../../components/Nav';
@@ -100,7 +96,6 @@ class Home extends Component {
         hideErr: true
       });
     } else {
-      //call the login method to call the backend, send the login data (email and password)//working!
       API.login(loginData)
         .then(response => {
           console.log("response", response);
@@ -231,15 +226,12 @@ class Home extends Component {
     API.signup(signupData)
       .then(response => {
         console.log("acount has been created");
-        //need to redirect to the User or artist page here, but how...may need to do it in the render section, but not sure how
         if (response.data.type === "customer") {
-          //open user page
           this.props.history.push({
             pathname: "/user",
             state: { detail: response.data }
           });
         } else {
-          //open artist page
           this.props.history.push({
             pathname: "/artist",
             state: { detail: response.data }
@@ -257,7 +249,7 @@ class Home extends Component {
     });
   };
 
-  // Method for closing error modalc
+  // Method for closing error modal
   closeModal = () => {
     console.log("Is this working?");
     this.setState({
