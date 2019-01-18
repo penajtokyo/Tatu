@@ -1,0 +1,7 @@
+h4 {
+    float: left;
+}
+
+.modal, .modal-footer {
+    background-color: #2a303e;
+}
