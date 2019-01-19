@@ -8,6 +8,7 @@ module.exports = {
     var artistId = req.session.customer.artistData._id
     console.log("this is cust id", customerId);
     console.log("this is artist id", artistId);
+    console.log(req.body);
     //call db.Customer.findOneAndUpdate() and give it the id of our artist/customer and update their data
 
           db.Customer.findOneAndUpdate({_id: customerId}, {$set:{

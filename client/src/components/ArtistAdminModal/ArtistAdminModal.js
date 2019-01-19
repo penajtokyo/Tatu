@@ -52,7 +52,9 @@ class ArtistAdminModal extends Component {
 
     // Call to utils.API.updateArtistInfo
     API.updateArtistInfo(dataToUpdate)
-      .then(res => {})
+      .then(res => {
+        console.log(res.data);
+      })
       .catch(err => console.log(err));
   };
 
@@ -84,7 +86,6 @@ class ArtistAdminModal extends Component {
       this.state.specialization
     ) {
       this.handleUpdate();
-      window.location.reload();
     }
   };
 
