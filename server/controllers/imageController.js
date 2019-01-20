@@ -175,9 +175,6 @@ module.exports = {
   //adds picture and its tags to db from artist page with the associated artist ID
   saveImage: function (req, res) {
     // console.log('object to save', req.body);
-    // console.log("testData in ImageController: ", req.params);
-    // console.log("session data: ", req.session.customer);
-    // console.log("saving to artist id", req.session.customer.artistData._id);
     db.Artist.findOne({
       _id: req.session.customer.artistData._id
     })

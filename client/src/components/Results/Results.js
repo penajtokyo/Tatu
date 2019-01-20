@@ -8,7 +8,7 @@ const Results = (props) => {
     <div>
       <Row>
         <Col s={12}>
-          <h4>Your Search Results...</h4>
+          <h4 className='sectionHead'>Your Search Results...</h4>
         </Col>
       </Row>
       <Row>
