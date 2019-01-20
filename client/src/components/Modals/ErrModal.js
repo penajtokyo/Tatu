@@ -26,10 +26,10 @@ export const ErrModal = (props) => {
                         <div className="modal-content">
                         <Row>
                             <Col s={12} m={12}>
-                                <h4>Oops</h4>
+                                <h4 className="modalHeader">Oops!</h4>
                                     </Col>
                                         <Col s={12} m={12}>
-                                    <p>All fields are required, please fill in the empty field(s)</p>
+                                    <p className="modalMessage">All fields are required, please fill in the empty field(s)</p>
                                 </Col>
                             </Row>
                         </div>
@@ -44,10 +44,10 @@ export const ErrModal = (props) => {
                         <div className="modal-content">
                         <Row>
                             <Col s={12} m={12}>
-                                <h4>Oops</h4>
+                                <h4 className="modalHeader">Oops!</h4>
                                     </Col>
                                         <Col s={12} m={12}>
-                                    <p>All fields are required, please fill in the empty field(s)</p>
+                                    <p className="modalMessage">All fields are required, please fill in the empty field(s)</p>
                                 </Col>
                             </Row>
                         </div>

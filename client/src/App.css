@@ -27,7 +27,6 @@ p {
   background-color: #344743;
 }
 
-
 /* form elements */
 /* adjusts the label on the fields from going up too high */
 .input-field label:not(.label-icon).active {

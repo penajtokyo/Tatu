@@ -1,7 +1,12 @@
-h4 {
+.modalHeader {
     float: left;
+    text-align: left;
 }
 
-.modal, .modal-footer {
+.modalMessage {
+    text-align: left;
+}
+
+.modal, .modal-foot {
     background-color: #2a303e;
 }
