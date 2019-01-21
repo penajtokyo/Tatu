@@ -11,11 +11,9 @@ import { Modal, Button, Input, Row } from "react-materialize";
 import Nav from '../../components/Nav';
 import "./Home.css";
 import API from "../../utils/API";
-import axios from 'axios';
 
 //variable for smarty streets api
-
-const url = "https://us-street.api.smartystreets.com/street-address?auth-id=7065599766197186&candidates=1&match=range";
+const url = "https://us-street.api.smartystreets.com/street-address?auth-id=7065599766197186&candidates=1&match=strict";
 
 class Home extends Component {
   state = {
@@ -167,7 +165,7 @@ onLoginSubmit = event => {
       let urlcity = this.state.st.split(' ').join('+');
       let completeurl = url + "&street=" + urlstreet + "&city=" + urlcity + "&state=" + urlstate + "&zipcode=" + this.state.zip;
 
-
+      console.log("complete URL: ", completeurl);
 
 
     if (
@@ -184,11 +182,13 @@ onLoginSubmit = event => {
       artistInfo.specialization === "" ||
       artistInfo.pricing === ""
     ) {
+      console.log("error 1");
       this.errModal();
     } else {
 
       const verifyAddress = (address) =>{
-        axios.get(address)
+        console.log("verify address");
+       API.verifyAddress(address)
         .then(response => {
           console.log(response.data)
           if (response.data.length < 1 || response.data === undefined){
@@ -196,6 +196,7 @@ onLoginSubmit = event => {
             this.setState({
               addressVerified: false,
             });
+            console.log("error 2");
             this.errModal();
           }
           else{
