@@ -1,15 +1,15 @@
 import React from "react";
-import {Row, Button, Input, Col} from "react-materialize";
+import {Row, Button, Input, Col } from "react-materialize";
 
 export const LoginForm = props => {
     return (
-      <div>
+      <div className="container">
       {props.invalidCredentials ? 
         <div className="no-credentials">
         <Row>
-          <Col s={12} m={12}>
+          <Col s={12} m={10} l={10}>
             <Input
-             s={12}
+             s={12} m={10} l={10}
              label="Email" 
              type="email" 
              name="loginEmail"
@@ -20,10 +20,10 @@ export const LoginForm = props => {
           </Col>
         </Row>
         <Row>
-          <Col className="login-password" s={10} m={10}>
+          <Col className="login-password" s={10} m={10} l={10}>
             {props.isPasswordVisible ? 
             <Input
-             s={10} 
+             s={10} m={10} l={10}
              label="Password" 
              type="text"
              name="loginPassword" 
@@ -32,7 +32,7 @@ export const LoginForm = props => {
              onKeyPress={props.handleKeyPress}
             />  : 
             <Input
-               s={10} 
+               s={10} m={10} l={10}
                label="Password" 
                type="password"
                name="loginPassword" 
@@ -52,7 +52,7 @@ export const LoginForm = props => {
     </div> : 
     <div>
         <Row>
-          <Col s={12} m={12}>
+          <Col s={12} m={10} l={10}>
             <Input
              s={12}
              label="Email" 
@@ -65,10 +65,10 @@ export const LoginForm = props => {
           </Col>
         </Row>
         <Row>
-          <Col className="login-password" s={10} m={10}>
+          <Col className="login-password" s={10} m={10} l={10}>
             {props.isPasswordVisible ? 
             <Input
-             s={10} 
+             s={10} m={10} l={10}
              label="Password" 
              type="text"
              name="loginPassword" 
@@ -77,7 +77,7 @@ export const LoginForm = props => {
              onKeyPress={props.handleKeyPress}
             />  : 
             <Input
-               s={10} 
+               s={10} m={10} l={10}
                label="Password" 
                type="password"
                name="loginPassword" 
@@ -85,7 +85,9 @@ export const LoginForm = props => {
                onChange={props.handleInputChange}
                onKeyPress={props.handleKeyPress}
             />}
+            <Col s={1} m={1}>
           <Button waves="light" className="password-btn" onClick={props.showPassword}>{props.isPasswordVisible ? 'Hide' : 'Show'}</Button>
+         </Col>
         </Col>
       </Row>
         <Row>

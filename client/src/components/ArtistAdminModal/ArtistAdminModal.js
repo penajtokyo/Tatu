@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Col, Row, Icon, Button, Modal, Input } from "react-materialize";
+import { Col, Row, Input } from "react-materialize";
 import API from "../../utils/API";
 
 class ArtistAdminModal extends Component {
@@ -36,6 +36,7 @@ class ArtistAdminModal extends Component {
 
   // This method sets the user data up to be shipped to the DB
   handleUpdate = () => {
+    console.log("working");
     const dataToUpdate = {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
@@ -54,6 +55,8 @@ class ArtistAdminModal extends Component {
     API.updateArtistInfo(dataToUpdate)
       .then(res => {})
       .catch(err => console.log(err));
+
+      console.log("Working");
   };
 
   // Event handler to set the form data to corresponding state key
@@ -88,33 +91,46 @@ class ArtistAdminModal extends Component {
     }
   };
 
+  // Modal to cancel update to artist information
+  cancelUpdate = () => {
+    this.setState({
+      firstName: this.props.userData.firstName,
+      lastName: this.props.userData.lastName,
+      email: this.props.userData.email,
+      phone: this.props.userData.phone,
+      location: this.props.userData.artistData.location,
+      street: this.props.userData.artistData.street,
+      city: this.props.userData.artistData.city,
+      state: this.props.userData.artistData.state,
+      zip: this.props.userData.artistData.zip,
+      pricing: this.props.userData.artistData.pricing,
+      specialization: this.props.userData.specialization
+    })
+  }
+
   render() {
     return (
       <div>
         <Row>
           <Col s={12} m={12} l={12} className="center" id={this.props}>
             {/* Modal button that displays on the Artist Profile page */}
-            <Modal
-              header="Edit Profile"
-              trigger={
-                <Button>
-                  <Icon>edit</Icon>
-                </Button>
-              }
-            >
+            <Row></Row>
               <Row>
                 {/* Edit profile form */}
                 <form onSubmit={this.handleSubmit}>
                   <Input
-                    s={6}
+                    s={12} m={6} l={6}
+                    label="First Name"
                     type="text"
                     name="firstName"
                     placeholder={this.props.userData.firstName}
+                    // value={this.state.firstName}
                     onChange={this.handleInputChange}
                   />
 
                   <Input
-                    s={6}
+                    s={12} m={6} l={6}
+                    label="Last Name"
                     type="text"
                     name="lastName"
                     placeholder={this.props.userData.lastName}
@@ -122,7 +138,8 @@ class ArtistAdminModal extends Component {
                   />
 
                   <Input
-                    s={6}
+                    s={12} m={6} l={6}
+                    label="Email"
                     type="text"
                     name="email"
                     placeholder={this.props.userData.email}
@@ -130,7 +147,8 @@ class ArtistAdminModal extends Component {
                   />
 
                   <Input
-                    s={6}
+                    s={12} m={6} l={6}
+                    label="Phone Number"
                     type="text"
                     name="phone"
                     placeholder={this.props.userData.phone}
@@ -138,7 +156,8 @@ class ArtistAdminModal extends Component {
                   />
 
                   <Input
-                    s={3}
+                    s={12} m={6} l={6}
+                    label="Location"
                     type="text"
                     name="location"
                     placeholder={this.props.userData.artistData.location}
@@ -146,7 +165,8 @@ class ArtistAdminModal extends Component {
                   />
 
                   <Input
-                    s={2}
+                    s={12} m={6} l={6}
+                    label="Street"
                     type="text"
                     name="street"
                     placeholder={this.props.userData.artistData.street}
@@ -154,7 +174,8 @@ class ArtistAdminModal extends Component {
                   />
 
                   <Input
-                    s={2}
+                    s={6} m={6} l={6}
+                    label="City"
                     type="text"
                     name="city"
                     placeholder={this.props.userData.artistData.city}
@@ -162,7 +183,8 @@ class ArtistAdminModal extends Component {
                   />
 
                   <Input
-                    s={1}
+                    s={4} m={2} l={2}
+                    label="State"
                     type="text"
                     name="state"
                     placeholder={this.props.userData.artistData.state}
@@ -170,7 +192,8 @@ class ArtistAdminModal extends Component {
                   />
 
                   <Input
-                    s={3}
+                    s={8} m={4} l={4}
+                    label="Zip"
                     type="text"
                     name="zip"
                     placeholder={this.props.userData.artistData.zip}
@@ -178,7 +201,8 @@ class ArtistAdminModal extends Component {
                   />
 
                   <Input
-                    s={6}
+                    s={12} m={6} l={6}
+                    label="Pricing"
                     type="select"
                     name="pricing"
                     placeholder={this.props.userData.artistData.pricing}
@@ -191,7 +215,8 @@ class ArtistAdminModal extends Component {
                   </Input>
 
                   <Input
-                    s={6}
+                    s={12} m={6} l={6}
+                    label="Specialization"
                     type="select"
                     name="specialization"
                     placeholder={this.props.userData.specialization}
@@ -205,24 +230,13 @@ class ArtistAdminModal extends Component {
                     </option>
                     <option value="Anatomy">Anatomy</option>
                   </Input>
-
-                  {/* Update button to update artist information */}
-                  <Button
-                    waves="light"
-                    type="submit"
-                    value="Submit"
-                    onSubmit={this.handleSubmit}
-                  >
-                    UPDATE
-                  </Button>
                 </form>
               </Row>
-            </Modal>
-          </Col>
-        </Row>
-      </div>
-    );
-  }
+            </Col>
+          </Row>
+        </div>
+      );
+    }
 }
 
 export default ArtistAdminModal;

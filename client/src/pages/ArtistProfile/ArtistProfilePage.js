@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 // import { Link } from "react-router-dom";
-import { Container, Col, Row } from "react-materialize";
+import { Container, Col, Row, Button, Modal } from "react-materialize";
 // import { Container, Col, Row, Icon, Button } from "react-materialize";
 import Images from "../../components/Images/Images";
 import AddPhotoForm from "../../components/AddPhotoForm/AddPhotoForm";
@@ -49,23 +49,67 @@ class ArtistProfilePage extends Component {
           handleLogout={this.handleLogout}
         />
         <Container>
-          <AddPhotoForm id={artistData._id} />
-          <ArtistAdminModal userData={userData} />
           <Row>
             <Col s={12} m={12} l={12} className="center">
-              <h6>{`${userData.firstName}  ${userData.lastName}`}</h6>
-              <p>{`${artistData.location} ${artistData.city} ${
+              
+              <h2>{`${userData.firstName}  ${userData.lastName}`}</h2>
+             
+             
+              <h3>{`${artistData.location} ${artistData.city} ${
                 artistData.state
-              } ${artistData.zip}`}</p>
-              <p>{artistData.pricing}</p>
-              <p>{artistData.specialization}</p>
+              } ${artistData.zip}`}</h3>
+             
+              <h3>{artistData.pricing}</h3>
+              <h3>{artistData.specialization}</h3>
+              
             </Col>
           </Row>
           <Row>
             <Images id={artistData._id} />
           </Row>
         </Container>
-      </div>
+
+        {/* Floating icon buttons for modals */}
+          <Button floating fab="vertical" icon="person" faicon="fa fa-plus" className="floating-btn" large style={{bottom: "45px", right: "24px"}}>
+            <Modal
+              header="Add a photo"
+              trigger={<Button floating icon="add_a_photo" className="add-photo"/>}
+              actions={
+                <div>
+                  <Button 
+                    className="cancel-btn" 
+                    onClose={this.closeModal} 
+                    flat modal="close" 
+                    waves="light">Cancel</Button>
+                  <Button 
+                    waves="light"
+                    type="submit"
+                    value="Submit"
+                    onSubmit={this.handleSubmit}>SUBMIT</Button>
+                </div>}>
+                <AddPhotoForm id={artistData._id} />
+              </Modal>
+              <Modal 
+                header="Edit Profile"
+                trigger={<Button floating icon="mode_edit" className="profile-edit"/>}
+                actions={
+                  <div>
+                    <Button 
+                      className="cancel-btn" 
+                      onClick={this.cancelUpdate} 
+                      flat modal="close" 
+                      waves="light">Cancel</Button>
+                    <Button
+                      waves="light"
+                      type="submit"
+                      value="Submit"
+                      onSubmit={this.handleSubmit}>
+                      UPDATE</Button>
+                  </div>}>
+                  <ArtistAdminModal userData={userData} />
+            </Modal>
+          </Button>
+        </div>
     );
   }
 }

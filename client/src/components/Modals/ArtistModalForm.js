@@ -8,7 +8,7 @@ export const ArtistModalForm = props => {
     <div style={artistStyle}>
       <Row></Row>
         <Row>
-          <Col s={12} m={6}>
+          <Col s={12} m={6} l={6}>
             <Input 
               s={12}
               label="First Name" 
@@ -19,7 +19,7 @@ export const ArtistModalForm = props => {
               onKeyPress={props.handleKeyClick} 
             />
           </Col>
-        <Col s={12} m={6}>
+        <Col s={12} m={6} l={6}>
           <Input 
             s={12}
             label="Last Name" 
@@ -32,7 +32,7 @@ export const ArtistModalForm = props => {
         </Col>
       </Row>
     <Row>
-      <Col s={12} m={6}>
+      <Col s={12} m={6} l={6}>
         <Input 
           s={12}
           label="Phone Number" 
@@ -46,7 +46,7 @@ export const ArtistModalForm = props => {
       </Col>
     </Row>
   <Row>
-    <Col s={12} m={6}>
+    <Col s={12} m={6} l={6}>
       <Input 
         s={12}
         label="Email" 
@@ -57,7 +57,7 @@ export const ArtistModalForm = props => {
         onKeyPress={props.handleKeyClick}
       />
     </Col>
-      <Col s={12} m={6}>
+      <Col s={12} m={6} l={6}>
         <Input 
           s={12}
           label="Password" 
@@ -70,7 +70,7 @@ export const ArtistModalForm = props => {
       </Col>
     </Row>
       <Row>    
-        <Col s={12} m={6}>
+        <Col s={12} m={6} l={6}>
           <Input 
             s={12}
             label="Location Name" 
@@ -81,7 +81,7 @@ export const ArtistModalForm = props => {
             onKeyPress={props.handleKeyClick}
           />
         </Col>    
-        <Col s={12} m={6}>     
+        <Col s={12} m={6} l={6}>     
           <Input 
             s={12}
             label="Street" 
@@ -94,7 +94,7 @@ export const ArtistModalForm = props => {
       </Col>
     </Row>
       <Row>
-        <Col s={12} m={6}>
+        <Col s={12} m={6} l={6}>
           <Input 
             s={12}
             label="City" 
@@ -105,18 +105,18 @@ export const ArtistModalForm = props => {
             onKeyPress={props.handleKeyClick}
           />
         </Col>
-      <Col s={10} m={2}>
+      <Col s={10} m={2} l={2}>
         <Input 
           s={12}
           label="State" 
           type="text" 
-          name="st"
-          value={props.st}
+          name="state"
+          value={props.state}
           onChange={props.handleInputChange}
           onKeyPress={props.handleKeyClick}
         />
       </Col>
-    <Col s={10} m={4}>
+    <Col s={10} m={4} l={4}>
       <Input 
         s={12}
         label="Zip" 
@@ -129,17 +129,17 @@ export const ArtistModalForm = props => {
     </Col>
   </Row>
     <Row>
-    <Col s={12} m={6}>
+    <Col s={12} m={6} l={6}>
         <Input s={12} type="select" name="specialization" value={props.specialization} onChange={props.handleInputChange}>
           <option value="">What is your specialization?</option>
           <option value="3D">3D</option>
           <option value="Abstract">Abstract</option>
-          <option value="AmTraditional">American Traditional</option>
+          <option value="AmericanTraditional">American Traditional</option>
           <option value="Biomechanical">Biomechanical</option>
           <option value="Celtic">Celtic</option>
           <option value="Chicano">Chicano</option>
           <option value="Geometric">Geometric</option>
-          <option value="Hawaiian">Hawaiian/Maori/Polynesian</option>
+          <option value="Hawaiian/Maori/Polynesian">Hawaiian/Maori/Polynesian</option>
           <option value="HyperRealistic">Hyper Realistic</option>
           <option value="Japanese">Japanese</option>
           <option value="PaintBrushStroke">Paint Brush Stroke</option>
@@ -149,7 +149,7 @@ export const ArtistModalForm = props => {
           <option value="Watercolor">Watercolor</option>
         </Input>
       </Col>
-        <Col s={12} m={6}>
+        <Col s={12} m={6} l={6}>
           <Input s={12} type="select" name="pricing" value={props.pricing} onChange={props.handleInputChange}>
             <option value="">What is your pricing structure?</option>
             <option value="Hour">Per hour</option>

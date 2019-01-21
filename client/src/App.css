@@ -12,6 +12,11 @@ p {
   text-align: center;
 }
 
+.container {
+  margin-top: 7%;
+  align-items: center;
+}
+
 /* buttons */
 .btn {
   background-color: #344743;
@@ -39,7 +44,7 @@ p {
 }
 
 /* modal elements */
-.modal, .modal .modal-footer  {
+.modal, .modal .modal-footer, .floating-btn  {
   background-color: #2a303e;
 }
 
@@ -65,6 +70,14 @@ p {
   background-color: white;
   text-align: right;
   padding-right: 5px;
+}
+
+.profile-edit {
+  background-color: #BF691E;
+}
+
+.add-photo {
+  background-color: #344743;
 }
 
 /* this is for the forms */

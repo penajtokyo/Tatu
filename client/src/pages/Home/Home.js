@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-// import { Container } from "../../components/Container";
-
 import {
   ErrModal,
   UserModalForm,
@@ -9,7 +7,6 @@ import {
 import { LoginForm } from "../../components/LoginForm";
 import { Modal, Button, Input, Row } from "react-materialize";
 import Nav from '../../components/Nav';
-import "./Home.css";
 import API from "../../utils/API";
 
 class Home extends Component {
@@ -27,7 +24,7 @@ class Home extends Component {
     location: "",
     street: "",
     city: "",
-    st: "",
+    state: "",
     zip: "",
     specialization: "",
     pricing: "",
@@ -134,11 +131,11 @@ onLoginSubmit = event => {
               });
             }
           }
-        }
+        
       })
       .catch(err => console.log(err));
-  }
-};
+    }
+  };
 
   // Method for artist signup and input verification.
   artistSignUp = event => {
@@ -152,7 +149,7 @@ onLoginSubmit = event => {
       location: this.state.location,
       street: this.state.street,
       city: this.state.city,
-      st: this.state.st,
+      state: this.state.state,
       zip: this.state.zip,
       specialization: this.state.specialization,
       pricing: this.state.pricing
@@ -189,7 +186,7 @@ onLoginSubmit = event => {
         location: "",
         street: "",
         city: "",
-        st: "",
+        state: "",
         zip: "",
         specialization: "",
         pricing: ""
@@ -232,7 +229,7 @@ onLoginSubmit = event => {
     }
   };
 
-  //method to be used in sign up methods above
+  // Method to be used in sign up methods above
   handleSignup = signupData => {
     API.signup(signupData)
       .then(response => {
@@ -253,7 +250,6 @@ onLoginSubmit = event => {
         }
       })
       .catch(err => console.log(err));
-
       this.setState({
         hideRow: false,
         hideUserRow: false,
@@ -318,8 +314,14 @@ onLoginSubmit = event => {
           trigger={<Button>Create Account</Button>}
           actions={
             <div>
-              <Button className="cancel-btn" onClick={this.resetModals} flat modal="close" waves="light">Cancel</Button>
-              <Button style={btnStyle} onClick={this.state.hideArtistRow ? this.artistSignUp : this.userSignUp}>Create Account</Button>
+              <Button 
+                className="cancel-btn" 
+                onClick={this.resetModals} 
+                flat modal="close" 
+                waves="light">Cancel</Button>
+              <Button 
+                style={btnStyle} 
+                onClick={this.state.hideArtistRow ? this.artistSignUp : this.userSignUp}>Create Account</Button>
             </div>}
         >
           <Row style={style}>
@@ -355,9 +357,8 @@ onLoginSubmit = event => {
             email={this.state.email}
             location={this.state.location}
             street={this.state.street}
-            state={this.state.state}
             city={this.state.city}
-            st={this.state.st}
+            state={this.state.state}
             zip={this.state.zip}
             specialization={this.state.specialization}
             pricing={this.state.pricing}
@@ -367,9 +368,11 @@ onLoginSubmit = event => {
             capitalize={this.capitalize}
           />
         </Modal>
+        <br />
         <hr />
         <h5><b>Existing Users</b></h5>
         <LoginForm
+          className="center-align"
           loginEmail={this.state.loginEmail}
           loginPassword={this.state.loginPassword}
           type={this.state.input}
