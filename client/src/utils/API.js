@@ -44,5 +44,10 @@ export default {
   // used to update artist information in db
   updateArtistInfo: updateData => {
     return axios.put("/api/admin/artistUpdate", updateData);
+  },
+
+  //used to verify address
+  verifyAddress: (address)=> {
+    return axios.get(address);
   }
 };

@@ -12,6 +12,9 @@ import Nav from '../../components/Nav';
 import "./Home.css";
 import API from "../../utils/API";
 
+//variable for smarty streets api
+const url = "https://us-street.api.smartystreets.com/street-address?auth-id=7065599766197186&candidates=1&match=strict";
+
 class Home extends Component {
   state = {
     loginEmail: "",
@@ -36,7 +39,10 @@ class Home extends Component {
     hideArtistRow: false,
     hideErr: false,
     invalidCredentials: false,
-    userName: ''
+    userName: '',
+    addressVerified: true
+
+
   };
 
   // Method to handle user pressing enter in login form.
@@ -110,7 +116,7 @@ onLoginSubmit = event => {
           this.setState({
             invalidCredentials: true
           });
-        } 
+        }
         else {
           this.setState({
             loginEmail: "",
@@ -150,7 +156,17 @@ onLoginSubmit = event => {
       specialization: this.state.specialization,
       pricing: this.state.pricing
     };
+
     event.preventDefault();
+
+    //variables for address verification
+      let urlstreet = this.state.street.split(' ').join('+');
+      let urlstate = this.state.st.split(' ').join('+');
+      let urlcity = this.state.st.split(' ').join('+');
+      let completeurl = url + "&street=" + urlstreet + "&city=" + urlcity + "&state=" + urlstate + "&zipcode=" + this.state.zip;
+
+      console.log("complete URL: ", completeurl);
+
 
     if (
       artistInfo.email === "" ||
@@ -166,30 +182,55 @@ onLoginSubmit = event => {
       artistInfo.specialization === "" ||
       artistInfo.pricing === ""
     ) {
+      console.log("error 1");
       this.errModal();
     } else {
-      console.log("artist info obj", artistInfo);
-      this.handleSignup(artistInfo);
-      this.setState({
-        email: "",
-        password: "",
-        selected: "",
-        firstName: "",
-        lastName: "",
-        phoneNumber: "",
-        location: "",
-        street: "",
-        city: "",
-        st: "",
-        zip: "",
-        specialization: "",
-        pricing: ""
-      });
+
+      const verifyAddress = (address) =>{
+        console.log("verify address");
+       API.verifyAddress(address)
+        .then(response => {
+          console.log(response.data)
+          if (response.data.length < 1 || response.data === undefined){
+            console.log("address is invalid");
+            this.setState({
+              addressVerified: false,
+            });
+            console.log("error 2");
+            this.errModal();
+          }
+          else{
+          console.log("address is valid")
+          console.log("artist info obj", artistInfo);
+          this.handleSignup(artistInfo);
+          this.setState({
+            email: "",
+            password: "",
+            selected: "",
+            firstName: "",
+            lastName: "",
+            phoneNumber: "",
+            location: "",
+            street: "",
+            city: "",
+            st: "",
+            zip: "",
+            specialization: "",
+            pricing: ""
+          });
+        }
+        }).catch(function (error) {
+          console.log(error);
+        });
+    };
+    verifyAddress(completeurl);
+
     }
   };
 
   // Method for user signup and input verification
   userSignUp = event => {
+    event.preventDefault();
     const customerInfo = {
       type: this.state.selected,
       firstName: this.state.firstName,
@@ -198,7 +239,7 @@ onLoginSubmit = event => {
       email: this.state.email,
       password: this.state.password
     };
-    event.preventDefault();
+
 
     if (
       customerInfo.email === "" ||
@@ -224,31 +265,33 @@ onLoginSubmit = event => {
   };
 
   //method to be used in sign up methods above
-  handleSignup = signupData => {
-    API.signup(signupData)
-      .then(response => {
-        console.log("account has been created");
-        
-        if (response.data.type === "customer") {
-          this.props.history.push({
-            pathname: "/user",
-            state: { detail: response.data }
-          });
-        } else {
-          this.props.history.push({
-            pathname: "/artist",
-            state: { detail: response.data }
-          });
-        }
-      })
-      .catch(err => console.log(err));
+ //method to be used in sign up methods above
+ handleSignup = signupData => {
+  API.signup(signupData)
+    .then(response => {
+      console.log("account has been created");
 
-      this.setState({
-        hideRow: false,
-        hideUserRow: false,
-        hideArtistRow: false
-      });
-  };
+      if (response.data.type === "customer") {
+        this.props.history.push({
+          pathname: "/user",
+          state: { detail: response.data }
+        });
+      } else {
+        this.props.history.push({
+          pathname: "/artist",
+          state: { detail: response.data }
+        });
+      }
+    })
+    .catch(err => console.log(err));
+
+    this.setState({
+      hideRow: false,
+      hideUserRow: false,
+      hideArtistRow: false
+    });
+};
+
 
   // Method for capitalizing the first letter of the first and last name for both User and Artist sign up form
   capitalize = (str) => {
@@ -289,6 +332,9 @@ onLoginSubmit = event => {
     this.setState({
       hideErr: false,
     })
+    this.setState({
+      addressVerified: true,
+    })
   }
 
   render() {
@@ -298,7 +344,7 @@ onLoginSubmit = event => {
       <div>
         <Nav name={this.state.userName} />
         <div className="container center-align">
-          <ErrModal hideErr={this.state.hideErr} closeModal={this.closeModal} />
+          <ErrModal hideErr={this.state.hideErr} addressVerified = {this.state.addressVerified} closeModal={this.closeModal} />
           <h5><b>New Users</b></h5>
           <Modal
             s={12}
