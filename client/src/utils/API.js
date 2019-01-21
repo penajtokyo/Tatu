@@ -43,6 +43,6 @@ export default {
 
   // used to update artist information in db
   updateArtistInfo: updateData => {
-    return axios.get("/api/admin/artistUpdate");
+    return axios.put("/api/admin/artistUpdate", updateData);
   }
 };

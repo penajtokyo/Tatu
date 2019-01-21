@@ -34,7 +34,6 @@ class Home extends Component {
     hideErr: false,
     invalidCredentials: false,
     userName: ''
-
   };
 
   // Method to handle user pressing enter in login form.
@@ -100,11 +99,9 @@ onLoginSubmit = event => {
       hideErr: true
     });
   } else {
-    //call the login method to call the backend, send the login data (email and password)//working!
     API.login(loginData)
       .then(response => {
         console.log("response", response);
-        //add if to check response of invalid from backend
         if (response.data === "invalid") {
           console.log("Invalid Email or Password")
           this.setState({
@@ -116,22 +113,18 @@ onLoginSubmit = event => {
             loginEmail: "",
             loginPassword: ""
           });
-            //redirect to the User or artist page
             if (response.data.type === "customer") {
-              //open user page
               this.props.history.push({
                 pathname: "/user",
                 state: { detail: response.data }
               });
             } else {
-              //open artist page
               this.props.history.push({
                 pathname: "/artist",
                 state: { detail: response.data }
               });
             }
           }
-        
       })
       .catch(err => console.log(err));
     }
@@ -172,10 +165,8 @@ onLoginSubmit = event => {
     ) {
       this.errModal();
     } else {
-      //This is where we will have the post route for artist sign up.
       console.log("artist info obj", artistInfo);
       this.handleSignup(artistInfo);
-      // console.log("email: " + email + " and password: " + password + " and specialization: " + specialization + " pricing: " + pricing);
       this.setState({
         email: "",
         password: "",
@@ -236,13 +227,11 @@ onLoginSubmit = event => {
         console.log("account has been created");
         
         if (response.data.type === "customer") {
-          //open user page
           this.props.history.push({
             pathname: "/user",
             state: { detail: response.data }
           });
         } else {
-          //open artist page
           this.props.history.push({
             pathname: "/artist",
             state: { detail: response.data }
@@ -303,87 +292,80 @@ onLoginSubmit = event => {
     const btnStyle = this.state.hideRow ? {display: "block"} : {display: "none"};
     return (
       <div>
-      <Nav name={this.state.userName} />
-      <div className="container center-align">
-        <ErrModal hideErr={this.state.hideErr} closeModal={this.closeModal} />
-        <h5><b>New Users</b></h5>
-        <Modal
-          s={12}
-          m={12}
-          header="Create New Account"
-          trigger={<Button>Create Account</Button>}
-          actions={
-            <div>
-              <Button 
-                className="cancel-btn" 
-                onClick={this.resetModals} 
-                flat modal="close" 
-                waves="light">Cancel</Button>
-              <Button 
-                style={btnStyle} 
-                onClick={this.state.hideArtistRow ? this.artistSignUp : this.userSignUp}>Create Account</Button>
-            </div>}
-        >
-          <Row style={style}>
-            <Input
-              s={12}
-              type="select"
-              value={this.state.selected}
-              onChange={this.handleSelection}
-            >
-              <option value="">What Best Describes You?</option>
-              <option value="customer">Customer</option>
-              <option value="artist">Tattoo Artist</option>
-            </Input>
-          </Row>
-          <UserModalForm
-            hideUserRow={this.state.hideUserRow}
-            firstName={this.state.firstName}
-            lastName={this.state.lastName}
-            password={this.state.password}
-            phoneNumber={this.state.phoneNumber}
-            email={this.state.email}
+        <Nav name={this.state.userName} />
+        <div className="container center-align">
+          <ErrModal hideErr={this.state.hideErr} closeModal={this.closeModal} />
+          <h5><b>New Users</b></h5>
+          <Modal
+            s={12}
+            m={12}
+            header="Create New Account"
+            trigger={<Button>Create Account</Button>}
+            actions={
+              <div>
+                <Button className="cancel-btn" onClick={this.resetModals} flat modal="close" waves="light">Cancel</Button>
+                <Button style={btnStyle} onClick={this.state.hideArtistRow ? this.artistSignUp : this.userSignUp}>Create Account</Button>
+              </div>}
+          >
+            <Row style={style}>
+              <Input
+                s={12}
+                type="select"
+                value={this.state.selected}
+                onChange={this.handleSelection}
+              >
+                <option value="">What Best Describes You?</option>
+                <option value="customer">Customer</option>
+                <option value="artist">Tattoo Artist</option>
+              </Input>
+            </Row>
+            <UserModalForm
+              hideUserRow={this.state.hideUserRow}
+              firstName={this.state.firstName}
+              lastName={this.state.lastName}
+              password={this.state.password}
+              phoneNumber={this.state.phoneNumber}
+              email={this.state.email}
+              handleInputChange={this.handleInputChange}
+              handleKeyClick={this.handleKeyClick}
+              userSignUp={this.userSignUp}
+              capitalize={this.capitalize}
+            />
+            <ArtistModalForm
+              hideArtistRow={this.state.hideArtistRow}
+              firstName={this.state.firstName}
+              lastName={this.state.lastName}
+              password={this.state.password}
+              phoneNumber={this.state.phoneNumber}
+              email={this.state.email}
+              location={this.state.location}
+              street={this.state.street}
+              state={this.state.state}
+              city={this.state.city}
+              st={this.state.st}
+              zip={this.state.zip}
+              specialization={this.state.specialization}
+              pricing={this.state.pricing}
+              handleInputChange={this.handleInputChange}
+              handleKeyClick={this.handleKeyClick}
+              artistSignUp={this.artistSignUp}
+              capitalize={this.capitalize}
+            />
+          </Modal>
+          <hr />
+          <h5><b>Existing Users</b></h5>
+          <LoginForm
+            loginEmail={this.state.loginEmail}
+            loginPassword={this.state.loginPassword}
+            type={this.state.input}
+            isPasswordVisible={this.state.isPasswordVisible}
+            invalidCredentials={this.state.invalidCredentials}
             handleInputChange={this.handleInputChange}
-            handleKeyClick={this.handleKeyClick}
-            userSignUp={this.userSignUp}
-            capitalize={this.capitalize}
+            onLoginSubmit={this.onLoginSubmit}
+            handleKeyPress={this.handleKeyPress}
+            showPassword={this.showPassword}
           />
-          <ArtistModalForm
-            hideArtistRow={this.state.hideArtistRow}
-            firstName={this.state.firstName}
-            lastName={this.state.lastName}
-            password={this.state.password}
-            phoneNumber={this.state.phoneNumber}
-            email={this.state.email}
-            location={this.state.location}
-            street={this.state.street}
-            city={this.state.city}
-            state={this.state.state}
-            zip={this.state.zip}
-            specialization={this.state.specialization}
-            pricing={this.state.pricing}
-            handleInputChange={this.handleInputChange}
-            handleKeyClick={this.handleKeyClick}
-            artistSignUp={this.artistSignUp}
-            capitalize={this.capitalize}
-          />
-        </Modal>
-        <br />
-        <hr />
-        <h5><b>Existing Users</b></h5>
-        <LoginForm
-          className="center-align"
-          loginEmail={this.state.loginEmail}
-          loginPassword={this.state.loginPassword}
-          type={this.state.input}
-          isPasswordVisible={this.state.isPasswordVisible}
-          invalidCredentials={this.state.invalidCredentials}
-          handleInputChange={this.handleInputChange}
-          onLoginSubmit={this.onLoginSubmit}
-          handleKeyPress={this.handleKeyPress}
-          showPassword={this.showPassword}
-        />
-      </div>
+        </div>
       </div>
     );
   }

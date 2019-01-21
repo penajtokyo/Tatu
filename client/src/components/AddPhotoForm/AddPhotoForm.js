@@ -5,8 +5,96 @@ import API from "../../utils/API";
 class AddPhotoForm extends Component {
   state = {
     url: "",
-    style: "",
-    placement: "",
+    style: [
+      'Abstract',
+      'Ambigram',
+      'American Traditional',
+      'Anatomical',
+      'Biomechanical',
+      'Black And Grey',
+      'Blackout',
+      'Blackwork',
+      'Blast Over',
+      'Botanical',
+      'Broken Glass',
+      'Paint Brush Stroke',
+      'Celtic',
+      'Chicano',
+      'Dotwork',
+      'Geometric',
+      'Glitch',
+      'Glow In The Dark',
+      'UV Ink',
+      'Gradient',
+      'Graffiti',
+      'Hyper Realistic',
+      'Inverted',
+      'Japanese',
+      'Lettering',
+      'Line',
+      'Mambo/Destrutturato',
+      'Mandala',
+      'Mayan',
+      'Minimalist',
+      'Negative Space',
+      'Neo Traditional',
+      'New School',
+      'Norse',
+      'Traditional',
+      'Tribal',
+      'Optical Illusion',
+      'Outline',
+      'Pinstripe',
+      'Pixel',
+      'Pointillism',
+      'Pop Art',
+      'Portrait',
+      'Quote/Word',
+      'Realism',
+      'Silhouette',
+      'Sketch',
+      'Stained Glass',
+      'Surrealism',
+      'Torn/Ripped Skin',
+      'Trash Polka',
+      'Polynesian',
+      'Maori',
+      'Hawaiian',
+      'Watercolor',
+      'White Ink',
+      'Wood Carving'
+    ],
+    placement: [
+      'Ankles',
+      'Back',
+      'Bicep',
+      'Bottom',
+      'Calf',
+      'Chest',
+      'Ear',
+      'Elbow',
+      'Eye Lid',
+      'Face',
+      'Finger',
+      'Forearm',
+      'Foot',
+      'Groin',
+      'Hand',
+      'Hip',
+      'Knee',
+      'Lip',
+      'Lower Back',
+      'Navel',
+      'Neck',
+      'Shin',
+      'Shoulder',
+      'Sternum',
+      'Stomach',
+      'Thigh',
+      'Toe',
+      'Upper Back',
+      'Wrist'
+    ],
     description: ""
   };
 
@@ -86,13 +174,13 @@ class AddPhotoForm extends Component {
                     type="select"
                     name="style"
                     label="Style"
-                    value={this.state.style}
+                    defaultValue="blank"
                     onChange={this.handleInputChange}
                   >
-                    <option value="">Choose a Style...</option>
-                    <option value="Abstract">Abstract</option>
-                    <option value="American Traditional">American Traditional</option>
-                    <option value="Anatomy">Anatomy</option>
+                    <option value="">Choose Placement...</option>
+                    {this.state.style.map((type, index) => (
+                      <option key={index} value={type}>{type}</option>
+                    ))}
                   </Input>
 
                   <Input
@@ -100,13 +188,13 @@ class AddPhotoForm extends Component {
                     type="select"
                     name="placement"
                     label="Placement"
-                    value={this.state.placement}
+                    defaultValue="blank"
                     onChange={this.handleInputChange}
                   >
                     <option value="">Choose Placement...</option>
-                    <option value="Ankle">Ankle</option>
-                    <option value="Bicep">Bicep</option>
-                    <option value="Chest">Chest</option>
+                    {this.state.placement.map((part, index) => (
+                      <option key={index} value={part}>{part}</option>
+                    ))}
                   </Input>
                 </form>
               </Row>

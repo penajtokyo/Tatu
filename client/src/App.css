@@ -32,8 +32,12 @@ p {
   background-color: #344743;
 }
 
-
 /* form elements */
+/* adjusts the label on the fields from going up too high */
+.input-field label:not(.label-icon).active {
+  transform: translateY(-40%);
+}
+
 .select-wrapper input.select-dropdown {
   border-bottom: 1px solid white;
   color: white;
@@ -53,7 +57,7 @@ p {
   width: auto;
   height: 20%;
   padding: 0px 5px 0px 5px;
-  margin-left: -70px;
+  /* margin-left: -50px; */
 }
 
 .helper-text {
