@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Button, Col, Row, Icon, Modal, Input } from "react-materialize";
+import SelectPlacement from "../SelectPlacement";
+import SelectStyle from "../SelectStyle";
 import API from "../../utils/API";
 
 class AddPhotoForm extends Component {
@@ -21,7 +23,14 @@ class AddPhotoForm extends Component {
 
     // Call to utils.API.addImage post request to the backend
     API.addImage(photoData)
-      .then(res => {})
+      .then(res => {
+        this.setState({
+          url: "",
+          style: "",
+          placement: "",
+          description: ""
+        });
+      })
       .catch(err => console.log(err));
   };
 
@@ -77,35 +86,15 @@ class AddPhotoForm extends Component {
                     onChange={this.handleInputChange}
                   />
 
-                  <Input
+                  <SelectPlacement
                     s={12}
-                    type="select"
-                    name="style"
-                    label="Style"
-                    defaultValue="2"
-                    onChange={this.handleInputChange}
-                  >
-                    <option value="">Choose a Style...</option>
-                    <option value="Abstract">Abstract</option>
-                    <option value="American Traditional">
-                      American Traditional
-                    </option>
-                    <option value="Anatomy">Anatomy</option>
-                  </Input>
+                    handleSelection={this.handleInputChange}
+                  />
 
-                  <Input
+                  <SelectStyle
                     s={12}
-                    type="select"
-                    name="placement"
-                    label="Placement"
-                    defaultValue="2"
-                    onChange={this.handleInputChange}
-                  >
-                    <option value="">Choose Placement...</option>
-                    <option value="Ankle">Ankle</option>
-                    <option value="Bicep">Bicep</option>
-                    <option value="Chest">Chest</option>
-                  </Input>
+                    handleSelection={this.handleInputChange}
+                  />
 
                   <Input
                     s={12}
@@ -120,6 +109,9 @@ class AddPhotoForm extends Component {
                     waves="light"
                     type="submit"
                     value="Submit"
+                    className="
+                    modal-action
+                    modal-close"
                     onSubmit={this.handleSubmit}
                   >
                     SUBMIT
