@@ -24,13 +24,12 @@ class Images extends Component {
   };
 
   render() {
-    console.log(this.state.tattooArtistImages);
     if (this.state.tattooArtistImages) {
       // Image variable that maps over the tattooArtistImages array and renders
       const images = this.state.tattooArtistImages.map(image => {
         return (
           <div>
-            <Col s={12} m={6} l={3}>
+            <Col s={12} m={6} l={4}>
               <Card
                 header={
                   <CardTitle
@@ -40,7 +39,7 @@ class Images extends Component {
                     waves="light"
                   />
                 }
-                title={image.description}
+                title={image.style}
                 reveal={
                   <div>
                     <p>{image.style}</p>
