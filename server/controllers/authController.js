@@ -9,73 +9,82 @@ module.exports = {
       bcrypt.hash(req.body.password, salt, function(err, hash) {
         // Store hash in your password DB.
         req.body.password = hash;
-        if (req.body.type === "customer") {
-          db.Customer.create(req.body).then(function(dbData) {
-            var userObj = {
-              _id: dbData._id,
-              firstName: dbData.firstName,
-              lastName: dbData.lastName,
-              email: dbData.email,
-              phone: dbData.phone,
-              type: dbData.type
-            };
-            req.session.customer = userObj;
-            req.session.customer.loggedIn = true;
-            res.json(dbData);
-          });
-        } else {
-          var customerObj = {
-            type: req.body.type,
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            phone: req.body.phone,
-            email: req.body.email,
-            password: req.body.password
-          };
-          console.log(customerObj);
-          db.Customer.create(customerObj).then(function(customerData) {
-            var artistData = {
-              specialization: req.body.specialization,
-              pricing: req.body.pricing,
-              location: req.body.location,
-              street: req.body.street,
-              city: req.body.city,
-              state: req.body.state,
-              zip: req.body.zip,
-              Customer_Id: customerData._id
-            };
-            db.Artist.create(artistData).then(function(artistData) {
-              db.Customer.findByIdAndUpdate(
-                { _id: customerData._id },
-                { artistData: artistData._id },
-                { new: true }
-              ).then(updateData => {
-                console.log(artistData);
+          db.Customer.findOne({
+            email: req.body.email
+              }).then(newEmail => {
+                if (newEmail !== null) {
+                  console.log('Email already registered found');
+                  res.json('email choice invalid');
+                } else { 
+            if (req.body.type === "customer") {
+              db.Customer.create(req.body).then(function(dbData) {
                 var userObj = {
-                  _id: customerData._id,
-                  firstName: customerData.firstName,
-                  lastName: customerData.lastName,
-                  email: customerData.email,
-                  phone: customerData.phone,
-                  type: customerData.type,
-                  artistData: {
-                    _id: artistData._id,
-                    specialization: artistData.specialization,
-                    pricing: artistData.pricing,
-                    location: artistData.location,
-                    street: artistData.street,
-                    city: artistData.city,
-                    state: artistData.state,
-                    zip: artistData.zip
-                  }
+                  _id: dbData._id,
+                  firstName: dbData.firstName,
+                  lastName: dbData.lastName,
+                  email: dbData.email,
+                  phone: dbData.phone,
+                  type: dbData.type
                 };
                 req.session.customer = userObj;
                 req.session.customer.loggedIn = true;
-                res.json(userObj);
+                res.json(dbData);
               });
-            });
-          });
-        }
+            } else {
+              var customerObj = {
+                type: req.body.type,
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                phone: req.body.phone,
+                email: req.body.email,
+                password: req.body.password
+              };
+              console.log(customerObj);
+              db.Customer.create(customerObj).then(function(customerData) {
+                var artistData = {
+                  specialization: req.body.specialization,
+                  pricing: req.body.pricing,
+                  location: req.body.location,
+                  street: req.body.street,
+                  city: req.body.city,
+                  state: req.body.state,
+                  zip: req.body.zip,
+                  Customer_Id: customerData._id
+                };
+                db.Artist.create(artistData).then(function(artistData) {
+                  db.Customer.findByIdAndUpdate(
+                    { _id: customerData._id },
+                    { artistData: artistData._id },
+                    { new: true }
+                  ).then(updateData => {
+                    console.log(artistData);
+                    var userObj = {
+                      _id: customerData._id,
+                      firstName: customerData.firstName,
+                      lastName: customerData.lastName,
+                      email: customerData.email,
+                      phone: customerData.phone,
+                      type: customerData.type,
+                      artistData: {
+                        _id: artistData._id,
+                        specialization: artistData.specialization,
+                        pricing: artistData.pricing,
+                        location: artistData.location,
+                        street: artistData.street,
+                        city: artistData.city,
+                        state: artistData.state,
+                        zip: artistData.zip
+                      }
+                    };
+                    req.session.customer = userObj;
+                    req.session.customer.loggedIn = true;
+                    res.json(userObj);
+                  });
+                });
+              });
+            }
+          }
+        })
       });
     });
   },
