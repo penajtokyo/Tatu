@@ -13,7 +13,11 @@ p {
   text-align: center;
 }
 
-.container {
+h4 {
+  color: black;
+}
+
+.home {
   margin-top: 7%;
   align-items: center;
   text-align: center;
@@ -171,6 +175,33 @@ input[type=number]:not(.browser-default):focus:not([readonly])+label {
   transform: translateY(-40%);
 }
 
+/* styling on artist page */
+.artist-container {
+    margin-top: 2%;
+    align-items: center;
+    text-align: center;
+}
+
+.artist {
+  color: white;
+  text-decoration: underline;
+  margin-top: 0;
+}
+.artist-header {
+  color: white;
+  text-decoration: underline;
+  margin-top: 30px;
+}
+
+footer.page-footer {
+  background-color: #2a303e;
+  height: 100px;
+}
+
+.profile-btn, .photo-btn {
+  float: right;
+}
+
 /* adjustments for mobile first */
 @media only screen and (max-width: 768px) {
   body {
@@ -191,6 +222,10 @@ input[type=number]:not(.browser-default):focus:not([readonly])+label {
     background-image: url('./images/tattooarms_xsm_bgi.jpg');
   }
 
+  h3, h4 {
+    font-size: 2em;
+  }
+
   .password-btn {
     margin-left: 0px;
   }
@@ -206,7 +241,7 @@ input[type=number]:not(.browser-default):focus:not([readonly])+label {
     margin-left: 0px;
   }
 
-  h2, h3 {
+  h3, h4 {
     font-size: 2em;
   }
 

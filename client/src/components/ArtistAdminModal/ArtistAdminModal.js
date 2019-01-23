@@ -55,6 +55,21 @@ class ArtistAdminModal extends Component {
     API.updateArtistInfo(dataToUpdate)
       .then(res => {
         console.log(res.data);
+        this.setState({
+          firstName: res.data.firstName,
+          lastName: res.data.lastName,
+          email: res.data.email,
+          phone: res.data.phone,
+          location: res.data.location,
+          street: res.data.artistData.street,
+          city: res.data.artistData.city,
+          state: res.data.artistData.state,
+          zip: res.data.artistData.zip,
+          pricing: res.data.artistData.pricing,
+          specialization: res.data.artistData.specialization
+        });
+        console.log(this.state);
+        // window.location.reload();
       })
       .catch(err => console.log(err));
 
@@ -124,8 +139,7 @@ class ArtistAdminModal extends Component {
                     label="First Name"
                     type="text"
                     name="firstName"
-                    placeholder={this.props.userData.firstName}
-                    // value={this.state.firstName}
+                    placeholder={this.state.firstName}
                     onChange={this.handleInputChange}
                   />
 
@@ -134,7 +148,7 @@ class ArtistAdminModal extends Component {
                     label="Last Name"
                     type="text"
                     name="lastName"
-                    placeholder={this.props.userData.lastName}
+                    placeholder={this.state.lastName}
                     onChange={this.handleInputChange}
                   />
 
@@ -143,7 +157,7 @@ class ArtistAdminModal extends Component {
                     label="Email"
                     type="text"
                     name="email"
-                    placeholder={this.props.userData.email}
+                    placeholder={this.state.email}
                     onChange={this.handleInputChange}
                   />
 
@@ -152,7 +166,7 @@ class ArtistAdminModal extends Component {
                     label="Phone Number"
                     type="text"
                     name="phone"
-                    placeholder={this.props.userData.phone}
+                    placeholder={this.state.phone}
                     onChange={this.handleInputChange}
                   />
 
@@ -161,7 +175,7 @@ class ArtistAdminModal extends Component {
                     label="Location"
                     type="text"
                     name="location"
-                    placeholder={this.props.userData.artistData.location}
+                    placeholder={this.state.location}
                     onChange={this.handleInputChange}
                   />
 
@@ -170,7 +184,7 @@ class ArtistAdminModal extends Component {
                     label="Street"
                     type="text"
                     name="street"
-                    placeholder={this.props.userData.artistData.street}
+                    placeholder={this.state.street}
                     onChange={this.handleInputChange}
                   />
 
@@ -179,7 +193,7 @@ class ArtistAdminModal extends Component {
                     label="City"
                     type="text"
                     name="city"
-                    placeholder={this.props.userData.artistData.city}
+                    placeholder={this.state.city}
                     onChange={this.handleInputChange}
                   />
 
@@ -188,7 +202,7 @@ class ArtistAdminModal extends Component {
                     label="State"
                     type="text"
                     name="state"
-                    placeholder={this.props.userData.artistData.state}
+                    placeholder={this.state.state}
                     onChange={this.handleInputChange}
                   />
 
@@ -197,7 +211,7 @@ class ArtistAdminModal extends Component {
                     label="Zip"
                     type="text"
                     name="zip"
-                    placeholder={this.props.userData.artistData.zip}
+                    placeholder={this.state.zip}
                     onChange={this.handleInputChange}
                   />
 
@@ -206,7 +220,7 @@ class ArtistAdminModal extends Component {
                     label="Pricing"
                     type="select"
                     name="pricing"
-                    placeholder={this.props.userData.artistData.pricing}
+                    placeholder={this.state.pricing}
                     defaultValue="1"
                     onChange={this.handleInputChange}
                   >
@@ -220,7 +234,7 @@ class ArtistAdminModal extends Component {
                     label="Specialization"
                     type="select"
                     name="specialization"
-                    placeholder={this.props.userData.specialization}
+                    placeholder={this.state.specialization}
                     defaultValue="1"
                     onChange={this.handleInputChange}
                   >

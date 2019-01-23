@@ -36,7 +36,7 @@ class Home extends Component {
     hideArtistRow: false,
     hideErr: false,
     invalidCredentials: false,
-    userName: '',
+    userName: "",
     addressVerified: true
   };
 
@@ -264,6 +264,7 @@ onLoginSubmit = event => {
         hideRow: false,
         hideUserRow: false,
         hideArtistRow: false,
+        addressVerified: true,
         email: "",
         password: "",
         selected: "",
@@ -278,7 +279,7 @@ onLoginSubmit = event => {
         specialization: "",
         pricing: ""
       });
-    }
+     }
     })
     .catch(err => console.log(err));
 
@@ -325,9 +326,7 @@ onLoginSubmit = event => {
   closeModal = () => {
     this.setState({
       hideErr: false,
-    })
-    this.setState({
-      addressVerified: true,
+      addressVerified: true
     })
   }
 
@@ -337,8 +336,11 @@ onLoginSubmit = event => {
     return (
       <div>
         <Nav name={this.state.userName} />
-        <div className="container center-align">
-          <ErrModal hideErr={this.state.hideErr} addressVerified = {this.state.addressVerified} closeModal={this.closeModal} />
+        <div className="container home center-align">
+          <ErrModal 
+            hideErr={this.state.hideErr} 
+            addressVerified = {this.state.addressVerified} 
+            closeModal={this.closeModal} />
           <h5><b>New Users</b></h5>
           <Modal
             s={12}
@@ -347,8 +349,15 @@ onLoginSubmit = event => {
             trigger={<Button className="main-btn">Create Account</Button>}
             actions={
               <div>
-                <Button className="cancel-btn" onClick={this.resetModals} flat modal="close" waves="light">Cancel</Button>
-                <Button className="signup-login" style={btnStyle} onClick={this.state.hideArtistRow ? this.artistSignUp : this.userSignUp}>Create Account</Button>
+                <Button 
+                  className="cancel-btn" 
+                  onClick={this.resetModals} 
+                  flat modal="close" 
+                  waves="light">Cancel</Button>
+                <Button 
+                  className="signup-login" 
+                  style={btnStyle} 
+                  onClick={this.state.hideArtistRow ? this.artistSignUp : this.userSignUp}>Create Account</Button>
               </div>}
           >
             <Row style={style}>
