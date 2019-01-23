@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import ArtistProfile from "./pages/ArtistProfile/ArtistProfilePage";
+import ArtistProfile from "./pages/ArtistProfile";
 // import ArtistAdmin from "./pages/ArtistAdmin/ArtistAdmin";
 import Home from "./pages/Home";
 import NoMatch from "./pages/NoMatch";
@@ -21,6 +21,6 @@ const App = () => {
       </div>
     </Router>
   );
-}
+};
 
 export default App;
