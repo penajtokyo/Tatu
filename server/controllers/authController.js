@@ -9,6 +9,13 @@ module.exports = {
       bcrypt.hash(req.body.password, salt, function(err, hash) {
         // Store hash in your password DB.
         req.body.password = hash;
+        db.Customer.findOne({
+            email: req.body.email
+          }).then(newEmail => {
+            if (newEmail !== null) {
+              console.log('Email already registered found');
+              res.json('email choice invalid');
+            } else { 
         if (req.body.type === "customer") {
           db.Customer.create(req.body).then(function(dbData) {
             var userObj = {
@@ -76,6 +83,8 @@ module.exports = {
             });
           });
         }
+      }
+    })
       });
     });
   },

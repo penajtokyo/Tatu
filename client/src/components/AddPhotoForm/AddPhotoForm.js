@@ -177,7 +177,7 @@ class AddPhotoForm extends Component {
                     defaultValue="blank"
                     onChange={this.handleInputChange}
                   >
-                    <option value="">Choose Placement...</option>
+                    <option value="">Choose Style...</option>
                     {this.state.style.map((type, index) => (
                       <option key={index} value={type}>{type}</option>
                     ))}
