@@ -28,7 +28,7 @@ export const ErrModal = (props) => {
         } else if (!emailVerified) {
           return <p className="modalMessage">Email address is already registered. Please enter new email.</p>;
         } else if (!addressVerified && emailVerified)
-        return <p className="modalMessage">The address you have entered is invalid. Please enter a different address.</p>;
+          return <p className="modalMessage">The address you have entered is invalid. Please enter a different address.</p>;
       }
      if (!props.hideErr) {
        return (
