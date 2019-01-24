@@ -68,25 +68,19 @@ class AddPhotoForm extends Component {
     const name = event.target.name;
     const value = event.target.value;
 
-    this.setState({
-      [name]: value
-    });
-  };
-
-  // Method for removing content from modals
-  resetModal = () => {
-    console.log("hi");
-    this.setState({
-      url: "",
-      style: "",
-      placement: "",
-      description: ""
-    });
+    // Method for removing content from modals
+    closeModal = () => {
+      console.log("hi");
+      this.setState({
+        url: "",
+        style: "",
+        placement: "",
+        description: ""
+      });
+    };
   };
 
   render() {
-    console.log(this.state.missingVal);
-    // {this.state.missingVal ? this.}
     return (
       <div>
         <Row>
@@ -97,22 +91,24 @@ class AddPhotoForm extends Component {
             className="center artist-container"
             id={this.props}
           >
-            <MissingValModal missingValModal={this.state.missingVal} />
+            {/* Modal button that displays on the Artist Profile page */}
+            {/* <MissingValModal missingValModal={this.state.missingVal} /> */}
             <Modal
               header="Add a photo"
               trigger={
                 <Button
-                  faicon="fa fa-plus"
                   floating
                   icon="add_a_photo"
-                  className="photo-btn"
+                  className="photo-btn fixed-action-btn"
+                  large
+                  style={{ bottom: "110px", right: "24px" }}
                 />
               }
               actions={
                 <div>
                   <Button
                     className="cancel-btn"
-                    onClick={this.resetModal}
+                    onClick={this.closeModal}
                     flat
                     modal="close"
                     waves="light"
@@ -123,7 +119,7 @@ class AddPhotoForm extends Component {
                     waves="light"
                     type="submit"
                     value="Submit"
-                    className="modal-action modal-close"
+                    className="update-btn modal-action modal-close"
                     onClick={this.handleSubmit}
                   >
                     UPDATE
@@ -154,13 +150,11 @@ class AddPhotoForm extends Component {
 
                   <Input
                     s={12}
-                    type="text"
+                    type="textarea"
                     name="description"
                     label="Description"
                     onChange={this.handleInputChange}
                   />
-
-                  {/* Submit button to add photo */}
                 </form>
               </Row>
             </Modal>

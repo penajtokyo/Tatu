@@ -37,7 +37,8 @@ class Home extends Component {
     hideErr: false,
     invalidCredentials: false,
     userName: "",
-    addressVerified: true
+    addressVerified: true,
+    emailVerified: true
   };
 
   // Method to handle user pressing enter in login form.
@@ -176,25 +177,20 @@ onLoginSubmit = event => {
       artistInfo.specialization === "" ||
       artistInfo.pricing === ""
     ) {
-      console.log("error 1");
       this.errModal();
     } else {
 
       const verifyAddress = (address) =>{
-        console.log("verify address");
        API.verifyAddress(address)
         .then(response => {
           console.log(response.data)
           if (response.data.length < 1 || response.data === undefined){
-            console.log("address is invalid");
             this.setState({
               addressVerified: false,
             });
-            console.log("error 2");
             this.errModal();
           }
           else{
-          console.log("address is valid")
           console.log("artist info obj", artistInfo);
           this.handleSignup(artistInfo);
         }
@@ -240,13 +236,12 @@ onLoginSubmit = event => {
  handleSignup = signupData => {
   API.signup(signupData)
     .then(response => {
-      console.log(response.data, "account has been created");
+      console.log(response.data);
         if (response.data === "email choice invalid") {
-          console.log("duplicate email");
-          return false;
-          // this.setState({
-          //   invalidCredentials: true
-          // });
+          this.setState({
+            emailVerified: false
+          });
+          this.errModal();
         }
         else {
       if (response.data.type === "customer") {
@@ -339,8 +334,9 @@ onLoginSubmit = event => {
         <div className="container home center-align">
           <ErrModal 
             hideErr={this.state.hideErr} 
-            addressVerified = {this.state.addressVerified} 
-            closeModal={this.closeModal} />
+            addressVerified={this.state.addressVerified} 
+            closeModal={this.closeModal}
+            emailVerified={this.state.emailVerified} />
           <h5><b>New Users</b></h5>
           <Modal
             s={12}

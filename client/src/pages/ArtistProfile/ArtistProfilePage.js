@@ -117,6 +117,7 @@ class ArtistProfilePage extends Component {
   // Submit form event handler that checks to see if a user has modified any of the data in the fields on the edit profile form
   handleSubmit = event => {
     event.preventDefault();
+    console.log("This ran");
     if (
       this.state.firstName ||
       this.state.lastName ||
@@ -141,21 +142,20 @@ class ArtistProfilePage extends Component {
         <Container>
           <Row>
             <Col s={12} m={12} l={12} className="artist-container">
-            <h3 className="artist">Artist</h3>
-              <h4>{`${this.state.firstName}  ${this.state.lastName}`}</h4>
-            <h3 className="artist-header">Information</h3>
-              <h4>{`${this.state.location} ${this.state.city} ${
+              <h5 className="artist-content"><span className="artist-category">Artist:</span> {`${this.state.firstName}  ${this.state.lastName}`}</h5>
+              <h5 className="artist-content"><span className="artist-category">Location:</span>  {`${this.state.location}, ${this.state.city} ${
                 this.state.state
-              } ${this.state.zip}`}</h4>
-              <h4>{this.state.pricing}</h4>
-              <h4>{this.state.specialization}</h4>
-            <h3 className="artist-header">Gallery</h3>
+              } ${this.state.zip}`}</h5>
+              <h5 className="artist-content"><span className="artist-category">Pricing:</span>  {this.state.pricing}</h5>
+              <h5 className="artist-content"><span className="artist-category">Speciality:</span>  {this.state.specialization}</h5>
+            <h5 className="artist-header">Gallery</h5>
             </Col>
           </Row>
           <Row>
             <Images id={this.state._id} />
           </Row>
         </Container>
+
         <Row>
           <Col s={12} m={12} l={12} className="center" id={this.props}>
             <AddPhotoForm id={this.state._id}/>
@@ -163,7 +163,7 @@ class ArtistProfilePage extends Component {
               <Modal
                 header="Edit Profile"
                 trigger={
-                  <Button faicon="fa fa-plus" floating icon="edit" className="profile-btn"/>
+                  <Button floating icon="edit" className="profile-btn fixed-action-btn" large style={{bottom: '45px', right: '24px'}} />
                 }
                 actions={
                   <div>
@@ -172,7 +172,7 @@ class ArtistProfilePage extends Component {
                       waves="light"
                       type="submit"
                       value="Submit"
-                      className="modal-action modal-close"
+                      className="update-btn modal-action modal-close"
                       onClick={this.handleSubmit}
                     >
                       UPDATE
@@ -256,7 +256,7 @@ class ArtistProfilePage extends Component {
                     />
                     <SelectStyle handleSelection={this.handleInputChange} />
                     <Input
-                      s={12}
+                      s={12} m={6}
                       type="select"
                       name="pricing"
                       placeholder={this.state.pricing}
@@ -264,8 +264,8 @@ class ArtistProfilePage extends Component {
                       onChange={this.handleInputChange}
                     >
                       <option value="">Choose a Pricing Structure...</option>
-                      <option value="piece">Piece</option>
-                      <option value="hourly">Hourly</option>
+                      <option value="Piece">Piece</option>
+                      <option value="Hourly">Hourly</option>
                     </Input>
                   </form>
                 </Row>
