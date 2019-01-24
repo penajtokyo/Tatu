@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Modal, Button, Col, Row } from "react-materialize";
+import { Modal, Button } from "react-materialize";
 
 class MissingVal extends Component {
   render() {

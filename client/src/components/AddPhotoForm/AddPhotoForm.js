@@ -11,9 +11,9 @@ class AddPhotoForm extends Component {
     url: "",
     style: "",
     placement: "",
-    description: "",
+    description: ""
     // Setting the default state === to false
-    missingVal: false
+    // missingVal: false
   };
 
   // Method that sets the photo data that is being shipped to the DB
@@ -52,33 +52,37 @@ class AddPhotoForm extends Component {
       this.handleAddPhoto();
       window.location.reload();
     } else {
-      // alert("Oops! It looks like something's missing.");
-      this.handleMissingVal();
+      alert("Oops! It looks like something's missing.");
+      // this.handleMissingVal();
     }
   };
 
-  handleMissingVal = () => {
-    //   // this.errModal();
-    this.setState({
-      missingVal: true
-    });
-  };
+  // handleMissingVal = () => {
+  //   //   // this.errModal();
+  //   this.setState({
+  //     missingVal: true
+  //   });
+  // };
 
   // Event handler to set the form data to corresponding state key's
   handleInputChange = event => {
     const name = event.target.name;
     const value = event.target.value;
 
-    // Method for removing content from modals
-    closeModal = () => {
-      console.log("hi");
-      this.setState({
-        url: "",
-        style: "",
-        placement: "",
-        description: ""
-      });
-    };
+    this.setState({
+      [name]: value
+    });
+  };
+
+  // Method for removing content from modals
+  closeModal = () => {
+    console.log("hi");
+    this.setState({
+      url: "",
+      style: "",
+      placement: "",
+      description: ""
+    });
   };
 
   render() {
@@ -93,7 +97,6 @@ class AddPhotoForm extends Component {
             id={this.props}
           >
             {/* Modal button that displays on the Artist Profile page */}
-            {/* <MissingValModal missingValModal={this.state.missingVal} /> */}
             <Modal
               header="Add a photo"
               trigger={

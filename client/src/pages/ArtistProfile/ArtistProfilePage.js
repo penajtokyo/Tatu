@@ -1,19 +1,11 @@
 import React, { Component } from "react";
-import {
-  Container,
-  Col,
-  Row,
-  Button,
-  Modal,
-  Input
-} from "react-materialize";
+import { Container, Col, Row, Button, Modal, Input } from "react-materialize";
 import Images from "../../components/Images/Images";
 import AddPhotoForm from "../../components/AddPhotoForm/AddPhotoForm";
 // import ArtistAdminModal from "../../components/ArtistAdminModal/ArtistAdminModal";
 import SelectStyle from "../../components/SelectStyle";
 import API from "../../utils/API";
 import Nav from "../../components/Nav";
-
 
 class ArtistProfilePage extends Component {
   state = {
@@ -37,6 +29,7 @@ class ArtistProfilePage extends Component {
     this.setSessionData();
   }
   setSessionData = () => {
+    console.log(this.props.location.state.detail.artistData.location);
     this.setState({
       id: this.props.location.state.detail.artistData._id,
       firstName: this.props.location.state.detail.firstName,
@@ -85,6 +78,7 @@ class ArtistProfilePage extends Component {
       pricing: this.state.pricing,
       specialization: this.state.specialization
     };
+    console.log(dataToUpdate);
     // Call to utils.API.updateArtistInfo
     API.updateArtistInfo(dataToUpdate)
       .then(res => {
@@ -137,18 +131,30 @@ class ArtistProfilePage extends Component {
 
   render() {
     return (
-    <div>
-      <Nav name={this.state.userName} handleLogout={this.handleLogout} />
+      <div>
+        <Nav name={this.state.userName} handleLogout={this.handleLogout} />
         <Container>
           <Row>
             <Col s={12} m={12} l={12} className="artist-container">
-              <h5 className="artist-content"><span className="artist-category">Artist:</span> {`${this.state.firstName}  ${this.state.lastName}`}</h5>
-              <h5 className="artist-content"><span className="artist-category">Location:</span>  {`${this.state.location}, ${this.state.city} ${
-                this.state.state
-              } ${this.state.zip}`}</h5>
-              <h5 className="artist-content"><span className="artist-category">Pricing:</span>  {this.state.pricing}</h5>
-              <h5 className="artist-content"><span className="artist-category">Speciality:</span>  {this.state.specialization}</h5>
-            <h5 className="artist-header">Gallery</h5>
+              <h5 className="artist-content">
+                <span className="artist-category">Artist:</span>{" "}
+                {`${this.state.firstName}  ${this.state.lastName}`}
+              </h5>
+              <h5 className="artist-content">
+                <span className="artist-category">Location:</span>{" "}
+                {`${this.state.location}, ${this.state.city} ${
+                  this.state.state
+                } ${this.state.zip}`}
+              </h5>
+              <h5 className="artist-content">
+                <span className="artist-category">Pricing:</span>{" "}
+                {this.state.pricing}
+              </h5>
+              <h5 className="artist-content">
+                <span className="artist-category">Speciality:</span>{" "}
+                {this.state.specialization}
+              </h5>
+              <h5 className="artist-header">Gallery</h5>
             </Col>
           </Row>
           <Row>
@@ -158,121 +164,136 @@ class ArtistProfilePage extends Component {
 
         <Row>
           <Col s={12} m={12} l={12} className="center" id={this.props}>
-            <AddPhotoForm id={this.state._id}/>
-              {/* Modal button that displays on the Artist Profile page */}
-              <Modal
-                header="Edit Profile"
-                trigger={
-                  <Button floating icon="edit" className="profile-btn fixed-action-btn" large style={{bottom: '45px', right: '24px'}} />
-                }
-                actions={
-                  <div>
-                    <Button className="cancel-btn" flat modal="close" waves="light">Cancel</Button>
-                    <Button
-                      waves="light"
-                      type="submit"
-                      value="Submit"
-                      className="update-btn modal-action modal-close"
-                      onClick={this.handleSubmit}
-                    >
-                      UPDATE
-                    </Button>
-                  </div>}
-              >
-                <Row>
-                  {/* Edit profile form */}
-                  <form onSubmit={this.handleSubmit}>
-                    <Input
-                      label="First Name"
-                      s={6}
-                      type="text"
-                      name="firstName"
-                      placeholder={this.state.firstName}
-                      onChange={this.handleInputChange}
-                    />
-                    <Input
-                      label="Last Name"
-                      s={6}
-                      type="text"
-                      name="lastName"
-                      placeholder={this.state.lastName}
-                      onChange={this.handleInputChange}
-                    />
-                    <Input
-                      label="Email"
-                      s={12}
-                      type="text"
-                      name="email"
-                      placeholder={this.state.email}
-                      onChange={this.handleInputChange}
-                    />
-                    <Input
-                      label="Phone Number"
-                      s={12}
-                      type="text"
-                      name="phone"
-                      placeholder={this.state.phone}
-                      onChange={this.handleInputChange}
-                    />
-                    <Input
-                      label="Location"
-                      s={6}
-                      type="text"
-                      name="location"
-                      placeholder={this.state.location}
-                      onChange={this.handleInputChange}
-                    />
-                    <Input
-                      label="Street"
-                      s={6}
-                      type="text"
-                      name="street"
-                      placeholder={this.state.street}
-                      onChange={this.handleInputChange}
-                    />
-                    <Input
-                      label="City"
-                      s={6}
-                      type="text"
-                      name="city"
-                      placeholder={this.state.city}
-                      onChange={this.handleInputChange}
-                    />
-                    <Input
-                      label="State"
-                      s={2}
-                      type="text"
-                      name="state"
-                      placeholder={this.state.state}
-                      onChange={this.handleInputChange}
-                    />
-                    <Input
-                      label="Zip"
-                      s={4}
-                      type="text"
-                      name="zip"
-                      placeholder={this.state.zip}
-                      onChange={this.handleInputChange}
-                    />
-                    <SelectStyle handleSelection={this.handleInputChange} />
-                    <Input
-                      s={12} m={6}
-                      type="select"
-                      name="pricing"
-                      placeholder={this.state.pricing}
-                      defaultValue="1"
-                      onChange={this.handleInputChange}
-                    >
-                      <option value="">Choose a Pricing Structure...</option>
-                      <option value="Piece">Piece</option>
-                      <option value="Hourly">Hourly</option>
-                    </Input>
-                  </form>
-                </Row>
-              </Modal>
-            </Col>
-          </Row>
-    </div>
+            <AddPhotoForm id={this.state._id} />
+            {/* Modal button that displays on the Artist Profile page */}
+            <Modal
+              header="Edit Profile"
+              trigger={
+                <Button
+                  floating
+                  icon="edit"
+                  className="profile-btn fixed-action-btn"
+                  large
+                  style={{ bottom: "45px", right: "24px" }}
+                />
+              }
+              actions={
+                <div>
+                  <Button
+                    className="cancel-btn"
+                    flat
+                    modal="close"
+                    waves="light"
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    waves="light"
+                    type="submit"
+                    value="Submit"
+                    className="update-btn modal-action modal-close"
+                    onClick={this.handleSubmit}
+                  >
+                    UPDATE
+                  </Button>
+                </div>
+              }
+            >
+              <Row>
+                {/* Edit profile form */}
+                <form>
+                  <Input
+                    label="First Name"
+                    s={6}
+                    type="text"
+                    name="firstName"
+                    placeholder={this.state.firstName}
+                    onChange={this.handleInputChange}
+                  />
+                  <Input
+                    label="Last Name"
+                    s={6}
+                    type="text"
+                    name="lastName"
+                    placeholder={this.state.lastName}
+                    onChange={this.handleInputChange}
+                  />
+                  <Input
+                    label="Email"
+                    s={12}
+                    type="text"
+                    name="email"
+                    placeholder={this.state.email}
+                    onChange={this.handleInputChange}
+                  />
+                  <Input
+                    label="Phone Number"
+                    s={12}
+                    type="text"
+                    name="phone"
+                    placeholder={this.state.phone}
+                    onChange={this.handleInputChange}
+                  />
+                  <Input
+                    label="Location"
+                    s={6}
+                    type="text"
+                    name="location"
+                    placeholder={this.state.location}
+                    onChange={this.handleInputChange}
+                  />
+                  <Input
+                    label="Street"
+                    s={6}
+                    type="text"
+                    name="street"
+                    placeholder={this.state.street}
+                    onChange={this.handleInputChange}
+                  />
+                  <Input
+                    label="City"
+                    s={6}
+                    type="text"
+                    name="city"
+                    placeholder={this.state.city}
+                    onChange={this.handleInputChange}
+                  />
+                  <Input
+                    label="State"
+                    s={2}
+                    type="text"
+                    name="state"
+                    placeholder={this.state.state}
+                    onChange={this.handleInputChange}
+                  />
+                  <Input
+                    label="Zip"
+                    s={4}
+                    type="text"
+                    name="zip"
+                    placeholder={this.state.zip}
+                    onChange={this.handleInputChange}
+                  />
+                  <SelectStyle handleSelection={this.handleInputChange} />
+                  <Input
+                    s={12}
+                    m={6}
+                    type="select"
+                    name="pricing"
+                    placeholder={this.state.pricing}
+                    defaultValue="1"
+                    onChange={this.handleInputChange}
+                  >
+                    <option value="">Choose a Pricing Structure...</option>
+                    <option value="Piece">Piece</option>
+                    <option value="Hourly">Hourly</option>
+                  </Input>
+                </form>
+              </Row>
+            </Modal>
+          </Col>
+        </Row>
+      </div>
     );
   }
 }
