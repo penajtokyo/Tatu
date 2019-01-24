@@ -26,7 +26,7 @@ export const ErrModal = (props) => {
           return <p className="modalMessage">All fields are required, please fill in the empty field(s)</p>
           ;
         }
-        return <p className="modalMessage">The address you have entered is invalid. Please enter a different address</p>;
+        return <p className="modalMessage">The address you have entered is invalid. Please enter a different address.</p>;
       }
      if (!props.hideErr) {
        return (
