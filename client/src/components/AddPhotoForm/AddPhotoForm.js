@@ -4,6 +4,7 @@ import SelectPlacement from "../SelectPlacement";
 import SelectStyle from "../SelectStyle";
 import API from "../../utils/API";
 // import MissingValModal from "../Modals/MissingVal";
+// import closeModal from '../Modals/'
 
 class AddPhotoForm extends Component {
   state = {

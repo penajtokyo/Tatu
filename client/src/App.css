@@ -13,10 +13,6 @@ p {
   text-align: center;
 }
 
-h4 {
-  color: black;
-}
-
 .home {
   margin-top: 7%;
   align-items: center;
@@ -92,7 +88,7 @@ h4 {
 
 /* this is for the forms */
 
-.login-btn, .cancel-btn, .main-btn {
+.login-btn, .cancel-btn, .main-btn, .update-btn {
   padding: 0px 15px 0px 15px;
 }
 
@@ -118,7 +114,9 @@ h4 {
 input[type=text]:not(.browser-default),
 input[type=email]:not(.browser-default),
 input[type=password]:not(.browser-default),
-input[type=number]:not(.browser-default) {
+input[type=number]:not(.browser-default),
+input[type=url]:not(.browser-default),
+input[type=textarea]:not(.browser-default) {
   border-bottom:1px solid white;
   color: white;
 }
@@ -128,6 +126,8 @@ input[type=text]:not(.browser-default):focus:not([readonly]),
 input[type=password]:not(.browser-default):focus:not([readonly]),
 input[type=email]:not(.browser-default):focus:not([readonly]),
 input[type=number]:not(.browser-default):focus:not([readonly]),
+input[type=url]:not(.browser-default):focus:not([readonly]),
+input[type=textarea]:not(.browser-default):focus:not([readonly]),
 .select-wrapper input.select-dropdown:focus  {
   border-bottom: 1px solid #BF691E;
   box-shadow: 0 1px 0 0 #BF691E;
@@ -137,7 +137,9 @@ input[type=number]:not(.browser-default):focus:not([readonly]),
 input[type=text]:not(.browser-default):focus:not([readonly])+label,
 input[type=password]:not(.browser-default):focus:not([readonly])+label,
 input[type=email]:not(.browser-default):focus:not([readonly])+label,
-input[type=number]:not(.browser-default):focus:not([readonly])+label {
+input[type=number]:not(.browser-default):focus:not([readonly])+label,
+input[type=url]:not(.browser-default):focus:not([readonly])+label,
+input[type=textarea]:not(.browser-default):focus:not([readonly])+label {
   color: #BF691E;
 }
 
@@ -182,14 +184,16 @@ input[type=number]:not(.browser-default):focus:not([readonly])+label {
     text-align: center;
 }
 
-.artist {
+.artist-content {
   color: white;
-  text-decoration: underline;
-  margin-top: 0;
 }
+
+.artist-category {
+  color: #516086;
+}
+
 .artist-header {
   color: white;
-  text-decoration: underline;
   margin-top: 30px;
 }
 
@@ -200,6 +204,15 @@ footer.page-footer {
 
 .profile-btn, .photo-btn {
   float: right;
+  padding: 0;
+}
+
+/* .profile-btn {
+  background-color: #2a303e;
+} */
+
+.photo-btn {
+  background-color: #BF691E;
 }
 
 /* adjustments for mobile first */
@@ -222,8 +235,8 @@ footer.page-footer {
     background-image: url('./images/tattooarms_xsm_bgi.jpg');
   }
 
-  h3, h4 {
-    font-size: 2em;
+  h5 {
+    font-size: 1.5em;
   }
 
   .password-btn {
@@ -241,8 +254,8 @@ footer.page-footer {
     margin-left: 0px;
   }
 
-  h3, h4 {
-    font-size: 2em;
+  h5 {
+    font-size: 1.5em;
   }
 
   body {
