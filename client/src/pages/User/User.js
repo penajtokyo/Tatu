@@ -138,9 +138,9 @@ class User extends Component {
                 <Results
                   imagesData={this.state.searchResults}
                 />) : (
-                  <Gallery
-                    images={this.state.allImages}
-                  />
+                <Gallery
+                  images={this.state.allImages}
+                />
                 )}
             </Col>
           </Row>

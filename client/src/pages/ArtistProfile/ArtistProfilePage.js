@@ -6,6 +6,7 @@ import AddPhotoForm from "../../components/AddPhotoForm/AddPhotoForm";
 import SelectStyle from "../../components/SelectStyle";
 import API from "../../utils/API";
 import Nav from "../../components/Nav";
+import "./ArtistProfile.css";
 
 class ArtistProfilePage extends Component {
   state = {
@@ -135,26 +136,27 @@ class ArtistProfilePage extends Component {
         <Nav name={this.state.userName} handleLogout={this.handleLogout} />
         <Container>
           <Row>
-            <Col s={12} m={12} l={12} className="artist-container">
+            <Col s={12} className="artist-container">
               <h5 className="artist-content">
-                <span className="artist-category">Artist:</span>{" "}
+                <span className="artist-category" />{" "}
                 {`${this.state.firstName}  ${this.state.lastName}`}
               </h5>
               <h5 className="artist-content">
-                <span className="artist-category">Location:</span>{" "}
+                <span className="artist-category">Your Location:</span>{" "}
                 {`${this.state.location}, ${this.state.city} ${
                   this.state.state
                 } ${this.state.zip}`}
               </h5>
               <h5 className="artist-content">
-                <span className="artist-category">Pricing:</span>{" "}
+                <span className="artist-category">How You Charge:</span>{" "}
                 {this.state.pricing}
               </h5>
               <h5 className="artist-content">
-                <span className="artist-category">Speciality:</span>{" "}
+                <span className="artist-category">Your Speciality:</span>{" "}
                 {this.state.specialization}
               </h5>
-              <h5 className="artist-header">Gallery</h5>
+              <hr id="divider" />
+              <h4 className="artist-header">Your Gallery</h4>
             </Col>
           </Row>
           <Row>
@@ -163,7 +165,7 @@ class ArtistProfilePage extends Component {
         </Container>
 
         <Row>
-          <Col s={12} m={12} l={12} className="center" id={this.props}>
+          <Col s={12} className="center" id={this.props}>
             <AddPhotoForm id={this.state._id} />
             {/* Modal button that displays on the Artist Profile page */}
             <Modal
@@ -194,100 +196,116 @@ class ArtistProfilePage extends Component {
                     className="update-btn modal-action modal-close"
                     onClick={this.handleSubmit}
                   >
-                    UPDATE
+                    Update
                   </Button>
                 </div>
               }
             >
               <Row>
                 {/* Edit profile form */}
-                <form>
-                  <Input
-                    label="First Name"
-                    s={6}
-                    type="text"
-                    name="firstName"
-                    placeholder={this.state.firstName}
-                    onChange={this.handleInputChange}
-                  />
-                  <Input
-                    label="Last Name"
-                    s={6}
-                    type="text"
-                    name="lastName"
-                    placeholder={this.state.lastName}
-                    onChange={this.handleInputChange}
-                  />
-                  <Input
-                    label="Email"
-                    s={12}
-                    type="text"
-                    name="email"
-                    placeholder={this.state.email}
-                    onChange={this.handleInputChange}
-                  />
-                  <Input
-                    label="Phone Number"
-                    s={12}
-                    type="text"
-                    name="phone"
-                    placeholder={this.state.phone}
-                    onChange={this.handleInputChange}
-                  />
-                  <Input
-                    label="Location"
-                    s={6}
-                    type="text"
-                    name="location"
-                    placeholder={this.state.location}
-                    onChange={this.handleInputChange}
-                  />
-                  <Input
-                    label="Street"
-                    s={6}
-                    type="text"
-                    name="street"
-                    placeholder={this.state.street}
-                    onChange={this.handleInputChange}
-                  />
-                  <Input
-                    label="City"
-                    s={6}
-                    type="text"
-                    name="city"
-                    placeholder={this.state.city}
-                    onChange={this.handleInputChange}
-                  />
-                  <Input
-                    label="State"
-                    s={2}
-                    type="text"
-                    name="state"
-                    placeholder={this.state.state}
-                    onChange={this.handleInputChange}
-                  />
-                  <Input
-                    label="Zip"
-                    s={4}
-                    type="text"
-                    name="zip"
-                    placeholder={this.state.zip}
-                    onChange={this.handleInputChange}
-                  />
-                  <SelectStyle handleSelection={this.handleInputChange} />
-                  <Input
-                    s={12}
-                    m={6}
-                    type="select"
-                    name="pricing"
-                    placeholder={this.state.pricing}
-                    defaultValue="1"
-                    onChange={this.handleInputChange}
-                  >
-                    <option value="">Choose a Pricing Structure...</option>
-                    <option value="Piece">Piece</option>
-                    <option value="Hourly">Hourly</option>
-                  </Input>
+                <form onSubmit={this.handleSubmit}>
+                  <Row>
+                    <Input
+                      s={12}
+                      m={6}
+                      label="First Name"
+                      type="text"
+                      name="firstName"
+                      placeholder={this.state.firstName}
+                      onChange={this.handleInputChange}
+                    />
+                    <Input
+                      s={12}
+                      m={6}
+                      label="Last Name"
+                      type="text"
+                      name="lastName"
+                      placeholder={this.state.lastName}
+                      onChange={this.handleInputChange}
+                    />
+                  </Row>
+                  <Row>
+                    <Input
+                      s={12}
+                      m={6}
+                      label="Email"
+                      type="text"
+                      name="email"
+                      placeholder={this.state.email}
+                      onChange={this.handleInputChange}
+                    />
+                    <Input
+                      s={12}
+                      m={6}
+                      label="Phone Number"
+                      type="text"
+                      name="phone"
+                      placeholder={this.state.phone}
+                      onChange={this.handleInputChange}
+                    />
+                  </Row>
+                  <Row>
+                    <Input
+                      s={12}
+                      m={6}
+                      label="Location"
+                      type="text"
+                      name="location"
+                      placeholder={this.state.location}
+                      onChange={this.handleInputChange}
+                    />
+                    <Input
+                      s={12}
+                      m={6}
+                      label="Street"
+                      type="text"
+                      name="street"
+                      placeholder={this.state.street}
+                      onChange={this.handleInputChange}
+                    />
+                  </Row>
+                  <Row>
+                    <Input
+                      label="City"
+                      s={6}
+                      type="text"
+                      name="city"
+                      placeholder={this.state.city}
+                      onChange={this.handleInputChange}
+                    />
+                    <Input
+                      label="State"
+                      s={2}
+                      type="text"
+                      name="state"
+                      placeholder={this.state.state}
+                      onChange={this.handleInputChange}
+                    />
+                    <Input
+                      label="Zip"
+                      s={4}
+                      type="text"
+                      name="zip"
+                      placeholder={this.state.zip}
+                      onChange={this.handleInputChange}
+                    />
+                  </Row>
+                  <Row>
+                    <SelectStyle handleSelection={this.handleInputChange} />
+                    <Input
+                      s={12}
+                      m={6}
+                      type="select"
+                      name="pricing"
+                      placeholder={this.state.pricing}
+                      defaultValue="1"
+                      onChange={this.handleInputChange}
+                    >
+                      <option value="">Choose a Pricing Structure...</option>
+                      <option value="Piece">Piece</option>
+                      <option value="Hourly">Hourly</option>
+                    </Input>
+                  </Row>
                 </form>
               </Row>
             </Modal>

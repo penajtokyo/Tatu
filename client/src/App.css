@@ -13,12 +13,6 @@ p {
   text-align: center;
 }
 
-.home {
-  margin-top: 7%;
-  align-items: center;
-  text-align: center;
-}
-
 /* buttons */
 .btn {
   background-color: #344743;
@@ -78,13 +72,13 @@ p {
   padding-right: 5px;
 }
 
-.profile-edit {
+/* .profile-edit {
   background-color: #BF691E;
-}
+} */
 
-.add-photo {
+/* .add-photo {
   background-color: #344743;
-}
+} */
 
 /* this is for the forms */
 
@@ -128,6 +122,7 @@ input[type=email]:not(.browser-default):focus:not([readonly]),
 input[type=number]:not(.browser-default):focus:not([readonly]),
 input[type=url]:not(.browser-default):focus:not([readonly]),
 input[type=textarea]:not(.browser-default):focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]),
 .select-wrapper input.select-dropdown:focus  {
   border-bottom: 1px solid #BF691E;
   box-shadow: 0 1px 0 0 #BF691E;
@@ -139,7 +134,8 @@ input[type=password]:not(.browser-default):focus:not([readonly])+label,
 input[type=email]:not(.browser-default):focus:not([readonly])+label,
 input[type=number]:not(.browser-default):focus:not([readonly])+label,
 input[type=url]:not(.browser-default):focus:not([readonly])+label,
-input[type=textarea]:not(.browser-default):focus:not([readonly])+label {
+input[type=textarea]:not(.browser-default):focus:not([readonly])+label,
+textarea.materialize-textarea:focus:not([readonly])+label {
   color: #BF691E;
 }
 
@@ -153,7 +149,6 @@ input[type=textarea]:not(.browser-default):focus:not([readonly])+label {
   opacity: 1;
   left: 100px;
 }
-
 
 /* this changes the line color to match the text color (below) and makes the completed font color white */
 .no-credentials input[type=text]:not(.browser-default):focus:not([readonly]),
@@ -173,57 +168,35 @@ input[type=textarea]:not(.browser-default):focus:not([readonly])+label {
   color: red;
 }
 
-.input-field label:not(.label-icon).active {
+/* adjust label height for all non textarea inputs */
+/* .input-field label:not(.label-icon).active {
   transform: translateY(-40%);
+} */
+
+/* adjust label height for text area */
+.input-field>label:not(.label-icon).active {
+  transform: translateY(-30%);
 }
 
-/* styling on artist page */
-.artist-container {
-    margin-top: 2%;
-    align-items: center;
-    text-align: center;
-}
-
-.artist-content {
-  color: white;
-}
-
-.artist-category {
-  color: #516086;
-}
-
-.artist-header {
-  color: white;
-  margin-top: 30px;
-}
-
-footer.page-footer {
-  background-color: #2a303e;
-  height: 100px;
-}
-
+/* artist page */
 .profile-btn, .photo-btn {
   float: right;
   padding: 0;
+}
+
+.photo-btn {
+  background-color: #BF691E;
 }
 
 /* .profile-btn {
   background-color: #2a303e;
 } */
 
-.photo-btn {
-  background-color: #BF691E;
-}
-
 /* adjustments for mobile first */
 @media only screen and (max-width: 768px) {
   body {
     background-image: url('./images/tattooarms_sm_bgi.jpg');
   }
-  /* img.tattooImage {
-    height: 440px;
-    width: 410px;
-  } */
 
   .password-btn {
     margin-left: 0px;

@@ -13,12 +13,14 @@ const SearchForm = (props) => {
         </Col>
       </Row>
       <Row>
-        <Col s={12} m={6}>
-          <SelectStyle handleSelection={props.handleSelection} />
-        </Col>
-        <Col s={12} m={6}>
-          <SelectPlacement handleSelection={props.handleSelection} />
-        </Col>
+        <SelectStyle 
+          handleSelection={props.handleSelection} 
+          style={props.style}
+        />
+        <SelectPlacement 
+          handleSelection={props.handleSelection} 
+          placement={props.placement}
+        />
       </Row>
       <Row>
         <p><Button onClick={props.handleSubmit}>Submit</Button></p>

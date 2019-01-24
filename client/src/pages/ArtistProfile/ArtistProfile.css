@@ -1,0 +1,26 @@
+.artist-container {
+    margin-top: 2%;
+    align-items: center;
+    text-align: center;
+}
+
+footer.page-footer {
+  background-color: #2a303e;
+  height: 100px;
+}
+
+#divider {
+    margin: 3% 0 1% 0;
+}
+
+.artist-content {
+    color: white;
+}
+  
+.artist-category {
+    color: #516086;
+}
+  
+.artist-header {
+    margin-top: 30px;
+}

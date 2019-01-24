@@ -5,9 +5,10 @@ import {
   ArtistModalForm
 } from "../../components/Modals";
 import { LoginForm } from "../../components/LoginForm";
-import { Modal, Button, Input, Row } from "react-materialize";
+import { Button, Input, Modal, Row } from "react-materialize";
 import Nav from '../../components/Nav';
 import API from "../../utils/API";
+import "./Home.css";
 
 //variable for smarty streets api
 const url = "https://us-street.api.smartystreets.com/street-address?auth-id=7065599766197186&candidates=1&match=strict";
@@ -340,7 +341,6 @@ onLoginSubmit = event => {
           <h5><b>New Users</b></h5>
           <Modal
             s={12}
-            m={12}
             header="Create New Account"
             trigger={<Button className="main-btn">Create Account</Button>}
             actions={
@@ -401,7 +401,9 @@ onLoginSubmit = event => {
               capitalize={this.capitalize}
             />
           </Modal>
+
           <hr />
+
           <h5><b>Existing Users</b></h5>
           <LoginForm
             loginEmail={this.state.loginEmail}

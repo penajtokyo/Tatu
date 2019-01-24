@@ -42,9 +42,11 @@ class Images extends Component {
                 title={image.style}
                 reveal={
                   <div>
-                    <p>{image.style}</p>
-                    <p>{image.placement}</p>
-                    <p>{image.description}</p>
+                    <p>Style: {image.style}<br />
+                      Placement: {image.placement}
+                    </p>
+                    <hr />
+                    <p>Description: {image.description}</p>
                   </div>
                 }
               />
