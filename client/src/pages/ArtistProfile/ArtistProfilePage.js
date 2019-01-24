@@ -13,6 +13,7 @@ import AddPhotoForm from "../../components/AddPhotoForm/AddPhotoForm";
 import SelectStyle from "../../components/SelectStyle";
 import API from "../../utils/API";
 import Nav from "../../components/Nav";
+import "./ArtistProfile.css";
 
 
 class ArtistProfilePage extends Component {
@@ -135,101 +136,110 @@ class ArtistProfilePage extends Component {
     }
   };
 
+
   render() {
     return (
     <div>
       <Nav name={this.state.userName} handleLogout={this.handleLogout} />
-        <Container>
-          <Row>
-            <Col s={12} m={12} l={12} className="artist-container">
-              <h5 className="artist-content"><span className="artist-category">Artist:</span> {`${this.state.firstName}  ${this.state.lastName}`}</h5>
-              <h5 className="artist-content"><span className="artist-category">Location:</span>  {`${this.state.location}, ${this.state.city} ${
-                this.state.state
-              } ${this.state.zip}`}</h5>
-              <h5 className="artist-content"><span className="artist-category">Pricing:</span>  {this.state.pricing}</h5>
-              <h5 className="artist-content"><span className="artist-category">Speciality:</span>  {this.state.specialization}</h5>
-            <h5 className="artist-header">Gallery</h5>
-            </Col>
-          </Row>
-          <Row>
-            <Images id={this.state._id} />
-          </Row>
-        </Container>
-
+      <Container>
         <Row>
-          <Col s={12} m={12} l={12} className="center" id={this.props}>
-            <AddPhotoForm id={this.state._id}/>
-              {/* Modal button that displays on the Artist Profile page */}
-              <Modal
-                header="Edit Profile"
-                trigger={
-                  <Button floating icon="edit" className="profile-btn fixed-action-btn" large style={{bottom: '45px', right: '24px'}} />
-                }
-                actions={
-                  <div>
-                    <Button className="cancel-btn" flat modal="close" waves="light">Cancel</Button>
-                    <Button
-                      waves="light"
-                      type="submit"
-                      value="Submit"
-                      className="update-btn modal-action modal-close"
-                      onClick={this.handleSubmit}
-                    >
-                      UPDATE
-                    </Button>
-                  </div>}
-              >
-                <Row>
-                  {/* Edit profile form */}
-                  <form onSubmit={this.handleSubmit}>
+          <Col s={12} className="artist-container">
+            <h5 className="artist-content"><span className="artist-category"></span> {`${this.state.firstName}  ${this.state.lastName}`}</h5>
+            <h5 className="artist-content"><span className="artist-category">Your Location:</span>  {`${this.state.location}, ${this.state.city} ${
+              this.state.state
+            } ${this.state.zip}`}</h5>
+            <h5 className="artist-content"><span className="artist-category">How You Charge:</span>  {this.state.pricing}</h5>
+            <h5 className="artist-content"><span className="artist-category">Your Speciality:</span>  {this.state.specialization}</h5>
+          <hr id="divider" />
+          <h4 className="artist-header">Your Gallery</h4>
+          </Col>
+        </Row>
+        <Row>
+          <Images id={this.state._id} />
+        </Row>
+      </Container>
+
+      <Row>
+        <Col s={12} className="center" id={this.props}>
+          <AddPhotoForm id={this.state._id}/>
+            {/* Modal button that displays on the Artist Profile page */}
+            <Modal
+              header="Edit Profile"
+              trigger={
+                <Button floating icon="edit" className="profile-btn fixed-action-btn" large style={{bottom: '45px', right: '24px'}} />
+              }
+              actions={
+                <div>
+                  <Button className="cancel-btn" flat modal="close" waves="light">Cancel</Button>
+                  <Button
+                    waves="light"
+                    type="submit"
+                    value="Submit"
+                    className="update-btn modal-action modal-close"
+                    onClick={this.handleSubmit}
+                  >
+                    Update
+                  </Button>
+                </div>}
+            >
+              <Row>
+                {/* Edit profile form */}
+                <form onSubmit={this.handleSubmit}>
+                  <Row>
                     <Input
+                      s={12} m={6}
                       label="First Name"
-                      s={6}
                       type="text"
                       name="firstName"
                       placeholder={this.state.firstName}
                       onChange={this.handleInputChange}
                     />
                     <Input
+                      s={12} m={6}
                       label="Last Name"
-                      s={6}
                       type="text"
                       name="lastName"
                       placeholder={this.state.lastName}
                       onChange={this.handleInputChange}
                     />
+                  </Row>
+                  <Row>
                     <Input
+                      s={12} m={6}
                       label="Email"
-                      s={12}
                       type="text"
                       name="email"
                       placeholder={this.state.email}
                       onChange={this.handleInputChange}
                     />
                     <Input
+                      s={12} m={6}
                       label="Phone Number"
-                      s={12}
                       type="text"
                       name="phone"
                       placeholder={this.state.phone}
                       onChange={this.handleInputChange}
                     />
+                  </Row>
+                  <Row>
                     <Input
+                      s={12} m={6}
                       label="Location"
-                      s={6}
                       type="text"
                       name="location"
                       placeholder={this.state.location}
                       onChange={this.handleInputChange}
                     />
                     <Input
+                      s={12} m={6}
                       label="Street"
-                      s={6}
                       type="text"
                       name="street"
                       placeholder={this.state.street}
                       onChange={this.handleInputChange}
                     />
+                  </Row>
+                  <Row>
                     <Input
                       label="City"
                       s={6}
@@ -254,6 +264,8 @@ class ArtistProfilePage extends Component {
                       placeholder={this.state.zip}
                       onChange={this.handleInputChange}
                     />
+                  </Row>
+                  <Row>
                     <SelectStyle handleSelection={this.handleInputChange} />
                     <Input
                       s={12} m={6}
@@ -267,11 +279,12 @@ class ArtistProfilePage extends Component {
                       <option value="Piece">Piece</option>
                       <option value="Hourly">Hourly</option>
                     </Input>
-                  </form>
-                </Row>
-              </Modal>
-            </Col>
-          </Row>
+                  </Row>
+                </form>
+              </Row>
+            </Modal>
+          </Col>
+        </Row>
     </div>
     );
   }

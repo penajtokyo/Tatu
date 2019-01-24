@@ -128,176 +128,175 @@ class ArtistAdminModal extends Component {
     return (
       <div>
         <Row>
-          <Col s={12} m={12} l={12} className="center" id={this.props}>
+          <Col s={12} m={12} className="center" id={this.props}>
             {/* Modal button that displays on the Artist Profile page */}
-            <Row></Row>
-              <Row>
+              {/* <Row> */}
                 {/* Edit profile form */}
                 <form onSubmit={this.handleSubmit}>
-                  <Input
-                    s={12} m={6} l={6}
-                    label="First Name"
-                    type="text"
-                    name="firstName"
-                    placeholder={this.state.firstName}
-                    onChange={this.handleInputChange}
-                  />
-
-                  <Input
-                    s={12} m={6} l={6}
-                    label="Last Name"
-                    type="text"
-                    name="lastName"
-                    placeholder={this.state.lastName}
-                    onChange={this.handleInputChange}
-                  />
-
-                  <Input
-                    s={12} m={6} l={6}
-                    label="Email"
-                    type="text"
-                    name="email"
-                    placeholder={this.state.email}
-                    onChange={this.handleInputChange}
-                  />
-
-                  <Input
-                    s={12} m={6} l={6}
-                    label="Phone Number"
-                    type="text"
-                    name="phone"
-                    placeholder={this.state.phone}
-                    onChange={this.handleInputChange}
-                  />
-
-                  <Input
-                    s={12} m={6} l={6}
-                    label="Location"
-                    type="text"
-                    name="location"
-                    placeholder={this.state.location}
-                    onChange={this.handleInputChange}
-                  />
-
-                  <Input
-                    s={12} m={6} l={6}
-                    label="Street"
-                    type="text"
-                    name="street"
-                    placeholder={this.state.street}
-                    onChange={this.handleInputChange}
-                  />
-
-                  <Input
-                    s={6} m={6} l={6}
-                    label="City"
-                    type="text"
-                    name="city"
-                    placeholder={this.state.city}
-                    onChange={this.handleInputChange}
-                  />
-
-                  <Input
-                    s={4} m={2} l={2}
-                    label="State"
-                    type="text"
-                    name="state"
-                    placeholder={this.state.state}
-                    onChange={this.handleInputChange}
-                  />
-
-                  <Input
-                    s={8} m={4} l={4}
-                    label="Zip"
-                    type="text"
-                    name="zip"
-                    placeholder={this.state.zip}
-                    onChange={this.handleInputChange}
-                  />
-
-                  <Input
-                    s={12} m={6} l={6}
-                    label="Pricing"
-                    type="select"
-                    name="pricing"
-                    placeholder={this.state.pricing}
-                    defaultValue="1"
-                    onChange={this.handleInputChange}
-                  >
-                    <option value="">Choose a Pricing Structure...</option>
-                    <option value="Piece">Piece</option>
-                    <option value="Hourly">Hourly</option>
-                  </Input>
-
-                  <Input
-                    s={12} m={6} l={6}
-                    label="Specialization"
-                    type="select"
-                    name="specialization"
-                    placeholder={this.state.specialization}
-                    defaultValue="1"
-                    onChange={this.handleInputChange}
-                  >
-                    <option value="">Choose a Specialization...</option>
-                    <option value="Abstract">Abstract</option>
-                    <option value="Ambigram">Ambigram</option>
-                    <option value="American Traditional">American Traditional</option>
-                    <option value="Anatomical">Anatomical</option>
-                    <option value="Biomechanical">Biomechanical</option>
-                    <option value="Black And Gray">Black And Gray</option>
-                    <option value="Blackout">Blackout</option>
-                    <option value="Blast Over">Blast Over</option>
-                    <option value="Botanical">Botanical</option>
-                    <option value="Broken Glass">Broken Glass</option>
-                    <option value="Paint Brush Stroke">Paint Brush Stroke</option>
-                    <option value="Celtic">Celtic</option>
-                    <option value="Chicano">Chicano</option>
-                    <option value="Dotwork">Dotwork</option>
-                    <option value="Geometric">Geometric</option>
-                    <option value="Glitch">Glitch</option>
-                    <option value="Glow In The Dark">Glow In The Dark</option>
-                    <option value="UV Ink">UV Ink</option>
-                    <option value="Gradient">Gradient</option>
-                    <option value="Graffiti">Graffiti</option>
-                    <option value="Hyper Realistic">Hyper Realistic</option>
-                    <option value="Inverted">Inverted</option>
-                    <option value="Japanese">Japanese</option>
-                    <option value="Lettering">Lettering</option>
-                    <option value="Line">Line</option>
-                    <option value="Mambo/Destrutturato">Mambo/Destrutturato</option>
-                    <option value="Mandala">Mandala</option>
-                    <option value="Mayan">Mayan</option>
-                    <option value="Minimalist">Minimalist</option>
-                    <option value="Negative Space">Negative Space</option>
-                    <option value="Neo Traditional">Neo Traditional</option>
-                    <option value="New School">New School</option>
-                    <option value="Norse">Norse</option>
-                    <option value="Traditional">Traditional</option>
-                    <option value="Tribal">Tribal</option>
-                    <option value="Optical Illusion">Optical Illusion</option>
-                    <option value="Outline">Outline</option>
-                    <option value="Pinstripe">Pinstripe</option>
-                    <option value="Pixel">Pixel</option>
-                    <option value="Pointillism">Pointillism</option>
-                    <option value="Pop Art">Pop Art</option>
-                    <option value="Portrait">Portrait</option>
-                    <option value="Quote/Word">Quote/Word</option>
-                    <option value="Realism">Realism</option>
-                    <option value="Silhouette">Silhouette</option>
-                    <option value="Sketch">Sketch</option>
-                    <option value="Stained Glass">Stained Glass</option>
-                    <option value="Surrealism">Surrealism</option>
-                    <option value="Torn/Ripped Skin">Torn/Ripped Skin</option>
-                    <option value="Trash Polka">Trash Polka</option>
-                    <option value="Polynesian">Polynesian</option>
-                    <option value="Maori">Maori</option>
-                    <option value="Hawaiian">Hawaiian</option>
-                    <option value="Watercolor">Watercolor</option>
-                    <option value="White Ink">White Ink</option>
-                    <option value="Wood Carving">Wood Carving</option>
-                  </Input>
+                  <Row>
+                    <Input
+                      s={12} m={6}
+                      label="First Name"
+                      type="text"
+                      name="firstName"
+                      placeholder={this.state.firstName}
+                      onChange={this.handleInputChange}
+                    />
+                    <Input
+                      s={12} m={6}
+                      label="Last Name"
+                      type="text"
+                      name="lastName"
+                      placeholder={this.state.lastName}
+                      onChange={this.handleInputChange}
+                    />
+                  </Row>
+                  <Row>
+                    <Input
+                      s={12} m={6}
+                      label="Email"
+                      type="text"
+                      name="email"
+                      placeholder={this.state.email}
+                      onChange={this.handleInputChange}
+                    />
+                    <Input
+                      s={} m={6}
+                      label="Phone Number"
+                      type="text"
+                      name="phone"
+                      placeholder={this.state.phone}
+                      onChange={this.handleInputChange}
+                    />
+                  </Row>
+                  <Row>
+                    <Input
+                      s={12} m={6}
+                      label="Location"
+                      type="text"
+                      name="location"
+                      placeholder={this.state.location}
+                      onChange={this.handleInputChange}
+                    />
+                    <Input
+                      s={12} m={6}
+                      label="Street"
+                      type="text"
+                      name="street"
+                      placeholder={this.state.street}
+                      onChange={this.handleInputChange}
+                    />
+                  </Row>
+                  <Row>
+                    <Input
+                      s={6} m={6}
+                      label="City"
+                      type="text"
+                      name="city"
+                      placeholder={this.state.city}
+                      onChange={this.handleInputChange}
+                    />
+                    <Input
+                      s={4} m={2}
+                      label="State"
+                      type="text"
+                      name="state"
+                      placeholder={this.state.state}
+                      onChange={this.handleInputChange}
+                    />
+                    <Input
+                      s={8} m={4}
+                      label="Zip"
+                      type="text"
+                      name="zip"
+                      placeholder={this.state.zip}
+                      onChange={this.handleInputChange}
+                    />
+                  </Row>
+                  <Row>
+                    <Input
+                      s={12} m={6}
+                      label="Pricing"
+                      type="select"
+                      name="pricing"
+                      placeholder={this.state.pricing}
+                      defaultValue="1"
+                      onChange={this.handleInputChange}
+                    >
+                      <option value="">Choose a Pricing Structure...</option>
+                      <option value="Per Piece">Per Piece</option>
+                      <option value="Per Hour">Per Hour</option>
+                    </Input>
+                    <Input
+                      s={12} m={6}
+                      label="Specialization"
+                      type="select"
+                      name="specialization"
+                      placeholder={this.state.specialization}
+                      defaultValue="1"
+                      onChange={this.handleInputChange}
+                    >
+                      <option value="">Choose a Specialization...</option>
+                      <option value="Abstract">Abstract</option>
+                      <option value="Ambigram">Ambigram</option>
+                      <option value="American Traditional">American Traditional</option>
+                      <option value="Anatomical">Anatomical</option>
+                      <option value="Biomechanical">Biomechanical</option>
+                      <option value="Black And Gray">Black And Gray</option>
+                      <option value="Blackout">Blackout</option>
+                      <option value="Blast Over">Blast Over</option>
+                      <option value="Botanical">Botanical</option>
+                      <option value="Broken Glass">Broken Glass</option>
+                      <option value="Paint Brush Stroke">Paint Brush Stroke</option>
+                      <option value="Celtic">Celtic</option>
+                      <option value="Chicano">Chicano</option>
+                      <option value="Dotwork">Dotwork</option>
+                      <option value="Geometric">Geometric</option>
+                      <option value="Glitch">Glitch</option>
+                      <option value="Glow In The Dark">Glow In The Dark</option>
+                      <option value="UV Ink">UV Ink</option>
+                      <option value="Gradient">Gradient</option>
+                      <option value="Graffiti">Graffiti</option>
+                      <option value="Hyper Realistic">Hyper Realistic</option>
+                      <option value="Inverted">Inverted</option>
+                      <option value="Japanese">Japanese</option>
+                      <option value="Lettering">Lettering</option>
+                      <option value="Line">Line</option>
+                      <option value="Mambo/Destrutturato">Mambo/Destrutturato</option>
+                      <option value="Mandala">Mandala</option>
+                      <option value="Mayan">Mayan</option>
+                      <option value="Minimalist">Minimalist</option>
+                      <option value="Negative Space">Negative Space</option>
+                      <option value="Neo Traditional">Neo Traditional</option>
+                      <option value="New School">New School</option>
+                      <option value="Norse">Norse</option>
+                      <option value="Traditional">Traditional</option>
+                      <option value="Tribal">Tribal</option>
+                      <option value="Optical Illusion">Optical Illusion</option>
+                      <option value="Outline">Outline</option>
+                      <option value="Pinstripe">Pinstripe</option>
+                      <option value="Pixel">Pixel</option>
+                      <option value="Pointillism">Pointillism</option>
+                      <option value="Pop Art">Pop Art</option>
+                      <option value="Portrait">Portrait</option>
+                      <option value="Quote/Word">Quote/Word</option>
+                      <option value="Realism">Realism</option>
+                      <option value="Silhouette">Silhouette</option>
+                      <option value="Sketch">Sketch</option>
+                      <option value="Stained Glass">Stained Glass</option>
+                      <option value="Surrealism">Surrealism</option>
+                      <option value="Torn/Ripped Skin">Torn/Ripped Skin</option>
+                      <option value="Trash Polka">Trash Polka</option>
+                      <option value="Polynesian">Polynesian</option>
+                      <option value="Maori">Maori</option>
+                      <option value="Hawaiian">Hawaiian</option>
+                      <option value="Watercolor">Watercolor</option>
+                      <option value="White Ink">White Ink</option>
+                      <option value="Wood Carving">Wood Carving</option>
+                    </Input>
+                  </Row>
                 </form>
-              </Row>
+              {/* </Row> */}
             </Col>
           </Row>
         </div>
