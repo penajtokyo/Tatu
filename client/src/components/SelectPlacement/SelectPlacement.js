@@ -33,11 +33,11 @@ class SelectStyle extends Component {
       'Toe',
       'Upper Back',
       'Wrist'
-    ]
+    ],
   }
   render() {
     return (
-      <Input s={12} type='select' name='placement' onChange={this.props.handleSelection} defaultValue='blank'>
+      <Input s={12} m={6} type='select' name='placement' value={this.props.placement} onChange={this.props.handleSelection}>
         <option value=''>Choose Placement...</option>
         {this.state.options.map((option, index) => (
           <option key={index} value={option}>{option}</option>)

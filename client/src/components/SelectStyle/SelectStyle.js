@@ -65,7 +65,7 @@ class SelectStyle extends Component {
   }
   render() {
     return (
-      <Input s={12} type='select' name='style' onChange={this.props.handleSelection} defaultValue='blank'>
+      <Input s={12} m={6} type='select' name='style' value={this.props.style} onChange={this.props.handleSelection}>
         <option value=''>Choose a Style...</option>
         {this.state.options.map((option, index) => (
           <option key={index} value={option}>{option}</option>)
