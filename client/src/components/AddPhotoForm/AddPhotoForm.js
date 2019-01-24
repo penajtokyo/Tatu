@@ -63,7 +63,7 @@ class AddPhotoForm extends Component {
  };
 
  // Method for removing content from modals
- resetModal = () => {
+ closeModal = () => {
    console.log("hi");
    this.setState({
     url: "",
@@ -82,12 +82,12 @@ class AddPhotoForm extends Component {
            <Modal
              header="Add a photo"
              trigger={
-              <Button faicon="fa fa-plus" floating icon="add_a_photo" className="photo-btn" />
+              <Button floating icon="add_a_photo" className="photo-btn fixed-action-btn" large style={{bottom: '110px', right: '24px'}} />
              }
              actions={
               <div>
-                <Button className="cancel-btn" onClick={this.resetModal} flat modal="close" waves="light">Cancel</Button>
-                <Button waves="light" type="submit" value="Submit" className="modal-action modal-close" onClick={this.handleSubmit}>UPDATE</Button>
+                <Button className="cancel-btn" onClick={this.closeModal} flat modal="close" waves="light">Cancel</Button>
+                <Button waves="light" type="submit" value="Submit" className="update-btn modal-action modal-close" onClick={this.handleSubmit}>UPDATE</Button>
               </div>}
            >
              <Row>
@@ -113,14 +113,11 @@ class AddPhotoForm extends Component {
 
                  <Input
                    s={12}
-                   type="text"
+                   type="textarea"
                    name="description"
                    label="Description"
                    onChange={this.handleInputChange}
                  />
-
-                 {/* Submit button to add photo */}
-                 
                </form>
              </Row>
            </Modal>
