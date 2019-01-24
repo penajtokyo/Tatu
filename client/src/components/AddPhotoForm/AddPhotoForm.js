@@ -3,7 +3,7 @@ import { Button, Col, Row, Modal, Input } from "react-materialize";
 import SelectPlacement from "../SelectPlacement";
 import SelectStyle from "../SelectStyle";
 import API from "../../utils/API";
-import MissingValModal from "../Modals/MissingVal";
+// import MissingValModal from "../Modals/MissingVal";
 
 class AddPhotoForm extends Component {
   state = {
