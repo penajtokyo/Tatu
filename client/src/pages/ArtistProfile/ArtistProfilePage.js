@@ -126,9 +126,11 @@ class ArtistProfilePage extends Component {
 
   // Function that sets the tattooArtistImages key in state with an array of the artists images
   handleSuccessfulUpload = imageData => {
+    console.log('image data', imageData);
     this.setState({
       tattooArtistImages: [...this.state.tattooArtistImages, imageData]
     });
+    console.log('state in handle successfulupload', this.state.tattooArtistImages);
   };
 
   // Submit form event handler that checks to see if a user has modified any of the data in the fields on the edit profile form

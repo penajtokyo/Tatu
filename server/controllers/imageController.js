@@ -38,7 +38,6 @@ module.exports = {
       })
       res.json(newDocs);
     })
-    // .then(pictures => res.json(pictures))
     .catch(err => res.status(422).json(err))
   },
   //gets all artist's doc from the DB,used to load to their profile page gallery
