@@ -3,14 +3,14 @@ import { Button, Col, Row, Modal, Input } from "react-materialize";
 import SelectPlacement from "../SelectPlacement";
 import SelectStyle from "../SelectStyle";
 import API from "../../utils/API";
-// import closeModal from "../Modals/";
 
 class AddPhotoForm extends Component {
   state = {
     url: "",
     style: "",
     placement: "",
-    description: ""
+    description: "",
+    disableBtn: true
   };
 
   // Method that sets the photo data that is being shipped to the DB
@@ -40,18 +40,10 @@ class AddPhotoForm extends Component {
   // Submit form event handler that check's to make sure that the user has provided all of the necessary information in the form
   handleSubmit = event => {
     event.preventDefault();
-    // console.log("Working?");
-
-    if (
-      this.state.url &&
-      this.state.style &&
-      this.state.placement &&
-      this.state.description
-    ) {
-      this.handleAddPhoto();
-    } else {
-      alert("Oops! It looks like something's missing.");
-    }
+    this.handleAddPhoto();
+    this.setState({
+      disableBtn: true
+    });
   };
 
   // Event handler to set the form data to corresponding state key's
@@ -60,6 +52,21 @@ class AddPhotoForm extends Component {
     this.setState({
       [name]: value
     });
+
+    if (
+      this.state.url &&
+      this.state.style &&
+      this.state.placement &&
+      this.state.description
+    ) {
+      this.setState({
+        disableBtn: false
+      });
+    } else {
+      this.setState({
+        disableBtn: true
+      });
+    }
   };
 
   // Method for removing content from modals
@@ -109,6 +116,7 @@ class AddPhotoForm extends Component {
                     waves="light"
                     className="update-btn modal-action modal-close"
                     onClick={this.handleSubmit}
+                    disabled={this.state.disableBtn}
                   >
                     Add
                   </Button>
