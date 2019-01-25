@@ -46,8 +46,9 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/tatuDB", { useNewUrlParser: true });
-
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/tatuDB" 
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
+console.log(MONGODB_URI);
 //using router routes
 app.use(routes)
 
