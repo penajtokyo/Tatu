@@ -50,8 +50,14 @@ if (process.env.NODE_ENV === "production") {
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/tatuDB" 
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 console.log(MONGODB_URI);
+
+
 //using router routes
 app.use(routes)
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "/../client/build/index.html"));
+});
 
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
