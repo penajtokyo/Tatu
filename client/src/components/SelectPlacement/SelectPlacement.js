@@ -4,10 +4,10 @@ import { Input } from 'react-materialize';
 class SelectStyle extends Component {
   state = {
     options: [
-      'Ankles',
+      'Ankle',
       'Back',
       'Bicep',
-      'Bottom',
+      'Buttock',
       'Calf',
       'Chest',
       'Ear',

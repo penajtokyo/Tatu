@@ -40,7 +40,6 @@ class AddPhotoForm extends Component {
   // Submit form event handler that check's to make sure that the user has provided all of the necessary information in the form
   handleSubmit = event => {
     event.preventDefault();
-
     this.handleAddPhoto();
     this.setState({
       disableBtn: true
@@ -119,7 +118,7 @@ class AddPhotoForm extends Component {
                     onClick={this.handleSubmit}
                     disabled={this.state.disableBtn}
                   >
-                    Update
+                    Add
                   </Button>
                 </div>
               }

@@ -33,7 +33,7 @@ class ArtistProfilePage extends Component {
     this.loadImages();
   }
   setSessionData = () => {
-    console.log(this.props.location.state.detail.artistData.location);
+    // console.log(this.props.location.state.detail.artistData.location);
     this.setState({
       id: this.props.location.state.detail.artistData._id,
       firstName: this.props.location.state.detail.firstName,
@@ -82,11 +82,11 @@ class ArtistProfilePage extends Component {
       pricing: this.state.pricing,
       specialization: this.state.specialization
     };
-    console.log(dataToUpdate);
+    // console.log(dataToUpdate);
     // Call to utils.API.updateArtistInfo
     API.updateArtistInfo(dataToUpdate)
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         // Setting state to the artist information that was updated in the DB
         this.setState({
           firstName: res.data.firstName,

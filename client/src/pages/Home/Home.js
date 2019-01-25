@@ -66,7 +66,7 @@ class Home extends Component {
     this.setState({
       [name]: value
     });
-    console.log(event.target.value);
+    // console.log(event.target.value);
   };
 
   // Method to toggle between customer and artist form depending on the user selection.
@@ -107,7 +107,7 @@ onLoginSubmit = event => {
   } else {
     API.login(loginData)
       .then(response => {
-        console.log("response", response);
+        // console.log("response", response);
         if (response.data === "invalid") {
           this.setState({
             invalidCredentials: true
@@ -227,7 +227,7 @@ onLoginSubmit = event => {
       this.errModal();
     } else {
       //Post route for user sign up.
-      console.log("customer info", customerInfo);
+      // console.log("customer info", customerInfo);
       this.handleSignup(customerInfo);
     }
   };
@@ -237,7 +237,7 @@ onLoginSubmit = event => {
  handleSignup = signupData => {
   API.signup(signupData)
     .then(response => {
-      console.log(response.data);
+      // console.log(response.data);
         if (response.data === "email choice invalid") {
           this.setState({
             emailVerified: false
@@ -245,40 +245,39 @@ onLoginSubmit = event => {
           this.errModal();
         }
         else {
-      if (response.data.type === "customer") {
-        this.props.history.push({
-          pathname: "/user",
-          state: { detail: response.data }
-        });
-      } else {
-        this.props.history.push({
-          pathname: "/artist",
-          state: { detail: response.data }
-        });
-      }
-      this.setState({
-        hideRow: false,
-        hideUserRow: false,
-        hideArtistRow: false,
-        addressVerified: true,
-        email: "",
-        password: "",
-        selected: "",
-        firstName: "",
-        lastName: "",
-        phoneNumber: "",
-        location: "",
-        street: "",
-        city: "",
-        st: "",
-        zip: "",
-        specialization: "",
-        pricing: ""
-      });
-     }
+          if (response.data.type === "customer") {
+            this.props.history.push({
+              pathname: "/user",
+              state: { detail: response.data }
+            });
+          } else {
+            this.props.history.push({
+              pathname: "/artist",
+              state: { detail: response.data }
+            });
+          }
+          this.setState({
+            hideRow: false,
+            hideUserRow: false,
+            hideArtistRow: false,
+            addressVerified: true,
+            email: "",
+            password: "",
+            selected: "",
+            firstName: "",
+            lastName: "",
+            phoneNumber: "",
+            location: "",
+            street: "",
+            city: "",
+            st: "",
+            zip: "",
+            specialization: "",
+            pricing: ""
+          });
+        }
     })
     .catch(err => console.log(err));
-
 };
 
   // Method for capitalizing the first letter of the first and last name for both User and Artist sign up form
