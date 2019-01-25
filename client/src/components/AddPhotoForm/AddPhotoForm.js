@@ -3,8 +3,7 @@ import { Button, Col, Row, Modal, Input } from "react-materialize";
 import SelectPlacement from "../SelectPlacement";
 import SelectStyle from "../SelectStyle";
 import API from "../../utils/API";
-// import MissingValModal from "../Modals/MissingVal";
-// import closeModal from '../Modals/'
+// import closeModal from "../Modals/";
 
 class AddPhotoForm extends Component {
   state = {
@@ -12,8 +11,6 @@ class AddPhotoForm extends Component {
     style: "",
     placement: "",
     description: ""
-    // Setting the default state === to false
-    // missingVal: false
   };
 
   // Method that sets the photo data that is being shipped to the DB
@@ -28,6 +25,8 @@ class AddPhotoForm extends Component {
     // Call to utils.API.addImage post request to the backend
     API.addImage(photoData)
       .then(res => {
+        // Lifting state to the key of tattooArtistImages on the Artist Profile Page
+        this.props.onSuccessfulUpload(res.data);
         this.setState({
           url: "",
           style: "",
@@ -50,26 +49,14 @@ class AddPhotoForm extends Component {
       this.state.description
     ) {
       this.handleAddPhoto();
-      window.location.reload();
     } else {
       alert("Oops! It looks like something's missing.");
-      // this.handleMissingVal();
     }
   };
 
-<<<<<<< HEAD
-  // handleMissingVal = () => {
-  //   //   // this.errModal();
-  //   this.setState({
-  //     missingVal: true
-  //   });
-  // };
-
   // Event handler to set the form data to corresponding state key's
   handleInputChange = event => {
-    const name = event.target.name;
-    const value = event.target.value;
-
+    const { name, value } = event.target;
     this.setState({
       [name]: value
     });
@@ -77,7 +64,6 @@ class AddPhotoForm extends Component {
 
   // Method for removing content from modals
   closeModal = () => {
-    console.log("hi");
     this.setState({
       url: "",
       style: "",
@@ -93,7 +79,6 @@ class AddPhotoForm extends Component {
           <Col
             s={12}
             m={12}
-            l={12}
             className="center artist-container"
             id={this.props}
           >
@@ -122,12 +107,10 @@ class AddPhotoForm extends Component {
                   </Button>
                   <Button
                     waves="light"
-                    type="submit"
-                    value="Submit"
                     className="update-btn modal-action modal-close"
                     onClick={this.handleSubmit}
                   >
-                    UPDATE
+                    Update
                   </Button>
                 </div>
               }
@@ -135,95 +118,36 @@ class AddPhotoForm extends Component {
               <Row>
                 {/* Add photo form */}
                 <form onSubmit={this.handleSubmit}>
-=======
- // Event handler to set the form data to corresponding state key's
- handleInputChange = event => {
-  //  const name = event.target.name;
-  //  const value = event.target.value;
-  const { name, value } = event.target;
-   this.setState({
-     [name]: value
-   });
- };
-
- // Method for removing content from modals
- closeModal = () => {
-   this.setState({
-    url: "",
-    style: "",
-    placement: "",
-    description: ""
-   })
- }
-
- render() {
-   return (
-     <div>
-       <Row>
-         <Col s={12} m={12} className="center artist-container" id={this.props}>
-           {/* Modal button that displays on the Artist Profile page */}
-            <Modal
-              header="Add a photo"
-              trigger={
-                <Button floating icon="add_a_photo" className="photo-btn fixed-action-btn" large style={{bottom: '110px', right: '24px'}} />
-              }
-              actions={
-                <div>
-                  <Button className="cancel-btn" onClick={this.closeModal} flat modal="close" waves="light">Cancel</Button>
-                  <Button waves="light" className="update-btn" onClick={this.handleSubmit}>Update</Button>
-                </div>
-              }
-            >
-             <Row>
-              {/* Add photo form */}
-              <form onSubmit={this.handleSubmit}>
-                <Row>
->>>>>>> master
-                  <Input
-                    s={12}
-                    type="url"
-                    name="url"
-<<<<<<< HEAD
-                    label="Image URL"
-                    onChange={this.handleInputChange}
-                  />
-
-                  <SelectPlacement
-                    s={12}
-                    handleSelection={this.handleInputChange}
-                  />
-
-                  <SelectStyle
-                    s={12}
-                    handleSelection={this.handleInputChange}
-                  />
-
-=======
-                    value={this.state.url}
-                    label="Image URL"
-                    onChange={this.handleInputChange}
-                  />
-                </Row>
-                <Row>
-                  <SelectPlacement
-                    handleSelection={this.handleInputChange}
-                    placement={this.state.placement}
-                  />
-                  <SelectStyle
-                    handleSelection={this.handleInputChange}
-                    style={this.state.style}
-                  />
-                </Row>
-                <Row>
->>>>>>> master
-                  <Input
-                    s={12}
-                    type="textarea"
-                    name="description"
-<<<<<<< HEAD
-                    label="Description"
-                    onChange={this.handleInputChange}
-                  />
+                  <Row>
+                    <Input
+                      s={12}
+                      type="url"
+                      name="url"
+                      value={this.state.url}
+                      label="Image URL"
+                      onChange={this.handleInputChange}
+                    />
+                  </Row>
+                  <Row>
+                    <SelectPlacement
+                      handleSelection={this.handleInputChange}
+                      placement={this.state.placement}
+                    />
+                    <SelectStyle
+                      handleSelection={this.handleInputChange}
+                      style={this.state.style}
+                    />
+                  </Row>
+                  <Row>
+                    <Input
+                      s={12}
+                      type="textarea"
+                      name="description"
+                      value={this.state.description}
+                      label="Description"
+                      onChange={this.handleInputChange}
+                    />
+                  </Row>
                 </form>
               </Row>
             </Modal>
@@ -232,21 +156,6 @@ class AddPhotoForm extends Component {
       </div>
     );
   }
-=======
-                    value={this.state.description}
-                    label="Description"
-                    onChange={this.handleInputChange}
-                  />
-                </Row>
-               </form>
-             </Row>
-           </Modal>
-         </Col>
-       </Row>
-     </div>
-   );
- }
->>>>>>> master
 }
 
 export default AddPhotoForm;
