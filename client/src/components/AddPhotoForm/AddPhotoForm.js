@@ -24,6 +24,7 @@ class AddPhotoForm extends Component {
    // Call to utils.API.addImage post request to the backend
    API.addImage(photoData)
      .then(res => {
+       this.props.onSuccessfulUpload(res.data);
        this.setState({
          url: "",
          style: "",
@@ -46,7 +47,7 @@ class AddPhotoForm extends Component {
      this.state.description
    ) {
      this.handleAddPhoto();
-     window.location.reload();
+    //  window.location.reload();
    } else {
      alert("Oops! It looks like something's missing.");
    }
