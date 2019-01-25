@@ -7,9 +7,9 @@ An app that allows users to search for tattoos and tattoo artists based on certa
 The need for this app is based on personal experience in trying to find an artist that does a particular type of tattoo, and there is no consistence resource (and most tattoo parlors websites lack detail and functionality).
 
 ## Video Demos
-- Customer/Regular User Account Creation, Landing page, and Search Functionality
-- Tattoo Artist Account Creation, Landing Page, Add Photo and Edit Profile Functionality
-- User Signing into to an existing account
+- [Customer/Regular User Account Creation, Landing page, and Search Functionality](https://drive.google.com/file/d/1_47KFfbywE5QzIDSprN9gYqp6aCiRBTe/view?usp=sharing)
+- [Tattoo Artist Account Creation, Landing Page, Add Photo and Edit Profile Functionality](https://drive.google.com/file/d/1LYh8AjftOwv-AYl6SwVV3M26d5OF6Qcu/view?usp=sharing)
+- [Existing user signing into to an existing account](https://drive.google.com/file/d/1DwgvA4fif10i4zKOHbIXoO1EdubJvMUB/view?usp=sharing)
 
 ## Regular User Flow and Functionality
 - As a customer looking for specific types of tattoos or even just looking to see what kinds of tattoos are out there, our app allows new users to create an account login information* (using the Create Account Button and corresponding form on the Home Page) and then search our database of artist's that have accounts on Tatu (and have uploaded images). We have an extensive list of both styles and body placement options that users can use to narrow down their search.
@@ -17,7 +17,7 @@ The need for this app is based on personal experience in trying to find an artis
 - Once they are done, they can hit the logout button in the Nav bar and are directed back the Home page.
 - *Note: User's passwords are encrypted before being stored in our database, for our user's security.
 
-## Tattoo Arist Flow and Functionality
+## Tattoo Artist Flow and Functionality
 - As a tattoo artist, I want to be able to have a location dedicated to me and my art work, and be a conduit for users to connect with artists. Tatu allows tattoo artists to create an account and login information* (using the Create Account Button and corresponding form on the Home Page), upload images and details of their work to their account, that will then be shared with our broader user base.
 - Tattoo artists can use the add photo modal/form (button found in the lower right corner) to add images to our database that will the display in their gallery and to our user's search results and default galleries.
 - Artists can also edit their information in the Edit Profile modal/form (button found in the lower right corner) if any of their information changes. This will update our datbase, and in turn updates the details found on the images they have in their and the user's galleries.
@@ -89,6 +89,3 @@ The need for this app is based on personal experience in trying to find an artis
 
 ## Credits
 * Page background images and tab icon PNGtree.com.
-
-
-[text that shows](link)

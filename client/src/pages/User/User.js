@@ -27,7 +27,7 @@ class User extends Component {
 
   // Method for calling error modal
   errModal = () => {
-    console.log(this.state.hideErr);
+    // console.log(this.state.hideErr);
     this.setState({
       hideErr: true
     });
@@ -44,7 +44,7 @@ class User extends Component {
   getAllImages = () => {
     API.getAllImages()
       .then((response) => {
-        console.log('all images from DB', response.data);
+        // console.log('all images from DB', response.data);
         this.setState({ allImages: response.data })
       })
       .catch(err => console.log(err))
@@ -54,7 +54,7 @@ class User extends Component {
   getImagesQuery = () => {
     API.getImagesByQuery(this.state.placement, this.state.style)
       .then((response) => {
-        console.log('response data from db', response.data);
+        // console.log('response data from db', response.data);
         //if array is empty (ie no matching results) display modal
         if (response.data.length === 0) {
           this.setState({
@@ -75,7 +75,7 @@ class User extends Component {
     this.setState({
       [name]: value
     });
-    console.log('state', this.state);
+    // console.log('state', this.state);
   };
 
   handleSubmit = (event) => {
@@ -94,15 +94,15 @@ class User extends Component {
 
   setUserName = () => {
     const userData = this.props.location.state.detail;
-    console.log('userData var', userData);
+    // console.log('userData var', userData);
     this.setState({ userName: userData.firstName })
-    console.log('users name', this.state.userName);
+    // console.log('users name', this.state.userName);
   };
 
   handleLogout = () => {
     API.logout()
       .then((response) => {
-        console.log('response:', response);
+        // console.log('response:', response);
         this.props.history.push({
           pathname: "/"
         });
