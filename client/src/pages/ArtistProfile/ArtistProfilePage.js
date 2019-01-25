@@ -1,12 +1,5 @@
 import React, { Component } from "react";
-import {
-  Container,
-  Col,
-  Row,
-  Button,
-  Modal,
-  Input
-} from "react-materialize";
+import { Container, Col, Row, Button, Modal, Input } from "react-materialize";
 import Images from "../../components/Images/Images";
 import AddPhotoForm from "../../components/AddPhotoForm/AddPhotoForm";
 // import ArtistAdminModal from "../../components/ArtistAdminModal/ArtistAdminModal";
@@ -14,7 +7,6 @@ import SelectStyle from "../../components/SelectStyle";
 import API from "../../utils/API";
 import Nav from "../../components/Nav";
 import "./ArtistProfile.css";
-
 
 class ArtistProfilePage extends Component {
   state = {
@@ -29,15 +21,19 @@ class ArtistProfilePage extends Component {
     state: "",
     zip: "",
     pricing: "",
-    specialization: ""
+    specialization: "",
+    tattooArtistImages: []
   };
   componentDidMount() {
-    //set user name based on session data
+    // Set user name based on session data
     this.setUserName();
     // Loading Session Data to the artist profile page
     this.setSessionData();
+    // Method to load images from the artist's pics
+    this.loadImages();
   }
   setSessionData = () => {
+    console.log(this.props.location.state.detail.artistData.location);
     this.setState({
       id: this.props.location.state.detail.artistData._id,
       firstName: this.props.location.state.detail.firstName,
@@ -86,6 +82,7 @@ class ArtistProfilePage extends Component {
       pricing: this.state.pricing,
       specialization: this.state.specialization
     };
+    console.log(dataToUpdate);
     // Call to utils.API.updateArtistInfo
     API.updateArtistInfo(dataToUpdate)
       .then(res => {
@@ -115,10 +112,28 @@ class ArtistProfilePage extends Component {
       [name]: value
     });
   };
+
+  // Function that gets all of the artists saved images
+  loadImages = () => {
+    API.getImages()
+      .then(res => {
+        this.setState({
+          tattooArtistImages: res.data.pictures
+        });
+      })
+      .catch(err => console.log(err));
+  };
+
+  // Function that sets the tattooArtistImages key in state with an array of the artists images
+  handleSuccessfulUpload = imageData => {
+    this.setState({
+      tattooArtistImages: [...this.state.tattooArtistImages, imageData]
+    });
+  };
+
   // Submit form event handler that checks to see if a user has modified any of the data in the fields on the edit profile form
   handleSubmit = event => {
     event.preventDefault();
-    console.log("This ran");
     if (
       this.state.firstName ||
       this.state.lastName ||
@@ -136,41 +151,72 @@ class ArtistProfilePage extends Component {
     }
   };
 
-
   render() {
     return (
-    <div>
-      <Nav name={this.state.userName} handleLogout={this.handleLogout} />
-      <Container>
-        <Row>
-          <Col s={12} className="artist-container">
-            <h5 className="artist-content"><span className="artist-category"></span> {`${this.state.firstName}  ${this.state.lastName}`}</h5>
-            <h5 className="artist-content"><span className="artist-category">Your Location:</span>  {`${this.state.location}, ${this.state.city} ${
-              this.state.state
-            } ${this.state.zip}`}</h5>
-            <h5 className="artist-content"><span className="artist-category">How You Charge:</span>  {this.state.pricing}</h5>
-            <h5 className="artist-content"><span className="artist-category">Your Speciality:</span>  {this.state.specialization}</h5>
-          <hr id="divider" />
-          <h4 className="artist-header">Your Gallery</h4>
-          </Col>
-        </Row>
-        <Row>
-          <Images id={this.state._id} />
-        </Row>
-      </Container>
+      <div>
+        <Nav name={this.state.userName} handleLogout={this.handleLogout} />
+        <Container>
+          <Row>
+            <Col s={12} className="artist-container">
+              <h5 className="artist-content">
+                <span className="artist-category" />{" "}
+                {`${this.state.firstName}  ${this.state.lastName}`}
+              </h5>
+              <h5 className="artist-content">
+                <span className="artist-category">Your Location:</span>{" "}
+                {`${this.state.location}, ${this.state.city} ${
+                  this.state.state
+                } ${this.state.zip}`}
+              </h5>
+              <h5 className="artist-content">
+                <span className="artist-category">How You Charge:</span>{" "}
+                {this.state.pricing}
+              </h5>
+              <h5 className="artist-content">
+                <span className="artist-category">Your Speciality:</span>{" "}
+                {this.state.specialization}
+              </h5>
+              <hr id="divider" />
+              <h4 className="artist-header">Your Gallery</h4>
+            </Col>
+          </Row>
+          <Row>
+            <Images
+              id={this.state._id}
+              tattooArtistImages={this.state.tattooArtistImages}
+            />
+          </Row>
+        </Container>
 
-      <Row>
-        <Col s={12} className="center" id={this.props}>
-          <AddPhotoForm id={this.state._id}/>
+        <Row>
+          <Col s={12} className="center" id={this.props}>
+            <AddPhotoForm
+              id={this.state._id}
+              // tattooArtistImages={this.state.tattooArtistImages}
+              onSuccessfulUpload={img => this.handleSuccessfulUpload(img)}
+            />
             {/* Modal button that displays on the Artist Profile page */}
             <Modal
               header="Edit Profile"
               trigger={
-                <Button floating icon="edit" className="profile-btn fixed-action-btn" large style={{bottom: '45px', right: '24px'}} />
+                <Button
+                  floating
+                  icon="edit"
+                  className="profile-btn fixed-action-btn"
+                  large
+                  style={{ bottom: "45px", right: "24px" }}
+                />
               }
               actions={
                 <div>
-                  <Button className="cancel-btn" flat modal="close" waves="light">Cancel</Button>
+                  <Button
+                    className="cancel-btn"
+                    flat
+                    modal="close"
+                    waves="light"
+                  >
+                    Cancel
+                  </Button>
                   <Button
                     waves="light"
                     type="submit"
@@ -180,14 +226,16 @@ class ArtistProfilePage extends Component {
                   >
                     Update
                   </Button>
-                </div>}
+                </div>
+              }
             >
               <Row>
                 {/* Edit profile form */}
                 <form onSubmit={this.handleSubmit}>
                   <Row>
                     <Input
-                      s={12} m={6}
+                      s={12}
+                      m={6}
                       label="First Name"
                       type="text"
                       name="firstName"
@@ -195,7 +243,8 @@ class ArtistProfilePage extends Component {
                       onChange={this.handleInputChange}
                     />
                     <Input
-                      s={12} m={6}
+                      s={12}
+                      m={6}
                       label="Last Name"
                       type="text"
                       name="lastName"
@@ -205,7 +254,8 @@ class ArtistProfilePage extends Component {
                   </Row>
                   <Row>
                     <Input
-                      s={12} m={6}
+                      s={12}
+                      m={6}
                       label="Email"
                       type="text"
                       name="email"
@@ -213,7 +263,8 @@ class ArtistProfilePage extends Component {
                       onChange={this.handleInputChange}
                     />
                     <Input
-                      s={12} m={6}
+                      s={12}
+                      m={6}
                       label="Phone Number"
                       type="text"
                       name="phone"
@@ -223,7 +274,8 @@ class ArtistProfilePage extends Component {
                   </Row>
                   <Row>
                     <Input
-                      s={12} m={6}
+                      s={12}
+                      m={6}
                       label="Location"
                       type="text"
                       name="location"
@@ -231,7 +283,8 @@ class ArtistProfilePage extends Component {
                       onChange={this.handleInputChange}
                     />
                     <Input
-                      s={12} m={6}
+                      s={12}
+                      m={6}
                       label="Street"
                       type="text"
                       name="street"
@@ -268,7 +321,8 @@ class ArtistProfilePage extends Component {
                   <Row>
                     <SelectStyle handleSelection={this.handleInputChange} />
                     <Input
-                      s={12} m={6}
+                      s={12}
+                      m={6}
                       type="select"
                       name="pricing"
                       placeholder={this.state.pricing}
@@ -285,7 +339,7 @@ class ArtistProfilePage extends Component {
             </Modal>
           </Col>
         </Row>
-    </div>
+      </div>
     );
   }
 }
