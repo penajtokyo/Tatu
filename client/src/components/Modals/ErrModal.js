@@ -22,9 +22,12 @@ const modalCloseStyle = {
 export const ErrModal = (props) => {
   function Verification(props) {
     const addressVerified = props.addressVerified;
-    const emailVerified = props.emailVerified
-    if (addressVerified && emailVerified) {
+    const emailVerified = props.emailVerified;
+    const validEmailVerified = props.validEmailVerified;
+    if (addressVerified && emailVerified && validEmailVerified) {
       return <p className="modalMessage">All fields are required, please fill in the empty field(s).</p>;
+    } else if (!validEmailVerified) {
+        return <p className="modalMessage">Please enter a valid email.</p>;
     } else if (!emailVerified) {
       return <p className="modalMessage">The email address you entered is already registered. Please enter new email.</p>;
     } else if (!addressVerified && emailVerified)
@@ -40,7 +43,7 @@ export const ErrModal = (props) => {
               <h4 className="modalHeader">Oops!</h4>
             </Col>
             <Col s={12} m={12}>
-              <Verification addressVerified={props.addressVerified} emailVerified={props.emailVerified} />
+              <Verification addressVerified={props.addressVerified} emailVerified={props.emailVerified} validEmailVerified={props.validEmailVerified} />
             </Col>
           </Row>
         </div>
@@ -58,7 +61,7 @@ export const ErrModal = (props) => {
               <h4 className="modalHeader">Oops!</h4>
             </Col>
             <Col s={12} m={12}>
-              <Verification addressVerified={props.addressVerified} emailVerified={props.emailVerified} />
+              <Verification addressVerified={props.addressVerified} emailVerified={props.emailVerified} validEmailVerified={props.validEmailVerified} />
             </Col>
           </Row>
         </div>

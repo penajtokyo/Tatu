@@ -86,7 +86,7 @@ class AddPhotoForm extends Component {
               actions={
                 <div>
                   <Button className="cancel-btn" onClick={this.closeModal} flat modal="close" waves="light">Cancel</Button>
-                  <Button waves="light" className="update-btn" onClick={this.handleSubmit}>Update</Button>
+                  <Button waves="light" className="update-btn" onClick={this.handleSubmit}>Add</Button>
                 </div>
               }
             >
