@@ -1,7 +1,8 @@
 var express = require("express");
 var mongoose = require("mongoose");
 var session = require("express-session");
-var routes = require("./routes")
+var routes = require("./routes");
+var path = require("path");
 
 var PORT = process.env.PORT || 3001;
 
@@ -24,14 +25,14 @@ app.use(
 //middleware for setting up a user object when anyone first come to the appplication
 function userSetup(req, res, next) {
   if (!req.session.customer) {
-    req.session.customer = {}
+    req.session.customer = {};
     req.session.customer.loggedIn = false;
   }
-  next()
+  next();
 }
 
 //using middlewhere acrossed the entire application before any route gets hit.
-app.use(userSetup)
+app.use(userSetup);
 
 // Use morgan logger for logging requests
 // app.use(logger("dev"));
@@ -42,19 +43,27 @@ app.use(express.json());
 app.use(express.static("public"));
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
+  app.use(express.static(path.join(__dirname, "/../client/build")));
 }
 
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/tatuDB", { useNewUrlParser: true });
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/tatuDB";
+mongoose.connect(
+  MONGODB_URI,
+  { useNewUrlParser: true }
+);
+console.log(MONGODB_URI);
 
 //using router routes
-app.use(routes)
+app.use(routes);
+
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "/../client/build/index.html"));
+});
 
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
 });
-
 
 //Test Data
 // {
