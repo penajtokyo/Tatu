@@ -124,7 +124,7 @@ class AddPhotoForm extends Component {
               }
             >
               <Row>
-                {/* Add photo form */}
+                {/* Add photo form */} 
                 <form onSubmit={this.handleSubmit}>
                   <Row>
                     <Input
