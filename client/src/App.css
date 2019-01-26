@@ -13,6 +13,10 @@ p {
   text-align: center;
 }
 
+.modal-backdrop.fade {
+  opacity: 0
+}
+
 /* buttons */
 .btn {
   background-color: #344743;

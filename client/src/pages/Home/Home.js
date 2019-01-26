@@ -39,7 +39,8 @@ class Home extends Component {
     invalidCredentials: false,
     userName: "",
     addressVerified: true,
-    emailVerified: true
+    emailVerified: true, 
+    validEmailVerified: true
   };
 
   // Method to handle user pressing enter in login form.
@@ -232,9 +233,21 @@ onLoginSubmit = event => {
     }
   };
 
-  //method to be used in sign up methods above
+  //Validator for email address format
+validateEmail = (email) => {
+  const regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  console.log(regex.test(email));
+  return regex.test(email);
+}
+
  //method to be used in sign up methods above
  handleSignup = signupData => {
+   if (!this.validateEmail(this.state.email)) {
+     this.setState({
+       validEmailVerified: false
+     });
+     this.errModal();
+   } else {
   API.signup(signupData)
     .then(response => {
       // console.log(response.data);
@@ -278,6 +291,7 @@ onLoginSubmit = event => {
         }
     })
     .catch(err => console.log(err));
+  }
 };
 
   // Method for capitalizing the first letter of the first and last name for both User and Artist sign up form
@@ -336,7 +350,9 @@ onLoginSubmit = event => {
             hideErr={this.state.hideErr} 
             addressVerified={this.state.addressVerified} 
             closeModal={this.closeModal}
-            emailVerified={this.state.emailVerified} />
+            emailVerified={this.state.emailVerified}
+            validEmailVerified={this.state.validEmailVerified} 
+          />
           <h5><b>New Users</b></h5>
           <Modal
             s={12}
