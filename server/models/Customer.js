@@ -30,7 +30,12 @@ var CustomerSchema = new Schema({
   artistData: {
     type: Schema.Types.ObjectId,
     ref: "Artist"
-  }
+  },
+  //their saved images
+  savedPictures: [{
+    type: Schema.Types.ObjectId,
+    ref: "Pictures"
+  }]
 });
 
 // This creates our model from the above schema, using mongoose's model method

@@ -17,6 +17,11 @@ export default {
     return axios.get('api/images/allImages');
   },
 
+  // to save images to the user's saved/favorites gallery based on the image ID of the card clicked
+  saveImages: photoID => {
+    return axios.post('api/images/savedImages', photoID)
+  },
+
   // get api route to retreive images in the artists pictures column
   getImages: () => {
     return axios.get("/api/images/artistImages");

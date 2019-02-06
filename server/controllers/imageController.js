@@ -7,7 +7,7 @@ module.exports = {
     .populate('artist')
     .populate('customer')
     .then(docs => {
-      console.log("the picture docs", docs);
+      // console.log("the picture docs", docs);
       //create a new array of objects that doesn't contain un-needed info
       var newDocs = docs.map((doc, i) => {
         return ({
@@ -172,14 +172,14 @@ module.exports = {
     }
   },
   //adds picture and its tags to db from artist page with the associated artist ID
-  saveImage: function (req, res) {
+  addImage: function (req, res) {
     // console.log('object to save', req.body);
     db.Artist.findOne({
       _id: req.session.customer.artistData._id
     })
     .then(artist => {
       // console.log('the artist data:', artist);
-      console.log("saving picture");
+      console.log("adding picture");
       //save the picture to the associated artist ID
       db.Pictures.create(req.body)
       .then(picture => {
@@ -205,5 +205,28 @@ module.exports = {
         })
       .catch(err => res.status(422).json(err));
     })
+  },
+  //saves images to the user's saved gallery/favorites
+  saveImage: function (req, res) {
+    //req.body needs to be the image _id for the card that it was clicked on
+    console.log('Picture ID', req.body);
+    //find the image id in the Pictures table
+    db.Pictures.findOne({
+      _id: req.body
+    })
+     //then find that customer by their session ID in the database
+    .then(picture => {
+      // console.log('the picture data:', picture);
+      console.log("saving picture");
+      //find the customer in the customer's table
+      db.Customer.findOneAndUpdate(
+        { _id: req.session.customer._id },
+        //put that picture ID into the customer.savedPictures array
+        { $push: { savedPictures: picture._id } },
+        { new: true })
+      // .populate("savedPictures")
+      .then((data) => res.json(data))
+    })
+    .catch(err => res.status(422).json(err));
   }
 }
