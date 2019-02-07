@@ -24,7 +24,7 @@ router
 // url: api/images/savedImages
 router
   .route('/savedImages')
-  .get(imageController.saveImage)
+  .get(imageController.findAllSaved)
   .post(imageController.saveImage)
 
 module.exports = router;

@@ -50,6 +50,27 @@ module.exports = {
       .then(doc => res.json(doc))
       .catch(err => res.status(422).json(err));
   },
+  //gets all user's saved images to load into their saved/favorites gallery
+  findAllSaved: function (req, res) {
+    console.log(req.session.customer._id);
+    db.Customer.findOne({
+      _id: req.session.customer._id
+    })
+    //this is how to populate across multple linked tables
+    .populate({
+      path: 'savedPictures',
+      populate: {
+        path: 'customer',
+        //doesn't bring back the password field--yay!
+        select: '-password',
+        populate: {
+          path: 'artistData'
+        }
+      }
+    })
+    .then(doc => res.json(doc))
+    .catch(err => res.status(422).json(err));
+  },
   //used from user page when querying by style and placement of tattoo w/ artist info
   findAllQuery: function (req, res) {
     console.log("this is the query values", req.query);
@@ -224,7 +245,6 @@ module.exports = {
         //put that picture ID into the customer.savedPictures array
         { $push: { savedPictures: picture._id } },
         { new: true })
-      // .populate("savedPictures")
       .then((data) => res.json(data))
     })
     .catch(err => res.status(422).json(err));
