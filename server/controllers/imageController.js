@@ -1,45 +1,7 @@
 //define methods to get and post info to/from the db
 const db = require("../models");
+
 module.exports = {
-  //gets all images in the db with no parameters to return to the user default view
-  findAllImages: function(req, res) {
-    db.Pictures.find({})
-    .populate('artist')
-    .populate('customer')
-    .then(docs => {
-      // console.log("the picture docs", docs);
-      //create a new array of objects that doesn't contain un-needed info
-      var newDocs = docs.map((doc, i) => {
-        return ({
-          _id: doc._id,
-          file: doc.file,
-          description: doc.description,
-          style: doc.style,
-          placement: doc.placement,
-          artist: {
-            pictures: doc.artist.pictures,
-            _id: doc.artist._id,
-            specialization: doc.artist.specialization,
-            pricing: doc.artist.pricing,
-            location: doc.artist.location,
-            street: doc.artist.street,
-            city: doc.artist.city,
-            state: doc.artist.state,
-            zip: doc.artist.zip,
-          },
-          customer: {
-            _id: doc.customer._id,
-            firstName: doc.customer.firstName,
-            lastName: doc.customer.lastName,
-            phone: doc.customer.phone,
-            email: doc.customer.email,
-          }
-        })
-      })
-      res.json(newDocs);
-    })
-    .catch(err => res.status(422).json(err))
-  },
   //gets all artist's doc from the DB,used to load to their profile page gallery
   findAllByArtist: function (req, res) {
     console.log(req.session.customer.artistData._id);
@@ -56,12 +18,12 @@ module.exports = {
     db.Customer.findOne({
       _id: req.session.customer._id
     })
-    //this is how to populate across multple linked tables
+    //this is how to populate across multple linked/nested tables
     .populate({
       path: 'savedPictures',
       populate: {
         path: 'customer',
-        //doesn't bring back the password field--yay!
+        //doesn't bring back the password key/value
         select: '-password',
         populate: {
           path: 'artistData'
@@ -74,121 +36,63 @@ module.exports = {
   //used from user page when querying by style and placement of tattoo w/ artist info
   findAllQuery: function (req, res) {
     console.log("this is the query values", req.query);
-    if (req.query.style != "" && req.query.placement != "") {
+    if (req.query.style == "All" || req.query.placement == "All"){
+      db.Pictures.find({})
+      .populate({
+        path: 'customer',
+        select: '-password',
+        populate: {
+          path: 'artistData'
+        }
+      })
+      // console.log("the picture docs", docs);
+      .then(doc => res.json(doc))
+      .catch(err => res.status(422).json(err));
+    }
+    else if (req.query.style != "" && req.query.placement != "") {
       db.Pictures.find({
         style: req.query.style,
         placement: req.query.placement
       })
-        .populate('artist')
-        .populate('customer')
-        .then(docs => {
-          console.log("the picture docs", docs);
-          //create a new array of objects that doesn't contain un-needed info
-          var newDocs = docs.map((doc, i) => {
-            return ({
-              _id: doc._id,
-              file: doc.file,
-              description: doc.description,
-              style: doc.style,
-              placement: doc.placement,
-              artist: {
-                pictures: doc.artist.pictures,
-                _id: doc.artist._id,
-                specialization: doc.artist.specialization,
-                pricing: doc.artist.pricing,
-                location: doc.artist.location,
-                street: doc.artist.street,
-                city: doc.artist.city,
-                state: doc.artist.state,
-                zip: doc.artist.zip,
-              },
-              customer: {
-                _id: doc.customer._id,
-                firstName: doc.customer.firstName,
-                lastName: doc.customer.lastName,
-                phone: doc.customer.phone,
-                email: doc.customer.email,
-              }
-            })
-          })
-          res.json(newDocs);
-        })
-        .catch(err => res.status(422).json(err));
-    } else if (req.query.style === "" && req.query.placement != "") {
+      .populate({
+        path: 'customer',
+        select: '-password',
+        populate: {
+          path: 'artistData'
+        }
+      })
+      // console.log("the picture docs", docs);
+      .then(doc => res.json(doc))
+      .catch(err => res.status(422).json(err));
+    } 
+    else if (req.query.style === "" && req.query.placement != "") {
       db.Pictures.find({
         placement: req.query.placement
       })
-        .populate('artist')
-        .populate('customer')
-        .then(docs => {
-          console.log("the picture docs", docs);
-          var newDocs = docs.map((doc, i,) => {
-            return ({
-              _id: doc._id,
-              file: doc.file,
-              description: doc.description,
-              style: doc.style,
-              placement: doc.placement,
-              artist: {
-                pictures: doc.artist.pictures,
-                _id: doc.artist._id,
-                specialization: doc.artist.specialization,
-                pricing: doc.artist.pricing,
-                location: doc.artist.location,
-                street: doc.artist.street,
-                city: doc.artist.city,
-                state: doc.artist.state,
-                zip: doc.artist.zip,
-              },
-              customer: {
-                _id: doc.customer._id,
-                firstName: doc.customer.firstName,
-                lastName: doc.customer.lastName,
-                phone: doc.customer.phone,
-                email: doc.customer.email,
-              }
-            })
-          })
-          res.json(newDocs);
-        })
+      .populate({
+        path: 'customer',
+        select: '-password',
+        populate: {
+          path: 'artistData'
+        }
+      })
+      // console.log("the picture docs", docs);
+      .then(doc => res.json(doc))
       .catch(err => res.status(422).json(err));
-    } else if (req.query.placement === "" && req.query.style != "") {
+    } 
+    else if (req.query.placement === "" && req.query.style != "") {
       db.Pictures.find({
         style: req.query.style
       })
-        .populate('artist')
-        .populate('customer')
-        .then(docs => {
-          console.log("the picture docs", docs);
-          var newDocs = docs.map((doc, i) => {
-            return ({
-              _id: doc._id,
-              file: doc.file,
-              description: doc.description,
-              style: doc.style,
-              placement: doc.placement,
-              artist: {
-                pictures: doc.artist.pictures,
-                _id: doc.artist._id,
-                specialization: doc.artist.specialization,
-                pricing: doc.artist.pricing,
-                location: doc.artist.location,
-                street: doc.artist.street,
-                city: doc.artist.city,
-                state: doc.artist.state,
-                zip: doc.artist.zip,
-              },
-              customer: {
-                _id: doc.customer._id,
-                firstName: doc.customer.firstName,
-                lastName: doc.customer.lastName,
-                phone: doc.customer.phone,
-                email: doc.customer.email,
-              }
-            })
-          })
-          res.json(newDocs);;
-        })
+      .populate({
+        path: 'customer',
+        select: '-password',
+        populate: {
+          path: 'artistData'
+        }
+      })
+      // console.log("the picture docs", docs);
+      .then(doc => res.json(doc))
       .catch(err => res.status(422).json(err));
     }
   },

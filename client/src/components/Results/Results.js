@@ -12,7 +12,10 @@ const Results = (props) => {
         </Col>
       </Row>
       <Row>
-        <DisplayCard data={props.imagesData}/>
+        <DisplayCard 
+          data={props.imagesData}
+          handleSaveImage={props.handleSaveImage}
+        />
       </Row>
     </div>
   );

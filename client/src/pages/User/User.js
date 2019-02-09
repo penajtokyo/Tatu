@@ -13,7 +13,9 @@ class User extends Component {
     placement: '',
     style: '',
     searchResults: [],
-    allImages: [],
+    // allImages: [],
+    savedImages: [],
+    imageSaved: false,
     userName: '',
     hideErr: false,
     err: ''
@@ -22,7 +24,7 @@ class User extends Component {
   componentDidMount() {
     //when page loads without search queries display a default view/gallery
     this.setUserName();
-    this.getAllImages();
+    this.getSavedImages();
   };
 
   // Method for calling error modal
@@ -40,12 +42,31 @@ class User extends Component {
     })
   }
 
-  //get all images to pass to gallery/user default view
-  getAllImages = () => {
-    API.getAllImages()
-      .then((response) => {
-        // console.log('all images from DB', response.data);
-        this.setState({ allImages: response.data })
+   //retrieve the user's saved images from the D 
+   getSavedImages = () => {
+    API.getSavedImages()
+      .then(response => {
+        console.log('all customer saved images from DB', response.data.savedPictures)
+        this.setState({ savedImages: response.data.savedPictures })
+      })
+      .catch(err => console.log(err))
+  };
+
+  //saves the selected image (by ID) to the DB
+  handleSaveImage = (id) => {
+    //this gets the props._id for the article that the button was clicked on and grabs the data.response associated with it
+    const findImageByID = this.state.searchResults.find((el) => el._id === id);
+    //this is the req.body to send over to the api > routes > controller file
+    const photoID = { _id: findImageByID._id};
+    API.saveImage(photoID)
+      .then(response => {
+        console.log("response", response)
+        console.log("image saved to user's gallery")
+        //load the saved images to the gallery// can refactored to be and get rid of response and console logs:
+        //.then(this.getSavedImages())
+        this.getSavedImages();
+        //change the state of the image to being saved, so that correct button displays on the card
+        // this.setState({ imageSaved: true })
       })
       .catch(err => console.log(err))
   };
@@ -54,7 +75,7 @@ class User extends Component {
   getImagesQuery = () => {
     API.getImagesByQuery(this.state.placement, this.state.style)
       .then((response) => {
-        // console.log('response data from db', response.data);
+        console.log('response data from db', response.data);
         //if array is empty (ie no matching results) display modal
         if (response.data.length === 0) {
           this.setState({
@@ -137,9 +158,11 @@ class User extends Component {
               {this.state.searchResults.length ? (
                 <Results
                   imagesData={this.state.searchResults}
+                  handleSaveImage={this.handleSaveImage}
                 />) : (
                 <Gallery
-                  images={this.state.allImages}
+                  // images={this.state.allImages}
+                  images={this.state.savedImages}
                 />
                 )}
             </Col>

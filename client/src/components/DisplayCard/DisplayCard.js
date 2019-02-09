@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Col, CardTitle } from 'react-materialize';
+import { Button, Card, Col, CardTitle, Icon } from 'react-materialize';
 import './DisplayCard.css';
 
 const DisplayCard = (props) => {
@@ -21,18 +21,21 @@ const DisplayCard = (props) => {
                 <hr />
                 <p>
                   Done By: {imageData.customer.firstName} {imageData.customer.lastName}<br />
-                  Specializes In: {imageData.artist.specialization}<br />
-                  Charges: {imageData.artist.pricing}<br />
+                  Specializes In: {imageData.customer.artistData.specialization}<br />
+                  Charges: {imageData.customer.artistData.pricing}<br />
                   Phone: {imageData.customer.phone}
                 </p>
                 <hr />
                 <p>
-                  Location: {imageData.artist.location}<br />
-                  {imageData.artist.street}<br />
-                  {imageData.artist.city}, {imageData.artist.state} {imageData.artist.zip}
+                  Location: {imageData.customer.artistData.location}<br />
+                  {imageData.customer.artistData.street}<br />
+                  {imageData.customer.artistData.city}, {imageData.customer.artistData.state} {imageData.customer.artistData.zip}
                 </p>
               </div>
             }>
+            {/* if selected fill in star, if not then empty star */}
+            {/* add the id from the db to the button to assoicate which image to save on click */}
+            <Button waves='light' onClick={() => props.handleSaveImage(imageData._id)} className='saveImageBtn'><Icon>star</Icon></Button>
           </Card>
         </Col>)
       )}

@@ -11,11 +11,13 @@ const Gallery = (props) => {
         <div>
         <Row>
             <Col s={12}>
-                <h4 className='sectionHead'>View All Images...</h4>
+                <h4 className='sectionHead'>Your Saved Images...</h4>
             </Col>
         </Row>
         <Row>
-            <DisplayCard data={props.images} />
+            <DisplayCard 
+                data={props.images}
+            />
         </Row>
         </div>
     );

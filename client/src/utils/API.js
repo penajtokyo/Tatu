@@ -11,11 +11,6 @@ export default {
     });
   },
 
-  //return all images with no query from the db to show on defualt user page
-  getAllImages: () => {
-    return axios.get('api/images/allImages');
-  },
-
   // to save images to the user's saved/favorites gallery based on the image ID of the card clicked
   saveImage: photoID => {
     return axios.post('api/images/savedImages', photoID)
