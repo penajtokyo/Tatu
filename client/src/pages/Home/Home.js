@@ -90,8 +90,7 @@ class Home extends Component {
   showPassword = (event) => {
     event.preventDefault();
     event.stopPropagation();
-    this.setState({isPasswordVisible: !this.state.isPasswordVisible
-    });
+    this.setState({isPasswordVisible: !this.state.isPasswordVisible});
   };
 
 // Method for user/artist login and input verification.

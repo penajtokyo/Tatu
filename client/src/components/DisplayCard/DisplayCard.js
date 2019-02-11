@@ -33,10 +33,14 @@ const DisplayCard = (props) => {
                 </p>
               </div>
             }>
-            {/* if selected fill in star, if not then empty star */}
-            {/* add the id from the db to the button to assoicate which image to save on click */}
-            <Button waves='light' onClick={() => props.handleSaveImage(imageData._id)} className='saveImageBtn'><Icon>star</Icon></Button>
-          </Card>
+            {/* if not a favorite (only should show in results area), show an empty heart, 
+            if favorite show filled in heart (both gallery and search results) */}
+            {props.cardSaved === false ? (
+              <Button waves='light' onClick={() => props.handleSaveImage(imageData._id)} className='saveImageBtn'><Icon>favorite</Icon></Button>
+            ) : (
+              <Button waves='light' onClick={() => props.handleRemoveImage(imageData._id)} className='unsaveImageBtn'><Icon>traffic</Icon></Button>
+            )}
+            </Card>
         </Col>)
       )}
     </div>

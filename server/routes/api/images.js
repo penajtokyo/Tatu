@@ -19,6 +19,7 @@ router
 router
   .route('/savedImages')
   .get(imageController.findAllSaved)
+  .put(imageController.removeSavedImage)
   .post(imageController.saveImage);
 
 module.exports = router;

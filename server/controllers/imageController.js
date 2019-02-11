@@ -152,5 +152,19 @@ module.exports = {
       .then((data) => res.json(data))
     })
     .catch(err => res.status(422).json(err));
+  },
+  //removes an image from the user's savedImages array in the db
+  removeSavedImage: function (req, res) {
+    //find the customer by the req.session id
+    console.log('Picture ID to remove', req.body._id);
+    console.log('customer ID', req.session.customer._id);
+    db.Customer.findOneAndUpdate(
+      { _id: req.session.customer._id },
+      //remove that picture ID into the customer.savedPictures array
+      { $pull: { savedPictures: req.body._id } },
+      { new: true })
+      .then((data) => res.json(data))
+    //update the saved images array by removing that picture id (req.body)
+    .catch(err => res.status(422).json(err));
   }
 }

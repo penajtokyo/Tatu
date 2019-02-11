@@ -7,20 +7,22 @@ import { Row, Col } from 'react-materialize';
 //make the category header a link/query that calls the api query to search by that style
 
 const Gallery = (props) => {
-    return (
-        <div>
-        <Row>
-            <Col s={12}>
-                <h4 className='sectionHead'>Your Saved Images...</h4>
-            </Col>
-        </Row>
-        <Row>
-            <DisplayCard 
-                data={props.images}
-            />
-        </Row>
-        </div>
-    );
+  return (
+    <div>
+      <Row>
+        <Col s={12}>
+          <h4 className='sectionHead'>Your Favorites</h4>
+        </Col>
+      </Row>
+      <Row>
+        <DisplayCard
+          data={props.images}
+          cardSaved={props.cardSaved}
+          handleRemoveImage={props.handleRemoveImage}
+        />
+      </Row>
+    </div>
+  );
 };
 
 export default Gallery;

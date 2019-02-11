@@ -21,6 +21,11 @@ export default {
     return axios.get('api/images/savedImages')
   },
 
+  //remove an image from the user's saved images (updates their savedImages array in the db)
+  removeImage: photoID => {
+    return axios.put('api/images/savedImages', photoID)
+  },
+
   // get api route to retreive images in the artists pictures column
   getImages: () => {
     return axios.get('/api/images/artistImages');

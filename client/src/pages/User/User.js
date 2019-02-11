@@ -13,9 +13,8 @@ class User extends Component {
     placement: '',
     style: '',
     searchResults: [],
-    // allImages: [],
     savedImages: [],
-    imageSaved: false,
+    cardSaved: false,
     userName: '',
     hideErr: false,
     err: ''
@@ -52,6 +51,8 @@ class User extends Component {
       .catch(err => console.log(err))
   };
 
+  
+
   //saves the selected image (by ID) to the DB
   handleSaveImage = (id) => {
     //this gets the props._id for the article that the button was clicked on and grabs the data.response associated with it
@@ -64,9 +65,33 @@ class User extends Component {
         console.log("image saved to user's gallery")
         //load the saved images to the gallery// can refactored to be and get rid of response and console logs:
         //.then(this.getSavedImages())
-        this.getSavedImages();
+        //do an if statement...if the cardSaved state is already true, don't change (hopefully this will not change all of them)
         //change the state of the image to being saved, so that correct button displays on the card
-        // this.setState({ imageSaved: true })
+        this.setState({ cardSaved: true });
+        //reload the saved images after update
+        this.getSavedImages();
+      })
+      .catch(err => console.log(err))
+  };
+
+  //removes a saved image from user's gallery
+  handleRemoveImage = (id) => {
+    //this gets the props._id for the article that the button was clicked on and grabs the data.response associated with it
+    const findImageByID = this.state.searchResults.find((el) => el._id === id);
+    console.log("find image by id in remove", findImageByID)
+    //this is the req.body to send over to the api > routes > controller file
+    const photoID = { _id: findImageByID._id};
+    console.log('photo ID in remove saved image', photoID);
+    API.removeImage(photoID)
+      .then(response => {
+        console.log("response", response)
+        console.log("image removed from user's gallery")
+        //load the saved images to the gallery// can refactored to be and get rid of response and console logs:
+        //.then(this.getSavedImages())
+        //do an if statement...if the cardSaved state is already false, don't change
+        //change the state of the image to being unsaved, so that correct button displays on the card
+        this.setState({ cardSaved: false });
+        this.getSavedImages();
       })
       .catch(err => console.log(err))
   };
@@ -159,14 +184,31 @@ class User extends Component {
                 <Results
                   imagesData={this.state.searchResults}
                   handleSaveImage={this.handleSaveImage}
+                  handleRemoveImage={this.handleRemoveImage}
+                  cardSaved={this.state.cardSaved}
                 />) : (
-                <Gallery
-                  // images={this.state.allImages}
-                  images={this.state.savedImages}
-                />
+                <div>
+                  <h5 className='placeholder'>Go ahead... search for your perfect tattoo...</h5>
+                  <hr id='sectionBreak'/>
+                </div>
                 )}
             </Col>
           </Row>
+          <Row>
+            <Col s={12} className='savedGallery'>
+              {this.state.savedImages.length ? (
+                <Gallery
+                  images={this.state.savedImages}
+                  cardSaved={this.state.cardSaved}
+                  handleRemoveImage={this.handleRemoveImage}
+                />) : (
+                  <div>
+                    <h5 className='placeholder'>You don't currently have any favorites.</h5>
+                  </div>
+                )}
+            </Col>
+          </Row>
+          
         </Container>
       </div>
     );
