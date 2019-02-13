@@ -39,7 +39,7 @@ class Home extends Component {
     invalidCredentials: false,
     userName: "",
     addressVerified: true,
-    emailVerified: true, 
+    emailVerified: true,
     validEmailVerified: true
   };
 
@@ -90,35 +90,36 @@ class Home extends Component {
   showPassword = (event) => {
     event.preventDefault();
     event.stopPropagation();
-    this.setState({isPasswordVisible: !this.state.isPasswordVisible
+    this.setState({
+      isPasswordVisible: !this.state.isPasswordVisible
     });
   };
 
-// Method for user/artist login and input verification.
-onLoginSubmit = event => {
-  const loginData = {
-    loginEmail: this.state.loginEmail,
-    loginPassword: this.state.loginPassword
-  };
-  event.preventDefault();
-  if (loginData.loginEmail === "" || loginData.loginPassword === "") {
-    this.setState({
-      hideErr: true
-    });
-  } else {
-    API.login(loginData)
-      .then(response => {
-        // console.log("response", response);
-        if (response.data === "invalid") {
-          this.setState({
-            invalidCredentials: true
-          });
-        }
-        else {
-          this.setState({
-            loginEmail: "",
-            loginPassword: ""
-          });
+  // Method for user/artist login and input verification.
+  onLoginSubmit = event => {
+    const loginData = {
+      loginEmail: this.state.loginEmail,
+      loginPassword: this.state.loginPassword
+    };
+    event.preventDefault();
+    if (loginData.loginEmail === "" || loginData.loginPassword === "") {
+      this.setState({
+        hideErr: true
+      });
+    } else {
+      API.login(loginData)
+        .then(response => {
+          // console.log("response", response);
+          if (response.data === "invalid") {
+            this.setState({
+              invalidCredentials: true
+            });
+          }
+          else {
+            this.setState({
+              loginEmail: "",
+              loginPassword: ""
+            });
             if (response.data.type === "customer") {
               this.props.history.push({
                 pathname: "/user",
@@ -131,8 +132,8 @@ onLoginSubmit = event => {
               });
             }
           }
-      })
-      .catch(err => console.log(err));
+        })
+        .catch(err => console.log(err));
     }
   };
 
@@ -157,12 +158,12 @@ onLoginSubmit = event => {
     event.preventDefault();
 
     //variables for address verification
-      let urlstreet = this.state.street.split(' ').join('+');
-      let urlstate = this.state.state.split(' ').join('+');
-      let urlcity = this.state.city.split(' ').join('+');
-      let completeurl = url + "&street=" + urlstreet + "&city=" + urlcity + "&state=" + urlstate + "&zipcode=" + this.state.zip;
+    let urlstreet = this.state.street.split(' ').join('+');
+    let urlstate = this.state.state.split(' ').join('+');
+    let urlcity = this.state.city.split(' ').join('+');
+    let completeurl = url + "&street=" + urlstreet + "&city=" + urlcity + "&state=" + urlstate + "&zipcode=" + this.state.zip;
 
-      console.log("complete URL: ", completeurl);
+    console.log("complete URL: ", completeurl);
 
 
     if (
@@ -182,25 +183,25 @@ onLoginSubmit = event => {
       this.errModal();
     } else {
 
-      const verifyAddress = (address) =>{
-       API.verifyAddress(address)
-        .then(response => {
-          console.log(response.data)
-          if (response.data.length < 1 || response.data === undefined){
-            this.setState({
-              addressVerified: false,
-            });
-            this.errModal();
-          }
-          else{
-          console.log("artist info obj", artistInfo);
-          this.handleSignup(artistInfo);
-        }
-        }).catch(function (error) {
-          console.log(error);
-        });
-    };
-    verifyAddress(completeurl);
+      const verifyAddress = (address) => {
+        API.verifyAddress(address)
+          .then(response => {
+            console.log(response.data)
+            if (response.data.length < 1 || response.data === undefined) {
+              this.setState({
+                addressVerified: false,
+              });
+              this.errModal();
+            }
+            else {
+              console.log("artist info obj", artistInfo);
+              this.handleSignup(artistInfo);
+            }
+          }).catch(function (error) {
+            console.log(error);
+          });
+      };
+      verifyAddress(completeurl);
 
     }
   };
@@ -233,66 +234,66 @@ onLoginSubmit = event => {
     }
   };
 
-  //Validator for email address format
-validateEmail = (email) => {
-  const regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  console.log(regex.test(email));
-  return regex.test(email);
-}
+  //   //Validator for email address format
+  // validateEmail = (email) => {
+  //   const regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  //   console.log(regex.test(email));
+  //   return regex.test(email);
+  // }
 
- //method to be used in sign up methods above
- handleSignup = signupData => {
-   if (!this.validateEmail(this.state.email)) {
-     this.setState({
-       validEmailVerified: false
-     });
-     this.errModal();
-   } else {
-  API.signup(signupData)
-    .then(response => {
-      // console.log(response.data);
-        if (response.data === "email choice invalid") {
-          this.setState({
-            emailVerified: false
-          });
-          this.errModal();
-        }
-        else {
-          if (response.data.type === "customer") {
-            this.props.history.push({
-              pathname: "/user",
-              state: { detail: response.data }
+  //method to be used in sign up methods above
+  handleSignup = signupData => {
+    if (!this.validateEmail(this.state.email)) {
+      this.setState({
+        validEmailVerified: false
+      });
+      this.errModal();
+    } else {
+      API.signup(signupData)
+        .then(response => {
+          // console.log(response.data);
+          if (response.data === "email choice invalid") {
+            this.setState({
+              emailVerified: false
             });
-          } else {
-            this.props.history.push({
-              pathname: "/artist",
-              state: { detail: response.data }
+            this.errModal();
+          }
+          else {
+            if (response.data.type === "customer") {
+              this.props.history.push({
+                pathname: "/user",
+                state: { detail: response.data }
+              });
+            } else {
+              this.props.history.push({
+                pathname: "/artist",
+                state: { detail: response.data }
+              });
+            }
+            this.setState({
+              hideRow: false,
+              hideUserRow: false,
+              hideArtistRow: false,
+              addressVerified: true,
+              email: "",
+              password: "",
+              selected: "",
+              firstName: "",
+              lastName: "",
+              phoneNumber: "",
+              location: "",
+              street: "",
+              city: "",
+              st: "",
+              zip: "",
+              specialization: "",
+              pricing: ""
             });
           }
-          this.setState({
-            hideRow: false,
-            hideUserRow: false,
-            hideArtistRow: false,
-            addressVerified: true,
-            email: "",
-            password: "",
-            selected: "",
-            firstName: "",
-            lastName: "",
-            phoneNumber: "",
-            location: "",
-            street: "",
-            city: "",
-            st: "",
-            zip: "",
-            specialization: "",
-            pricing: ""
-          });
-        }
-    })
-    .catch(err => console.log(err));
-  }
-};
+        })
+        .catch(err => console.log(err));
+    }
+  };
 
   // Method for capitalizing the first letter of the first and last name for both User and Artist sign up form
   capitalize = (str) => {
@@ -341,17 +342,17 @@ validateEmail = (email) => {
 
   render() {
     const style = this.state.hideRow ? { display: "none" } : {};
-    const btnStyle = this.state.hideRow ? {display: "block", padding: "0px 9px 0px 9px"} : {display: "none"};
+    const btnStyle = this.state.hideRow ? { display: "block", padding: "0px 9px 0px 9px" } : { display: "none" };
     return (
       <div>
         <Nav name={this.state.userName} />
         <div className="container home center-align">
-          <ErrModal 
-            hideErr={this.state.hideErr} 
-            addressVerified={this.state.addressVerified} 
+          <ErrModal
+            hideErr={this.state.hideErr}
+            addressVerified={this.state.addressVerified}
             closeModal={this.closeModal}
             emailVerified={this.state.emailVerified}
-            validEmailVerified={this.state.validEmailVerified} 
+            validEmailVerified={this.state.validEmailVerified}
           />
           <h5><b>New Users</b></h5>
           <Modal
@@ -360,14 +361,14 @@ validateEmail = (email) => {
             trigger={<Button className="main-btn">Create Account</Button>}
             actions={
               <div>
-                <Button 
-                  className="cancel-btn" 
-                  onClick={this.resetModals} 
-                  flat modal="close" 
+                <Button
+                  className="cancel-btn"
+                  onClick={this.resetModals}
+                  flat modal="close"
                   waves="light">Cancel</Button>
-                <Button 
-                  className="signup-login" 
-                  style={btnStyle} 
+                <Button
+                  className="signup-login"
+                  style={btnStyle}
                   onClick={this.state.hideArtistRow ? this.artistSignUp : this.userSignUp}>Create Account</Button>
               </div>}
           >

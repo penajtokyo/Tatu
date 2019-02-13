@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Col, Card, CardTitle } from "react-materialize";
 
 class Images extends Component {
+
   render() {
     if (this.props.tattooArtistImages) {
       // Image variable that maps over the tattooArtistImages array and renders
