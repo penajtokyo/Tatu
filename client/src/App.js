@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import NoMatch from "./pages/NoMatch";
 import User from "./pages/User";
 import "./App.css";
+import ChatScreen from './components/ChatScreen'
 
 const App = () => {
   return (
