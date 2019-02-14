@@ -15,7 +15,7 @@ const Results = (props) => {
       <Row>
         <DisplayCard 
           data={props.imagesData}
-          cardSaved={props.cardSaved}
+          savedImgIDs={props.saved}
           handleSaveImage={props.handleSaveImage}
           handleRemoveImage={props.handleRemoveImage}
         />

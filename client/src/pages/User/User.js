@@ -14,14 +14,13 @@ class User extends Component {
     style: '',
     searchResults: [],
     savedImages: [],
-    cardSaved: false,
+    userSavedIDs: this.props.location.state.detail.savedPictures,
     userName: '',
     hideErr: false,
     err: ''
   };
 
   componentDidMount() {
-    //when page loads without search queries display a default view/gallery
     this.setUserName();
     this.getSavedImages();
   };
@@ -41,34 +40,25 @@ class User extends Component {
     })
   }
 
-   //retrieve the user's saved images from the D 
-   getSavedImages = () => {
-    API.getSavedImages()
-      .then(response => {
-        console.log('all customer saved images from DB', response.data.savedPictures)
-        this.setState({ savedImages: response.data.savedPictures })
-      })
-      .catch(err => console.log(err))
+  //retrieve the user's saved images from the D 
+  getSavedImages = () => {
+  API.getSavedImages()
+    .then(response => {
+      // console.log('all customer saved images from DB', response.data.savedPictures)
+      this.setState({ savedImages: response.data.savedPictures })
+    })
+    .catch(err => console.log(err))
   };
-
-  
 
   //saves the selected image (by ID) to the DB
   handleSaveImage = (id) => {
-    //this gets the props._id for the article that the button was clicked on and grabs the data.response associated with it
+    //this gets the props._id for the article that the button was clicked 
     const findImageByID = this.state.searchResults.find((el) => el._id === id);
-    //this is the req.body to send over to the api > routes > controller file
     const photoID = { _id: findImageByID._id};
     API.saveImage(photoID)
       .then(response => {
-        console.log("response", response)
-        console.log("image saved to user's gallery")
-        //load the saved images to the gallery// can refactored to be and get rid of response and console logs:
-        //.then(this.getSavedImages())
-        //do an if statement...if the cardSaved state is already true, don't change (hopefully this will not change all of them)
-        //change the state of the image to being saved, so that correct button displays on the card
-        this.setState({ cardSaved: true });
-        //reload the saved images after update
+        // console.log("image saved to user's gallery");
+        this.setState({ userSavedIDs: response.data.savedPictures})
         this.getSavedImages();
       })
       .catch(err => console.log(err))
@@ -76,21 +66,14 @@ class User extends Component {
 
   //removes a saved image from user's gallery
   handleRemoveImage = (id) => {
-    //this gets the props._id for the article that the button was clicked on and grabs the data.response associated with it
-    const findImageByID = this.state.searchResults.find((el) => el._id === id);
-    console.log("find image by id in remove", findImageByID)
-    //this is the req.body to send over to the api > routes > controller file
+    //this gets the props._id for the article that the button was clicked on and 
+    const findImageByID = this.state.savedImages.find((el) => el._id === id);
     const photoID = { _id: findImageByID._id};
-    console.log('photo ID in remove saved image', photoID);
+    // console.log('photo ID in remove saved image', photoID);
     API.removeImage(photoID)
       .then(response => {
-        console.log("response", response)
-        console.log("image removed from user's gallery")
-        //load the saved images to the gallery// can refactored to be and get rid of response and console logs:
-        //.then(this.getSavedImages())
-        //do an if statement...if the cardSaved state is already false, don't change
-        //change the state of the image to being unsaved, so that correct button displays on the card
-        this.setState({ cardSaved: false });
+        // console.log("image removed from user's gallery")
+        this.setState({ userSavedIDs: response.data.savedPictures})
         this.getSavedImages();
       })
       .catch(err => console.log(err))
@@ -100,7 +83,7 @@ class User extends Component {
   getImagesQuery = () => {
     API.getImagesByQuery(this.state.placement, this.state.style)
       .then((response) => {
-        console.log('response data from db', response.data);
+        // console.log('response data from db', response.data);
         //if array is empty (ie no matching results) display modal
         if (response.data.length === 0) {
           this.setState({
@@ -121,7 +104,6 @@ class User extends Component {
     this.setState({
       [name]: value
     });
-    // console.log('state', this.state);
   };
 
   handleSubmit = (event) => {
@@ -183,9 +165,9 @@ class User extends Component {
               {this.state.searchResults.length ? (
                 <Results
                   imagesData={this.state.searchResults}
+                  saved={this.state.userSavedIDs}
                   handleSaveImage={this.handleSaveImage}
                   handleRemoveImage={this.handleRemoveImage}
-                  cardSaved={this.state.cardSaved}
                 />) : (
                 <div>
                   <h5 className='placeholder'>Go ahead... search for your perfect tattoo...</h5>
@@ -199,7 +181,7 @@ class User extends Component {
               {this.state.savedImages.length ? (
                 <Gallery
                   images={this.state.savedImages}
-                  cardSaved={this.state.cardSaved}
+                  saved={this.state.userSavedIDs}
                   handleRemoveImage={this.handleRemoveImage}
                 />) : (
                   <div>

@@ -17,7 +17,7 @@ const Gallery = (props) => {
       <Row>
         <DisplayCard
           data={props.images}
-          cardSaved={props.cardSaved}
+          savedImgIDs={props.saved}
           handleRemoveImage={props.handleRemoveImage}
         />
       </Row>

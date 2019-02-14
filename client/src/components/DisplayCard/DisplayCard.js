@@ -3,11 +3,19 @@ import { Button, Card, Col, CardTitle, Icon } from 'react-materialize';
 import './DisplayCard.css';
 
 const DisplayCard = (props) => {
+  //helper function to check if images are in the user's savedPictures array used in the button display of the card
+  function checkImgSaved(arr, val) {
+    return arr.some(function(arrVal) {
+      return val === arrVal
+    })
+  };
+
   return (
     <div>
       {props.data.map((imageData, index) => (
         <Col l={4} m={6} s={12} key={index}>
           <Card
+            id={imageData._id}
             header={<CardTitle reveal image={imageData.file} waves='light' />}
             title={imageData.style}
             reveal={
@@ -33,12 +41,10 @@ const DisplayCard = (props) => {
                 </p>
               </div>
             }>
-            {/* if not a favorite (only should show in results area), show an empty heart, 
-            if favorite show filled in heart (both gallery and search results) */}
-            {props.cardSaved === false ? (
+            {checkImgSaved(props.savedImgIDs, imageData._id) === false ? (
               <Button waves='light' onClick={() => props.handleSaveImage(imageData._id)} className='saveImageBtn'><Icon>favorite</Icon></Button>
             ) : (
-              <Button waves='light' onClick={() => props.handleRemoveImage(imageData._id)} className='unsaveImageBtn'><Icon>traffic</Icon></Button>
+              <Button waves='light' onClick={() => props.handleRemoveImage(imageData._id)} className='saveImageBtn'><Icon>traffic</Icon></Button>
             )}
             </Card>
         </Col>)
