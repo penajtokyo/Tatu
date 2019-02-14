@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card, Col, CardTitle, Icon } from 'react-materialize';
+import { Button, Card, Col, CardTitle } from 'react-materialize';
 import './DisplayCard.css';
 
 const DisplayCard = (props) => {
@@ -42,9 +42,9 @@ const DisplayCard = (props) => {
               </div>
             }>
             {checkImgSaved(props.savedImgIDs, imageData._id) === false ? (
-              <Button waves='light' onClick={() => props.handleSaveImage(imageData._id)} className='saveImageBtn'><Icon>favorite</Icon></Button>
+              <Button onClick={() => props.handleSaveImage(imageData._id)} className='saveImageBtn' tooltip='Add to Favorites'><i className="far fa-heart"></i></Button>
             ) : (
-              <Button waves='light' onClick={() => props.handleRemoveImage(imageData._id)} className='saveImageBtn'><Icon>traffic</Icon></Button>
+              <Button onClick={() => props.handleRemoveImage(imageData._id)} className='saveImageBtn' tooltip='Remove from Favorites'><i className="fas fa-heart"></i></Button>
             )}
             </Card>
         </Col>)
