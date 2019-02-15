@@ -10,7 +10,6 @@ import "./ArtistProfile.css";
 
 class ArtistProfilePage extends Component {
   state = {
-    userName: "",
     firstName: "",
     lastName: "",
     email: "",
@@ -52,7 +51,7 @@ class ArtistProfilePage extends Component {
   setUserName = () => {
     const user = this.props.location.state.detail;
     // console.log("user var", user);
-    this.setState({ userName: user.firstName });
+    this.setState({ firstName: user.firstName });
     // console.log("users name", this.state.userName);
   };
   handleLogout = () => {
@@ -154,7 +153,7 @@ class ArtistProfilePage extends Component {
   render() {
     return (
       <div>
-        <Nav name={this.state.userName} handleLogout={this.handleLogout} />
+        <Nav name={this.state.firstName} handleLogout={this.handleLogout} />
         <Container>
           <Row>
             <Col s={12} className="artist-container">
@@ -209,14 +208,7 @@ class ArtistProfilePage extends Component {
               }
               actions={
                 <div>
-                  <Button
-                    className="cancel-btn"
-                    flat
-                    modal="close"
-                    waves="light"
-                  >
-                    Cancel
-                  </Button>
+                  
                   <Button
                     waves="light"
                     type="submit"
@@ -225,6 +217,14 @@ class ArtistProfilePage extends Component {
                     onClick={this.handleSubmit}
                   >
                     Update
+                  </Button>
+                  <Button
+                    className="cancel-btn"
+                    flat
+                    modal="close"
+                    waves="light"
+                  >
+                    Cancel
                   </Button>
                 </div>
               }

@@ -6,16 +6,20 @@ import Nav from '../../components/Nav';
 import Results from '../../components/Results';
 import { SearchErrModal } from '../../components/Modals';
 import SearchForm from '../../components/SearchForm';
+import UserAdmin from '../../components/UserAdmin';
 import './User.css';
 
 class User extends Component {
   state = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
     placement: '',
     style: '',
     searchResults: [],
     savedImages: [],
     userSavedIDs: this.props.location.state.detail.savedPictures,
-    userName: '',
     hideErr: false,
     err: ''
   };
@@ -38,7 +42,19 @@ class User extends Component {
     this.setState({
       hideErr: false,
     })
-  }
+  };
+
+  setUserName = () => {
+    const userData = this.props.location.state.detail;
+    // console.log('userData var', userData);
+    this.setState({  
+      firstName: userData.firstName,
+      lastName: userData.lastName,
+      email: userData.email,
+      phone: userData.phone 
+    })
+    // console.log('users name', this.state.userName);
+  };
 
   //retrieve the user's saved images from the D 
   getSavedImages = () => {
@@ -106,6 +122,14 @@ class User extends Component {
     });
   };
 
+  handleInputChange = () => {
+
+  };
+
+  handleUpdateSubmit = () => {
+
+  };
+
   handleSubmit = (event) => {
     event.preventDefault();
     //if both fields are blank invoke the err modal
@@ -118,13 +142,6 @@ class User extends Component {
     else {
       this.getImagesQuery();
     }
-  };
-
-  setUserName = () => {
-    const userData = this.props.location.state.detail;
-    // console.log('userData var', userData);
-    this.setState({ userName: userData.firstName })
-    // console.log('users name', this.state.userName);
   };
 
   handleLogout = () => {
@@ -141,7 +158,7 @@ class User extends Component {
     return (
       <div>
         <Nav
-          name={this.state.userName}
+          name={this.state.firstName}
           handleLogout={this.handleLogout}
         />
         <Container>
@@ -149,6 +166,14 @@ class User extends Component {
             message={this.state.err}
             hideErr={this.state.hideErr}
             closeModal={this.closeModal}
+          />
+          <UserAdmin 
+            firstName={this.state.firstName}
+            lastName={this.state.lastName}
+            email={this.state.email}
+            phone={this.state.phone}
+            handleInputChange={this.handleInputChange}
+            handleUpdateSubmit={this.handleUpdateSubmit}
           />
           <Row>
             <Col s={12} className='search'>
