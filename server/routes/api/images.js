@@ -11,13 +11,15 @@ router
 // url: api/images/artistImages
 router
   .route('/artistImages')
-  .post(imageController.saveImage)
+  .post(imageController.addImage)
   .get(imageController.findAllByArtist);
 
-  //gets all images from DB
-  // url: api/images/allImages
-  router
-    .route('/allImages')
-    .get(imageController.findAllImages);
+//gets and saves users's saved images from DB
+// url: api/images/savedImages
+router
+  .route('/savedImages')
+  .get(imageController.findAllSaved)
+  .put(imageController.removeSavedImage)
+  .post(imageController.saveImage);
 
 module.exports = router;
