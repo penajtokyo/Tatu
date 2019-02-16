@@ -39,7 +39,7 @@ const UserAdmin = props => {
             type="text"
             name="firstName"
             placeholder={props.firstName}
-            onChange={props.handleInputChange}
+            onChange={props.handleSelection}
           />
           <Input
             s={12} m={6}
@@ -47,7 +47,7 @@ const UserAdmin = props => {
             type="text"
             name="lastName"
             placeholder={props.lastName}
-            onChange={props.handleInputChange}
+            onChange={props.handleSelection}
           />
         </Row>
         <Row>
@@ -57,7 +57,7 @@ const UserAdmin = props => {
             type="email"
             name="email"
             placeholder={props.email}
-            onChange={props.handleInputChange}
+            onChange={props.handleSelection}
           />
           <Input
             s={12} m={6}
@@ -65,7 +65,7 @@ const UserAdmin = props => {
             type="text"
             name="phone"
             placeholder={props.phone}
-            onChange={props.handleInputChange}
+            onChange={props.handleSelection}
           />
         </Row>
       </Modal>

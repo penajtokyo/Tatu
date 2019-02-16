@@ -41,6 +41,11 @@ export default {
     return axios.put('/api/admin/artistUpdate', updateData);
   },
 
+   // used to update customer/user information
+   updateUserInfo: updatedData => {
+    return axios.put('/api/admin/userUpdate', updatedData);
+  },
+
   //post route to send data to backend on account creation along with email and password
   signup: signupData => {
     return axios.post('/api/auth/signup', signupData);

@@ -67,7 +67,7 @@ class User extends Component {
   };
 
   //saves the selected image (by ID) to the DB
-  handleSaveImage = (id) => {
+  handleSaveImage = id => {
     //this gets the props._id for the article that the button was clicked 
     const findImageByID = this.state.searchResults.find((el) => el._id === id);
     const photoID = { _id: findImageByID._id};
@@ -81,7 +81,7 @@ class User extends Component {
   };
 
   //removes a saved image from user's gallery
-  handleRemoveImage = (id) => {
+  handleRemoveImage = id => {
     //this gets the props._id for the article that the button was clicked on and 
     const findImageByID = this.state.savedImages.find((el) => el._id === id);
     const photoID = { _id: findImageByID._id};
@@ -95,7 +95,6 @@ class User extends Component {
       .catch(err => console.log(err))
   };
 
-  //query DB for all images with a certain body placement and/or style
   getImagesQuery = () => {
     API.getImagesByQuery(this.state.placement, this.state.style)
       .then((response) => {
@@ -114,20 +113,40 @@ class User extends Component {
       .catch(err => console.log(err))
   };
 
-  //handles the selection in the form
-  handleSelection = (event) => {
+  //handles the selection in the form and updates to the fields in edit profile modal
+  handleSelection = event => {
     const { name, value } = event.target;
     this.setState({
       [name]: value
     });
   };
 
-  handleInputChange = () => {
-
-  };
-
-  handleUpdateSubmit = () => {
-
+  //handles profile update submit button
+  handleUpdateSubmit = event => {
+    event.preventDefault();
+    if (
+      this.state.firstName ||
+      this.state.lastName ||
+      this.state.email ||
+      this.state.phone
+    ) {
+      const dataToUpdate = {
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        email: this.state.email,
+        phone: this.state.phone
+      };
+      API.updateUserInfo(dataToUpdate)
+      .then(res => {
+        this.setState({
+          firstName: res.data.firstName,
+          lastName: res.data.lastName,
+          email: res.data.email,
+          phone: res.data.phone,
+        })
+      })
+      .catch(err => console.log(err))
+    }
   };
 
   handleSubmit = (event) => {
@@ -154,6 +173,7 @@ class User extends Component {
       })
       .catch(err => console.log(err))
   };
+  
   render() {
     return (
       <div>
@@ -172,7 +192,7 @@ class User extends Component {
             lastName={this.state.lastName}
             email={this.state.email}
             phone={this.state.phone}
-            handleInputChange={this.handleInputChange}
+            handleSelection={this.handleSelection}
             handleUpdateSubmit={this.handleUpdateSubmit}
           />
           <Row>
