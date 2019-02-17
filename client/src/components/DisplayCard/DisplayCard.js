@@ -44,7 +44,7 @@ const DisplayCard = (props) => {
             {checkImgSaved(props.savedImgIDs, imageData._id) === false ? (
               <Button onClick={() => props.handleSaveImage(imageData._id)} className='saveImageBtn' tooltip='Add to Favorites'><i className="far fa-heart"></i></Button>
             ) : (
-              <Button onClick={() => props.handleRemoveImage(imageData._id)} className='saveImageBtn' tooltip='Remove from Favorites'><i className="fas fa-heart"></i></Button>
+              <Button onClick={() => props.handleRemoveImage(imageData._id)} className='saveImageBtn'><i className="fas fa-heart"></i></Button>
             )}
             </Card>
         </Col>)

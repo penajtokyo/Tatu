@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Input, Modal, Row } from 'react-materialize';
+import './UserAdmin.css';
 
 const UserAdmin = props => {
   return (

@@ -173,7 +173,7 @@ class User extends Component {
       })
       .catch(err => console.log(err))
   };
-  
+
   render() {
     return (
       <div>
@@ -215,7 +215,7 @@ class User extends Component {
                   handleRemoveImage={this.handleRemoveImage}
                 />) : (
                 <div>
-                  <h5 className='placeholder'>Go ahead... search for your perfect tattoo...</h5>
+                  <h5 className='placeholder'>Go ahead... search for your perfect tattoo.</h5>
                   <hr id='sectionBreak'/>
                 </div>
                 )}
@@ -223,6 +223,7 @@ class User extends Component {
           </Row>
           <Row>
             <Col s={12} className='savedGallery'>
+              <h4 className='sectionHead'>Your Favorites</h4>
               {this.state.savedImages.length ? (
                 <Gallery
                   images={this.state.savedImages}
@@ -230,7 +231,7 @@ class User extends Component {
                   handleRemoveImage={this.handleRemoveImage}
                 />) : (
                   <div>
-                    <h5 className='placeholder'>You don't currently have any favorites.</h5>
+                    <h5 className='placeholder'>You don't currently have saved images.</h5>
                   </div>
                 )}
             </Col>

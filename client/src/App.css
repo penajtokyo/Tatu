@@ -47,7 +47,6 @@ p {
   color: #BF691E;
 }
 
-/* modal elements */
 .modal, .modal .modal-footer, .floating-btn  {
   background-color: #2a303e;
 }
@@ -66,8 +65,18 @@ p {
     color: rgba(0,0,0,0.54);
 }
 
-.cancel-btn, .cancel-btn:hover, .cancel-btn:focus  {
+.cancel-btn,
+.cancel-btn:hover,
+.cancel-btn:focus,
+.cancelLogin-btn,
+.cancelLogin-btn:hover,
+.cancelLogin-btn:focus {
   background-color: transparent;
+}
+
+.cancel-btn,
+.signup-login {
+  float: right;
 }
 
 .modal-foot {
@@ -84,9 +93,11 @@ p {
   background-color: #344743;
 } */
 
-/* this is for the forms */
-
-.login-btn, .cancel-btn, .main-btn, .update-btn {
+.login-btn,
+.cancel-btn,
+.cancelLogin-btn,
+.main-btn,
+.update-btn {
   padding: 0px 15px 0px 15px;
 }
 
@@ -149,6 +160,7 @@ textarea.materialize-textarea:focus:not([readonly])+label {
   background-color: #2a303e;
   border: #2a303e;
   padding: 10px;
+  margin-left: 4%;
   border-radius: 2.5px;
   opacity: 1;
   left: 100px;
@@ -172,11 +184,6 @@ textarea.materialize-textarea:focus:not([readonly])+label {
   color: red;
 }
 
-/* adjust label height for all non textarea inputs */
-/* .input-field label:not(.label-icon).active {
-  transform: translateY(-40%);
-} */
-
 /* adjust label height for text area */
 .input-field>label:not(.label-icon).active {
   transform: translateY(-30%);
@@ -192,9 +199,6 @@ textarea.materialize-textarea:focus:not([readonly])+label {
   background-color: #BF691E;
 }
 
-/* .profile-btn {
-  background-color: #2a303e;
-} */
 
 /* adjustments for mobile first */
 @media only screen and (max-width: 768px) {
