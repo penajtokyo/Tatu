@@ -1,6 +1,6 @@
 import React from 'react';
 import DisplayCard from '../../components/DisplayCard';
-import { Row, Col } from 'react-materialize';
+import { Row } from 'react-materialize';
 
 //for each syle in the DB return a swiper showing all images in that category
 //at start there would be no additional details
@@ -9,11 +9,6 @@ import { Row, Col } from 'react-materialize';
 const Gallery = (props) => {
   return (
     <div>
-      <Row>
-        <Col s={12}>
-          <h4 className='sectionHead'>Your Favorites</h4>
-        </Col>
-      </Row>
       <Row>
         <DisplayCard
           data={props.images}

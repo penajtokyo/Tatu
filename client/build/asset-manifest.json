@@ -1,14 +1,14 @@
 {
-  "main.css": "/static/css/main.2e32c27a.chunk.css",
-  "main.js": "/static/js/main.340102fa.chunk.js",
-  "main.js.map": "/static/js/main.340102fa.chunk.js.map",
-  "static/js/1.fb453005.chunk.js": "/static/js/1.fb453005.chunk.js",
-  "static/js/1.fb453005.chunk.js.map": "/static/js/1.fb453005.chunk.js.map",
+  "main.css": "/static/css/main.97c5b253.chunk.css",
+  "main.js": "/static/js/main.c1c856be.chunk.js",
+  "main.js.map": "/static/js/main.c1c856be.chunk.js.map",
+  "static/js/1.6d7b0608.chunk.js": "/static/js/1.6d7b0608.chunk.js",
+  "static/js/1.6d7b0608.chunk.js.map": "/static/js/1.6d7b0608.chunk.js.map",
   "runtime~main.js": "/static/js/runtime~main.229c360f.js",
   "runtime~main.js.map": "/static/js/runtime~main.229c360f.js.map",
-  "static/css/main.2e32c27a.chunk.css.map": "/static/css/main.2e32c27a.chunk.css.map",
-  "static/media/App.css": "/static/media/tattooarms_sm_bgi.1f1ba12f.jpg",
+  "static/css/main.97c5b253.chunk.css.map": "/static/css/main.97c5b253.chunk.css.map",
+  "static/media/App.css": "/static/media/tattooarms_bgi.51f075da.jpg",
   "index.html": "/index.html",
-  "precache-manifest.5440b56c0449effad04555d3fb1b1f51.js": "/precache-manifest.5440b56c0449effad04555d3fb1b1f51.js",
+  "precache-manifest.6672381ce3ff3e2d858a371b3cf34001.js": "/precache-manifest.6672381ce3ff3e2d858a371b3cf34001.js",
   "service-worker.js": "/service-worker.js"
 }

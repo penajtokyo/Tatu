@@ -6,16 +6,20 @@ import Nav from '../../components/Nav';
 import Results from '../../components/Results';
 import { SearchErrModal } from '../../components/Modals';
 import SearchForm from '../../components/SearchForm';
+import UserAdmin from '../../components/UserAdmin';
 import './User.css';
 
 class User extends Component {
   state = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
     placement: '',
     style: '',
     searchResults: [],
     savedImages: [],
     userSavedIDs: this.props.location.state.detail.savedPictures,
-    userName: '',
     hideErr: false,
     err: ''
   };
@@ -38,7 +42,19 @@ class User extends Component {
     this.setState({
       hideErr: false,
     })
-  }
+  };
+
+  setUserName = () => {
+    const userData = this.props.location.state.detail;
+    // console.log('userData var', userData);
+    this.setState({  
+      firstName: userData.firstName,
+      lastName: userData.lastName,
+      email: userData.email,
+      phone: userData.phone 
+    })
+    // console.log('users name', this.state.userName);
+  };
 
   //retrieve the user's saved images from the D 
   getSavedImages = () => {
@@ -51,7 +67,7 @@ class User extends Component {
   };
 
   //saves the selected image (by ID) to the DB
-  handleSaveImage = (id) => {
+  handleSaveImage = id => {
     //this gets the props._id for the article that the button was clicked 
     const findImageByID = this.state.searchResults.find((el) => el._id === id);
     const photoID = { _id: findImageByID._id};
@@ -65,7 +81,7 @@ class User extends Component {
   };
 
   //removes a saved image from user's gallery
-  handleRemoveImage = (id) => {
+  handleRemoveImage = id => {
     //this gets the props._id for the article that the button was clicked on and 
     const findImageByID = this.state.savedImages.find((el) => el._id === id);
     const photoID = { _id: findImageByID._id};
@@ -79,7 +95,6 @@ class User extends Component {
       .catch(err => console.log(err))
   };
 
-  //query DB for all images with a certain body placement and/or style
   getImagesQuery = () => {
     API.getImagesByQuery(this.state.placement, this.state.style)
       .then((response) => {
@@ -98,12 +113,40 @@ class User extends Component {
       .catch(err => console.log(err))
   };
 
-  //handles the selection in the form
-  handleSelection = (event) => {
+  //handles the selection in the form and updates to the fields in edit profile modal
+  handleSelection = event => {
     const { name, value } = event.target;
     this.setState({
       [name]: value
     });
+  };
+
+  //handles profile update submit button
+  handleUpdateSubmit = event => {
+    event.preventDefault();
+    if (
+      this.state.firstName ||
+      this.state.lastName ||
+      this.state.email ||
+      this.state.phone
+    ) {
+      const dataToUpdate = {
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        email: this.state.email,
+        phone: this.state.phone
+      };
+      API.updateUserInfo(dataToUpdate)
+      .then(res => {
+        this.setState({
+          firstName: res.data.firstName,
+          lastName: res.data.lastName,
+          email: res.data.email,
+          phone: res.data.phone,
+        })
+      })
+      .catch(err => console.log(err))
+    }
   };
 
   handleSubmit = (event) => {
@@ -120,13 +163,6 @@ class User extends Component {
     }
   };
 
-  setUserName = () => {
-    const userData = this.props.location.state.detail;
-    // console.log('userData var', userData);
-    this.setState({ userName: userData.firstName })
-    // console.log('users name', this.state.userName);
-  };
-
   handleLogout = () => {
     API.logout()
       .then((response) => {
@@ -137,11 +173,12 @@ class User extends Component {
       })
       .catch(err => console.log(err))
   };
+
   render() {
     return (
       <div>
         <Nav
-          name={this.state.userName}
+          name={this.state.firstName}
           handleLogout={this.handleLogout}
         />
         <Container>
@@ -149,6 +186,14 @@ class User extends Component {
             message={this.state.err}
             hideErr={this.state.hideErr}
             closeModal={this.closeModal}
+          />
+          <UserAdmin 
+            firstName={this.state.firstName}
+            lastName={this.state.lastName}
+            email={this.state.email}
+            phone={this.state.phone}
+            handleSelection={this.handleSelection}
+            handleUpdateSubmit={this.handleUpdateSubmit}
           />
           <Row>
             <Col s={12} className='search'>
@@ -170,7 +215,7 @@ class User extends Component {
                   handleRemoveImage={this.handleRemoveImage}
                 />) : (
                 <div>
-                  <h5 className='placeholder'>Go ahead... search for your perfect tattoo...</h5>
+                  <h5 className='placeholder'>Go ahead... search for your perfect tattoo.</h5>
                   <hr id='sectionBreak'/>
                 </div>
                 )}
@@ -178,6 +223,7 @@ class User extends Component {
           </Row>
           <Row>
             <Col s={12} className='savedGallery'>
+              <h4 className='sectionHead'>Your Favorites</h4>
               {this.state.savedImages.length ? (
                 <Gallery
                   images={this.state.savedImages}
@@ -185,7 +231,7 @@ class User extends Component {
                   handleRemoveImage={this.handleRemoveImage}
                 />) : (
                   <div>
-                    <h5 className='placeholder'>You don't currently have any favorites.</h5>
+                    <h5 className='placeholder'>You don't currently have saved images.</h5>
                   </div>
                 )}
             </Col>
