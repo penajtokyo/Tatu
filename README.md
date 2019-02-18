@@ -28,7 +28,6 @@ The need for this app is based on personal experience in trying to find an artis
 
 - User Page:
      * Improve default gallery view to include categories of each style, that if the header is clicked then displays the cards with more details for each image found in that category.
-     * Allows users to save cards to their profile of tattoos they like/are interested in.
      * Add a link in each card to go direclty to that tattoo artist profile page to view all of their images and/or contact information.
      * Add a chat feature to connect users to the tattoo artist
 
