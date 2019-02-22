@@ -27,6 +27,14 @@ var CustomerSchema = new Schema({
     type: String,
     require: true
   },
+  resetPasswordToken: {
+    type: String,
+    require: false
+  },
+  resetPasswordExpires: {
+    type: Date,
+    require: false
+  },
   artistData: {
     type: Schema.Types.ObjectId,
     ref: "Artist"

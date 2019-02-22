@@ -1,5 +1,6 @@
 import React from "react";
 import {Col, Container, Button, Input, Row } from "react-materialize";
+import { Link } from "react-router-dom";
 import './LoginForm.css';
 
 export const LoginForm = props => {
@@ -49,10 +50,15 @@ export const LoginForm = props => {
               </Col>
               <Row>
                 <Col s={12}>
-                  <span className="wrong-credentials" data-error="wrong" data-success="right">No user found with these credentials.</span>
+                  <span className="wrong-credentials left" data-error="wrong" data-success="right">No user found with these credentials.</span>
                 </Col>
               </Row>
+            <Row className="link-two">
+              <Col s={12}>
+                <Link  className="left" to="/forgot-password">Forgot your password?</Link>
+              </Col>
             </Row>
+          </Row>
             <Row>
               <Button className="login-btn" waves="light" onClick={props.onLoginSubmit}>Login</Button>
               <Button className="cancel-btn" onClick={props.resetModals} flat modal="close" waves="light">Cancel</Button>
@@ -94,16 +100,22 @@ export const LoginForm = props => {
                   value={props.loginPassword}
                   onChange={props.handleInputChange}
                   onKeyPress={props.handleKeyPress}
-                />)
+                />
+                )
               }
             <Col s={1}>
               <Button waves="light" className="password-btn" onClick={props.showPassword}>{props.isPasswordVisible ? 'Hide' : 'Show'}</Button>
             </Col>
           </Col>
         </Row>
+        <Row className="link">
+          <Col s={12}>
+            <Link  className="left" to="/forgot-password">Forgot your password?</Link>
+          </Col>
+        </Row>
         <Row>
-          <Button className="login-btn" waves="light" onClick={props.onLoginSubmit}>Login</Button>
-          <Button className="cancel-btn" onClick={props.resetModals} flat modal="close" waves="light">Cancel</Button>
+          <Button className="login-btn left" waves="light" onClick={props.onLoginSubmit}>Login</Button>
+          <Button className="cancel-btn left" onClick={props.resetModals} flat modal="close" waves="light">Cancel</Button>
         </Row>
       </div>)
       }

@@ -9,9 +9,11 @@ import { Button, Input, Modal, Row } from "react-materialize";
 import Nav from '../../components/Nav';
 import API from "../../utils/API";
 import "./Home.css";
+import zxcvbn from "zxcvbn";
 
 //variable for smarty streets api
 const url = "https://us-street.api.smartystreets.com/street-address?auth-id=7065599766197186&candidates=1&match=strict";
+
 
 class Home extends Component {
   state = {
@@ -32,6 +34,7 @@ class Home extends Component {
     zip: "",
     specialization: "",
     pricing: "",
+    score: null,
     hideRow: false,
     hideUserRow: false,
     hideArtistRow: false,
@@ -67,7 +70,8 @@ class Home extends Component {
     this.setState({
       [name]: value
     });
-    // console.log(event.target.value);
+  
+    this.passwordStrength();
   };
 
   // Method to toggle between customer and artist form depending on the user selection.
@@ -299,6 +303,22 @@ validateEmail = (email) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
 
+  // Method for indicating the strength of the password being entered
+  passwordStrength = () => {
+    if(this.state.password === ""){
+      this.setState({
+        score: 'null'
+      })
+    }
+    else{
+      let pw = zxcvbn(this.state.password);
+      this.setState({
+        score: pw.score
+      });      
+    }
+
+  }
+
   // Method for error modal. Still not fully functional.
   errModal = () => {
     console.log(this.state.hideErr);
@@ -325,6 +345,7 @@ validateEmail = (email) => {
       zip: "",
       specialization: "",
       pricing: "",
+      score: null,
       hideRow: false,
       hideUserRow: false,
       hideArtistRow: false,
@@ -394,6 +415,8 @@ validateEmail = (email) => {
               handleKeyClick={this.handleKeyClick}
               userSignUp={this.userSignUp}
               capitalize={this.capitalize}
+              passwordStrength={this.passwordStrength}
+              score={this.state.score}
             />
             <ArtistModalForm
               hideArtistRow={this.state.hideArtistRow}
@@ -414,6 +437,8 @@ validateEmail = (email) => {
               handleKeyClick={this.handleKeyClick}
               artistSignUp={this.artistSignUp}
               capitalize={this.capitalize}
+              passwordStrength={this.passwordStrength}
+              score={this.state.score}
             />
           </Modal>
 
@@ -439,3 +464,8 @@ validateEmail = (email) => {
 }
 
 export default Home;
+
+
+
+
+

@@ -58,6 +58,7 @@ export const ArtistModalForm = props => {
       <Col s={12} m={6}>
         <Input 
           s={12}
+          className="password__input"
           label="Password" 
           type="text" 
           name="password"
@@ -65,6 +66,7 @@ export const ArtistModalForm = props => {
           onChange={props.handleInputChange}
           onKeyPress={props.handleKeyClick}
         />
+          <div s={6} className="password__strength" data-score={props.score}></div>
       </Col>
     </Row>
     <Row>    
