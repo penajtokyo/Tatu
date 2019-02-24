@@ -93,8 +93,7 @@ class Home extends Component {
   showPassword = (event) => {
     event.preventDefault();
     event.stopPropagation();
-    this.setState({isPasswordVisible: !this.state.isPasswordVisible
-    });
+    this.setState({isPasswordVisible: !this.state.isPasswordVisible});
   };
 
 // Method for user/artist login and input verification.
@@ -238,6 +237,7 @@ onLoginSubmit = event => {
 
   //Validator for email address format
 validateEmail = (email) => {
+  // eslint-disable-next-line
   const regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   console.log(regex.test(email));
   return regex.test(email);

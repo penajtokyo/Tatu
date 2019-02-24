@@ -164,7 +164,7 @@ class ArtistAdminModal extends Component {
                       autoComplete="off"
                     />
                     <Input
-                      s={} m={6}
+                      s={12} m={6}
                       label="Phone Number"
                       type="text"
                       name="phone"

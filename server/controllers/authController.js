@@ -114,7 +114,8 @@ module.exports = {
                   lastName: userData.lastName,
                   email: userData.email,
                   phone: userData.phone,
-                  type: userData.type
+                  type: userData.type,
+                  savedPictures: userData.savedPictures
                 };
                 req.session.customer.loggedIn = true;
                 res.json(req.session.customer);

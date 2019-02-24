@@ -4,6 +4,7 @@ import { Input } from 'react-materialize';
 class SelectStyle extends Component {
   state = {
     options: [
+      'All',
       'Abstract',
       'Ambigram',
       'American Traditional',

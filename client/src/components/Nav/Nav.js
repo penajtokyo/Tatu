@@ -3,6 +3,7 @@ import { Navbar, NavItem } from 'react-materialize';
 import './Nav.css';
 
 const Nav = (props) => {
+
   return (
     <div>
       <Navbar brand='Tatu' right>

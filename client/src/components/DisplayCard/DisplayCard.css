@@ -1,8 +1,22 @@
 img {
     height: 300px;
     width: 100%; 
- }
+}
  
- p {
-     color: black;
- }
+p {
+    color: black;
+}
+
+.saveImageBtn,
+.saveImageBtn:hover {
+    background: transparent !important;
+    margin-bottom: 0px !important;
+    padding: 0;
+    width: 40px;
+    box-shadow: none;
+}
+
+.far, .fas {
+    color: #BF691E;
+    font-size: 30px !important;
+}

@@ -2,5 +2,18 @@
     opacity: 0 !important;
 }
 
+.row {
+    margin-bottom: 10px;
+}
 
+.placeholder {
+    color: gray;
+}
 
+#sectionBreak {
+    margin: 3% 0 1% 0;
+}
+
+.placeholder {
+    color: white;
+}
