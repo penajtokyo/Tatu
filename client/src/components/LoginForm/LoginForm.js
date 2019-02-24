@@ -18,6 +18,7 @@ export const LoginForm = props => {
                 value={props.loginEmail}
                 onChange={props.handleInputChange}
                 onKeyPress={props.handleKeyPress}
+                autoComplete="off"
                 />
               </Col>
             </Row>
@@ -32,6 +33,7 @@ export const LoginForm = props => {
                     value={props.loginPassword}
                     onChange={props.handleInputChange}
                     onKeyPress={props.handleKeyPress}
+                    autoComplete="off"
                   />  
                 ) : (
                   <Input
@@ -42,6 +44,7 @@ export const LoginForm = props => {
                     value={props.loginPassword}
                     onChange={props.handleInputChange}
                     onKeyPress={props.handleKeyPress}
+                    autoComplete="off"
                   />)
                 }
                 <Col s={1}>
@@ -76,6 +79,7 @@ export const LoginForm = props => {
                 value={props.loginEmail}
                 onChange={props.handleInputChange}
                 onKeyPress={props.handleKeyPress}
+                autoComplete="off"
               />
             </Col>
           </Row>
@@ -90,6 +94,7 @@ export const LoginForm = props => {
                   value={props.loginPassword}
                   onChange={props.handleInputChange}
                   onKeyPress={props.handleKeyPress}
+                  autoComplete="off"
                 />
               ) : (
                 <Input
@@ -100,6 +105,7 @@ export const LoginForm = props => {
                   value={props.loginPassword}
                   onChange={props.handleInputChange}
                   onKeyPress={props.handleKeyPress}
+                  autoComplete="off"
                 />
                 )
               }

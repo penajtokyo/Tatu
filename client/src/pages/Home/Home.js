@@ -14,7 +14,6 @@ import zxcvbn from "zxcvbn";
 //variable for smarty streets api
 const url = "https://us-street.api.smartystreets.com/street-address?auth-id=7065599766197186&candidates=1&match=strict";
 
-
 class Home extends Component {
   state = {
     loginEmail: "",
@@ -273,25 +272,6 @@ validateEmail = (email) => {
               state: { detail: response.data }
             });
           }
-          this.setState({
-            hideRow: false,
-            hideUserRow: false,
-            hideArtistRow: false,
-            addressVerified: true,
-            email: "",
-            password: "",
-            selected: "",
-            firstName: "",
-            lastName: "",
-            phoneNumber: "",
-            location: "",
-            street: "",
-            city: "",
-            st: "",
-            zip: "",
-            specialization: "",
-            pricing: ""
-          });
         }
     })
     .catch(err => console.log(err));

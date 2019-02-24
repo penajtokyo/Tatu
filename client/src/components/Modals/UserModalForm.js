@@ -15,7 +15,8 @@ export const UserModalForm = props => {
               name="firstName"
               value={props.capitalize(props.firstName)}
               onChange={props.handleInputChange}
-              onKeyPress={props.handleKeyClick} 
+              onKeyPress={props.handleKeyClick}
+              autoComplete="off" 
             />
           </Col>
         <Col s={12} m={6}>
@@ -27,6 +28,7 @@ export const UserModalForm = props => {
             value={props.capitalize(props.lastName)}
             onChange={props.handleInputChange}
             onKeyPress={props.handleKeyClick}
+            autoComplete="off"
           />
         </Col>
       </Row>
@@ -40,6 +42,7 @@ export const UserModalForm = props => {
           value={props.phoneNumber}
           onChange={props.handleInputChange}
           onKeyPress={props.handleKeyClick}
+          autoComplete="off"
         />
       </Col>
     </Row>
@@ -53,6 +56,7 @@ export const UserModalForm = props => {
         value={props.email}
         onChange={props.handleInputChange}
         onKeyPress={props.handleKeyClick}
+        autoComplete="off"
       />
     </Col>
       <Col s={12} m={6}>
@@ -65,6 +69,7 @@ export const UserModalForm = props => {
           value={props.password}
           onChange={props.handleInputChange}
           onKeyPress={props.handleKeyClick}
+          autoComplete="off"
         />
           <div s={6} className="password__strength" data-score={props.score}></div>
       </Col>
