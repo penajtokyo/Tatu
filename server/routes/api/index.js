@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const imagesRoutes = require("./images");
 const authRoutes = require("./auth");
-const artistAdmin = require("./artistAdmin");
+// const artistAdmin = require("./artistAdmin");
 const passwordRoute = require("./forgotPassword");
 const resetRoute = require("./resetPassword");
 const adminRoutes = require("./admin");

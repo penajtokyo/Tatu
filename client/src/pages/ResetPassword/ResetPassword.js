@@ -55,14 +55,14 @@ class ResetPassword extends Component {
             password:  this.state.password,
             passwordToken: this.props.match.params.token         
         };
-        // console.log(password, passwordToken);
         API.updatePassword(passwordObj)
             .then(response => {
                 console.log(response.data);
                 if (response.data.message === "password updated") {
                     this.setState({
                         updated: true,
-                        error: false
+                        error: false,
+                        password: ""
                     });
                 } else {
                     this.setState({
@@ -103,7 +103,7 @@ class ResetPassword extends Component {
                 <Nav name={this.state.name}/>
                     <div className="container reset-page">
                         <div className="container">
-                          <h5 className="p-resetPassword">Please enter a new password below.</h5>
+                          <h5 className="p-resetPassword">Please enter a new password below.</h5> 
                             <form className="password-form" onSubmit={this.updatePass}>
                                 <Input 
                                 id="password"
@@ -111,6 +111,7 @@ class ResetPassword extends Component {
                                 onChange={this.handleChange("password")}
                                 value={password}
                                 type="text"
+                                autoComplete="off"
                                 />
                                 <Button className="btn-style">Update</Button>
                             </form>
