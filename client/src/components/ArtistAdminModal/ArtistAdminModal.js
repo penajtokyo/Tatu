@@ -141,6 +141,7 @@ class ArtistAdminModal extends Component {
                       name="firstName"
                       placeholder={this.state.firstName}
                       onChange={this.handleInputChange}
+                      autoComplete="off"
                     />
                     <Input
                       s={12} m={6}
@@ -149,6 +150,7 @@ class ArtistAdminModal extends Component {
                       name="lastName"
                       placeholder={this.state.lastName}
                       onChange={this.handleInputChange}
+                      autoComplete="off"
                     />
                   </Row>
                   <Row>
@@ -159,6 +161,7 @@ class ArtistAdminModal extends Component {
                       name="email"
                       placeholder={this.state.email}
                       onChange={this.handleInputChange}
+                      autoComplete="off"
                     />
                     <Input
                       s={12} m={6}
@@ -167,6 +170,7 @@ class ArtistAdminModal extends Component {
                       name="phone"
                       placeholder={this.state.phone}
                       onChange={this.handleInputChange}
+                      autoComplete="off"
                     />
                   </Row>
                   <Row>
@@ -177,6 +181,7 @@ class ArtistAdminModal extends Component {
                       name="location"
                       placeholder={this.state.location}
                       onChange={this.handleInputChange}
+                      autoComplete="off"
                     />
                     <Input
                       s={12} m={6}
@@ -185,6 +190,7 @@ class ArtistAdminModal extends Component {
                       name="street"
                       placeholder={this.state.street}
                       onChange={this.handleInputChange}
+                      autoComplete="off"
                     />
                   </Row>
                   <Row>
@@ -195,6 +201,7 @@ class ArtistAdminModal extends Component {
                       name="city"
                       placeholder={this.state.city}
                       onChange={this.handleInputChange}
+                      autoComplete="off"
                     />
                     <Input
                       s={4} m={2}
@@ -203,6 +210,7 @@ class ArtistAdminModal extends Component {
                       name="state"
                       placeholder={this.state.state}
                       onChange={this.handleInputChange}
+                      autoComplete="off"
                     />
                     <Input
                       s={8} m={4}
@@ -211,6 +219,7 @@ class ArtistAdminModal extends Component {
                       name="zip"
                       placeholder={this.state.zip}
                       onChange={this.handleInputChange}
+                      autoComplete="off"
                     />
                   </Row>
                   <Row>
@@ -222,6 +231,7 @@ class ArtistAdminModal extends Component {
                       placeholder={this.state.pricing}
                       defaultValue="1"
                       onChange={this.handleInputChange}
+                      autoComplete="off"
                     >
                       <option value="">Choose a Pricing Structure...</option>
                       <option value="Per Piece">Per Piece</option>
@@ -235,6 +245,7 @@ class ArtistAdminModal extends Component {
                       placeholder={this.state.specialization}
                       defaultValue="1"
                       onChange={this.handleInputChange}
+                      autoComplete="off"
                     >
                       <option value="">Choose a Specialization...</option>
                       <option value="Abstract">Abstract</option>
