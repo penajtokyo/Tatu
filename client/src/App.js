@@ -19,7 +19,7 @@ const App = () => {
           {/* <Route exact path="/artistAdmin/:id" component={ArtistAdmin} /> */}
           <Route exact path="/user" component={User} />
           <Route exact path="/forgot-password" component={ForgotPassword}/>
-          <Route path="/reset-password/:token" component={ResetPassword}/>
+          <Route exact path="/reset-password/:token" component={ResetPassword}/>
           <Route component={NoMatch} />
         </Switch>
       </div>
