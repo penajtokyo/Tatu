@@ -204,7 +204,7 @@ textarea.materialize-textarea:focus:not([readonly])+label {
   margin-left: 4%;
   border-radius: 2.5px;
   opacity: 1;
-  left: 20px;
+  margin-bottom: 5px;
 }
 
 /* this changes the line color to match the text color (below) and makes the completed font color white */

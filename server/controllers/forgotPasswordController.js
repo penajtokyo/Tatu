@@ -2,6 +2,8 @@ var db = require("../models");
 const crypto = require("crypto");
 require("dotenv").config();
 
+
+const keys = require("../keys");
 const nodemailer = require("nodemailer");
 
 module.exports = {
@@ -23,8 +25,8 @@ module.exports = {
                 const transporter = nodemailer.createTransport({
                     service: "gmail",
                     auth: {
-                        user: `${process.env.EMAIL_ADDRESS}`,
-                        pass: `${process.env.EMAIL_PASSWORD}`
+                        user: `${keys.email.email}`,
+                        pass: `${keys.email.password}`
                     },
                 });
 
