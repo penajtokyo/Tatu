@@ -3,6 +3,7 @@ var mongoose = require("mongoose");
 var session = require("express-session");
 var routes = require("./routes");
 var path = require("path");
+var dotenv = require("dotenv").config();
 
 var PORT = process.env.PORT || 3001;
 

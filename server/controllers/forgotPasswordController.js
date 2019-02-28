@@ -1,8 +1,8 @@
 var db = require("../models");
 const crypto = require("crypto");
-require("dotenv").config();
+var dotenv = require("dotenv").config();
 
-const keys = require("../keys");
+// const keys = require("../keys");
 const nodemailer = require("nodemailer");
 
 module.exports = {
