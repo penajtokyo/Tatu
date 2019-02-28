@@ -25,7 +25,7 @@ module.exports = {
                 var PASSWORD = process.env.EMAIL_PASSWORD; //|| `${keys.email.password}`;
 
                 var resetURL;
-                if (process.env === "production") {
+                if (process.env.NODE_ENV === "production") {
                     resetURL = `https://tatuappv2.herokuapp.com/reset-password/${token}`;
                 }
                 else {
