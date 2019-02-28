@@ -2,7 +2,6 @@ var db = require("../models");
 const crypto = require("crypto");
 require("dotenv").config();
 
-
 const keys = require("../keys");
 const nodemailer = require("nodemailer");
 
@@ -22,14 +21,30 @@ module.exports = {
             if (user === null) {
                 res.json("email not in db");
             } else {
+                var ADDRESS = process.env.EMAIL_ADDRESS; //|| `${keys.email.email}` ;
+                var PASSWORD = process.env.EMAIL_PASSWORD; //|| `${keys.email.password}`;
+
+                var resetURL;
+                if (process.env === "production") {
+                    resetURL = `https://tatuappv2.herokuapp.com/reset-password/${token}`;
+                }
+                else {
+                    resetURL = `http://localhost:3000/reset-password/${token}`;
+                };
+
+                console.log("email address", ADDRESS);
+                console.log("email password", PASSWORD); 
+                
                 const transporter = nodemailer.createTransport({
                     service: "gmail",
                     auth: {
-                        user: `${keys.email.email}`,
-                        pass: `${keys.email.password}`
+                        user: ADDRESS,
+                        pass: PASSWORD
                     },
                 });
 
+                // `http://localhost:3000/reset-password/${token}\n\n` +
+                // `https://tatuappv2.herokuapp.com/reset-password/${token}\n\n` +
                 const mailOptions = {
                     from: `tatuinkinc@gmail.com`,
                     to: `${user.email}`,
@@ -37,8 +52,9 @@ module.exports = {
                     text:
                         `You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n` +
                         `Please click on the following link, or paste this into your browser to complete the process within 30 minutes of receiving it: \n\n` +
-                        `http://localhost:3002/reset-password/${token}\n\n` +
-                        `If you did not request this, please ignore this email and your password will remain unchanged.\n`
+                        resetURL + `\n\n` + 
+                        `If you did not request this, please ignore this email and your password will remain unchanged.\n\n` +
+                        `Note: This mailbox isn't monitored, so please don't reply.\n`
                 };
                 console.log("sending mail");
 
