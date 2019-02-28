@@ -63,5 +63,25 @@ export default {
   //used to verify address
   verifyAddress: (address)=> {
     return axios.get(address);
+  },
+
+  //used to send forgot password email
+  forgotPassword: email => {
+    return axios.post("/api/forgotPassword/forgot-password", email)
+  },
+
+  //used to mount the reset password page after clicking on link in email
+  resetPassword: passwordToken => {
+    return axios.get("/api/resetPassword/reset-password", passwordToken)
+  },
+
+  //used to update the password
+  updatePassword: (passwordObj) => {
+    return axios.put("/api/resetPassword/update-password", passwordObj) 
+    //   // params: {
+    //   //   password: password,
+    //   //   passwordToken: passwordToken
+    //   // }
+    // });
   }
 };

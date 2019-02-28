@@ -134,6 +134,7 @@ class AddPhotoForm extends Component {
                       value={this.state.url}
                       label="Image URL"
                       onChange={this.handleInputChange}
+                      autoComplete="off"
                     />
                   </Row>
                   <Row>
@@ -154,6 +155,7 @@ class AddPhotoForm extends Component {
                       value={this.state.description}
                       label="Description"
                       onChange={this.handleInputChange}
+                      autoComplete="off"
                     />
                   </Row>
                 </form>

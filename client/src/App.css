@@ -51,6 +51,22 @@ p {
   background-color: #2a303e;
 }
 
+.style-open {
+  display: block;
+  z-index: 1050;
+  background-color: white;
+  width: 50%;
+  color: #BF691E;
+}
+
+.style-close {
+  display: none;
+  z-index: 1050;
+  background-color: white;
+  width: 50%;
+  color: #BF691E;
+}
+
 .password-btn {
   font-size: 80%;
   width: auto;
@@ -119,6 +135,31 @@ p {
   border: #344743;
 }
 
+.login-btn, .cancel-btn, .main-btn, .update-btn {
+  padding: 0px 15px 0px 15px;
+}
+
+.login-password {
+  margin-bottom: -5px;
+}
+
+.login-btn, .cancel-btn {
+  left: 5px;
+  margin-top: -5px;
+}
+
+.link {
+  margin-top: -25px;
+  position: relative;
+  left: 10px;
+}
+
+.link-two {
+  margin-top: -10px;
+  position: relative;
+  left: 20px;
+}
+
 /* makes the input lines white as well as the text once input */
 input[type=text]:not(.browser-default),
 input[type=email]:not(.browser-default),
@@ -156,14 +197,14 @@ textarea.materialize-textarea:focus:not([readonly])+label {
 
 .wrong-credentials {
   color: red;
-  float: left;
+  position: relative;
   background-color: #2a303e;
   border: #2a303e;
   padding: 10px;
   margin-left: 4%;
   border-radius: 2.5px;
   opacity: 1;
-  left: 100px;
+  margin-bottom: 5px;
 }
 
 /* this changes the line color to match the text color (below) and makes the completed font color white */
@@ -199,11 +240,86 @@ textarea.materialize-textarea:focus:not([readonly])+label {
   background-color: #BF691E;
 }
 
+.password{
+  display: block;
+  position: relative;
+  text-transform: uppercase;
+  font-weight: 700;
+  width: 100%;
+  color: #727272;
+}
+
+.password__input{
+  display: block;
+  text-transform: none;
+  width: 100%;
+  height: 42px;
+  border-width: 0 0 1px;
+  border-style: solid;
+  border-color: #B6B6B6;
+  font-weight: 400;
+  color: #212121;
+}
+
+.password:focus, .password:active {
+  border-color: #00BCD4;
+  outline: 0;
+}
+  
+  
+.password__strength{
+  position: relative;
+  width: 0%;
+  height: 4px;
+  bottom: -75px;
+  left: 10px;
+  background: transparent;
+  transition: all 300ms ease-in-out;
+}
+
+    .password__strength[data-score="null"]{
+      width: 0;
+      background: red;
+    }
+    
+    .password__strength[data-score="0"]{
+      width: 5%;
+      background: #F44336;
+    }
+    .password__strength[data-score="1"]{
+      width: 25%;
+      background: #F44336;
+    }
+
+    .password__strength[data-score="2"]{
+      width: 50%;
+      background: #FFEB3B;
+    }
+
+    .password__strength[data-score="3"]{
+      width: 75%;
+      background: #4CAF50;
+    }
+
+    .password__strength[data-score="4"]{
+      width: 93%;
+      background: #4CAF50;
+    }
+  
+
+
+/* .profile-btn {
+  background-color: #2a303e;
+} */
 
 /* adjustments for mobile first */
 @media only screen and (max-width: 768px) {
   body {
     background-image: url('./images/tattooarms_sm_bgi.jpg');
+  }
+
+  .password-page, .reset-page, .loading {
+    width: 100%
   }
 
   .password-btn {
@@ -217,11 +333,27 @@ textarea.materialize-textarea:focus:not([readonly])+label {
   }
 
   h5 {
-    font-size: 1.5em;
+    font-size: 1em;
+  }
+
+  h4 {
+    font-size: 1.4em;
+  }
+
+  p {
+    font-size: 1em;
   }
 
   .password-btn {
     margin-left: 0px;
+  }
+
+  .password-page, .reset-page, .loading {
+    width: 100%;
+  }
+
+  .modal, .modal .modal-footer, .floating-btn  {
+    width: 100%;
   }
 
 }
@@ -236,10 +368,23 @@ textarea.materialize-textarea:focus:not([readonly])+label {
   }
 
   h5 {
-    font-size: 1.5em;
+    font-size: 1em;
   }
 
-  body {
-  background-color: blue;
+  h4 {
+    font-size: 1.4em;
+  }
+
+  p {
+    font-size: 1em;
+  }
+
+  .password-page, .reset-page, .loading {
+    width: 100%;
+  }
+
+  .modal, .modal .modal-footer, .floating-btn  {
+    width: 100%;
   }
 }
+

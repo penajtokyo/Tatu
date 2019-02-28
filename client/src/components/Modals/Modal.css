@@ -11,3 +11,20 @@
 .modal, .modal-foot {
     background-color: #2a303e;
 }
+
+
+/* .style-open {
+    display: block;
+    z-index: 1050;
+    background-color: white;
+    width: 50%;
+    color: #BF691E;
+}
+
+.style-close {
+    display: none;
+    z-index: 1050;
+    background-color: white;
+    width: 50%;
+    color: #BF691E;
+} */
